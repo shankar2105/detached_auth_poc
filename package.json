@@ -15,6 +15,8 @@
     "build-browserPreload": "cross-env NODE_ENV=production webpack -r babel-register --config webpack.config.browser.preload.js --progress --profile --colors",
 
     "build-bg": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.background.prod.babel.js --colors",
+    "build-browserPreload": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.browser-preload.prod.babel.js --colors",
+    "build-webPreload": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.web-preload.prod.babel.js --colors",
 
 
     "build-renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js --colors",
