@@ -16,7 +16,6 @@ const addMiddlewares = ( middleware, isBackgroundProcess = false ) =>
 
     middleware.unshift( promiseMiddleware );
 
-    console.log( process.pid, 'is adding middleware', isBackgroundProcess)
     if ( isBackgroundProcess )
     {
         console.log('THIS PROCESS HAS triggerAlias&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')

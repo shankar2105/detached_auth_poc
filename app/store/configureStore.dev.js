@@ -3,6 +3,8 @@ import thunk from 'redux-thunk';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
+import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n';
+
 import {
     inRendererProcess,
     // isRunningUnpacked,
@@ -18,7 +20,7 @@ import {
 } from 'electron-redux';
 
 import createRootReducer from '../reducers';
-import * as counterActions from '../actions/counter';
+import * as bookmarkActions from '../actions/bookmarks_actions';
 // import type { counterStateType } from '../reducers/types';
 
 
@@ -63,8 +65,9 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
 
 
     // Redux DevTools Configuration
+    // TODO add all actions here?
     const actionCreators = {
-        ...counterActions,
+        ...bookmarkActions,
         ...routerActions
     };
 
@@ -110,6 +113,10 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
         replayActionMain( store );
     }
 
+    // TODO: remove this lark?
+    syncTranslationWithStore( store );
+    store.dispatch( loadTranslations( translationsObject ) );
+    store.dispatch( setLocale( 'en' ) );
     return store;
 };
 
