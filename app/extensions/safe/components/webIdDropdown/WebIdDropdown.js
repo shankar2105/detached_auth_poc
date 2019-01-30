@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import styles from './browser.css';
-import { CLASSES, isRunningSpectronTestProcess, startedRunningMock } from 'appConstants';
+import { CLASSES, isRunningSpectronTestProcess, startedRunningMock } from '@Constants';
 import { SAFE } from 'extensions/safe/constants';
 import { Column, IconButton, Grid } from 'nessie-ui';
 import _ from 'lodash';

@@ -1,9 +1,9 @@
-import pkg from 'appPackage';
+import pkg from '@Package';
 import EventEmitter from 'events';
 import logger from 'logger';
-import * as remoteCallActions from 'actions/remoteCall_actions';
+import * as remoteCallActions from '@Actions/remoteCall_actions';
 import safe from '@maidsafe/safe-node-app';
-import { PROTOCOLS, CONFIG } from 'appConstants';
+import { PROTOCOLS, CONFIG } from '@Constants';
 import { manifest as authManifest } from 'extensions/safe/auth-api/manifest';
 import { callIPC } from './ffi/ipc';
 

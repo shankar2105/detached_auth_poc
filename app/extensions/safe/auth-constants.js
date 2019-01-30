@@ -9,7 +9,7 @@ import { isHot,
     startedRunningMock,
     isRunningNodeEnvTest,
     isRunningSpectronTestProcess
-} from 'appConstants';
+} from '@Constants';
 
 
 // let libLocaleModifier = '';

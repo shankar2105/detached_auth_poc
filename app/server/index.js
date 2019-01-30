@@ -1,5 +1,5 @@
 import express from 'express';
-import { CONFIG, startedRunningProduction } from 'appConstants';
+import { CONFIG, startedRunningProduction } from '@Constants';
 import logger from 'logger';
 
 const app = express();

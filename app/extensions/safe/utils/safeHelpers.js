@@ -1,5 +1,5 @@
-import pkg from 'appPackage';
-import { CONFIG } from 'appConstants';
+import pkg from '@Package';
+import { CONFIG } from '@Constants';
 import url from 'url';
 import logger from 'logger';
 

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './notifier.css';
 import logger from 'logger';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 import { Button, Column, IconButton, MessageBox, Row, Text } from 'nessie-ui';
 

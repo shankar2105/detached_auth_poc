@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import logger from 'logger';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 import { Row, Col, Button } from 'antd';
 import 'antd/lib/row/style';

@@ -3,10 +3,10 @@
 import { ipcRenderer, remote } from 'electron';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AddressBar from 'components/AddressBar';
-import TabBar from 'components/TabBar';
-import Notifier from 'components/Notifier';
-import TabContents from 'components/TabContents';
+import AddressBar from '@Components/AddressBar';
+import TabBar from '@Components/TabBar';
+import Notifier from '@Components/Notifier';
+import TabContents from '@Components/TabContents';
 import styles from './browser.css';
 import logger from 'logger';
 

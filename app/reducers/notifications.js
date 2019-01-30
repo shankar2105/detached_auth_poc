@@ -2,7 +2,7 @@
 import { createActions }from 'redux-actions';
 import initialAppState from './initialAppState';
 import logger from 'logger';
-import { TYPES } from 'actions/notification_actions';
+import { TYPES } from '@Actions/notification_actions';
 
 const initialState = initialAppState.notifications;
 const findNotificationIndexById = ( theState, theCall ) =>

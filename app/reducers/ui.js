@@ -1,7 +1,7 @@
 // @flow
 import { createActions }from 'redux-actions';
 import initialAppState from './initialAppState';
-import { TYPES } from 'actions/ui_actions';
+import { TYPES } from '@Actions/ui_actions';
 
 const initialState = initialAppState.ui;
 

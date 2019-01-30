@@ -1,5 +1,5 @@
 import logger from 'logger';
-import { CONFIG, PROTOCOLS } from 'appConstants';
+import { CONFIG, PROTOCOLS } from '@Constants';
 
 import { remote } from 'electron';
 /* eslint-enable import/extensions */

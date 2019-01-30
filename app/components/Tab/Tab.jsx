@@ -2,7 +2,7 @@
 import { remote, ipcRenderer } from 'electron';
 import contextMenu from 'electron-context-menu'
 import React, { Component } from 'react';
-import Error from 'components/PerusePages/Error';
+import Error from '@Components/PerusePages/Error';
 import ReactDOMServer from 'react-dom/server';
 import _ from 'lodash';
 import PropTypes from 'prop-types';

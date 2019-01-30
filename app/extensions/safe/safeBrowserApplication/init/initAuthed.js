@@ -4,7 +4,7 @@ import onNetworkStateChange from 'extensions/safe/safeBrowserApplication/init/ne
 import {
     APP_INFO,
     CONFIG,
-} from 'appConstants';
+} from '@Constants';
 
 import logger from 'logger';
 import { ipcRenderer } from 'electron';

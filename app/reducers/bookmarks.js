@@ -2,8 +2,8 @@
 // @flow
 import { remote, shell, webContents } from 'electron';
 import _ from 'lodash';
-import { TYPES } from 'actions/bookmarks_actions';
-import { TYPES as UI_TYPES } from 'actions/ui_actions';
+import { TYPES } from '@Actions/bookmarks_actions';
+import { TYPES as UI_TYPES } from '@Actions/ui_actions';
 import { makeValidAddressBarUrl } from 'utils/urlHelpers';
 import initialAppState from './initialAppState';
 

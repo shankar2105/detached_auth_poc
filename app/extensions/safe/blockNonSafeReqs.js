@@ -1,7 +1,7 @@
 import { remote, shell } from 'electron';
 import { parse as parseURL } from 'url';
 import path from 'path';
-import { CONFIG } from 'appConstants';
+import { CONFIG } from '@Constants';
 import { urlIsAllowedBySafe } from './utils/safeHelpers';
 import logger from 'logger';
 

@@ -1,8 +1,8 @@
 /* eslint global-require: 1, flowtype-errors/show-errors: 0 */
 import logger from 'logger';
-import { configureStore } from 'store/configureStore';
+import { configureStore } from '@Store/configureStore';
 import i18n from 'i18n';
-import { I18N_CONFIG, startedRunningMock } from 'appConstants';
+import { I18N_CONFIG, startedRunningMock } from '@Constants';
 
 
 import manageRemoteCalls from './background.manageRemoteCalls';

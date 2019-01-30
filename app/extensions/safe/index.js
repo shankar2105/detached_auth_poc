@@ -14,13 +14,13 @@ import registerSafeAuthProtocol from './protocols/safe-auth';
 import blockNonSAFERequests from './blockNonSafeReqs';
 
 import { setIsMock } from 'extensions/safe/actions/safeBrowserApplication_actions';
-import { startedRunningMock, isRunningSpectronTestProcess, isRunningUnpacked } from 'appConstants';
+import { startedRunningMock, isRunningSpectronTestProcess, isRunningUnpacked } from '@Constants';
 import { handleSafeBrowserStoreChanges } from './safeBrowserApplication';
 import { getSafeBrowserUnauthedReqUri } from 'extensions/safe/safeBrowserApplication/init/initAnon';
 
 import sysUri from 'extensions/safe/ffi/sys_uri';
-import { APP_INFO, PROTOCOLS } from 'appConstants';
-import { addTab } from 'actions/tabs_actions';
+import { APP_INFO, PROTOCOLS } from '@Constants';
+import { addTab } from '@Actions/tabs_actions';
 
 import safeReducers from 'extensions/safe/reducers';
 import webviewPreload from 'extensions/safe/webviewPreload';

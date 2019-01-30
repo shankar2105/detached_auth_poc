@@ -2,7 +2,7 @@
 import safeBrowserApp from 'extensions/safe/reducers/safeBrowserApp';
 import { TYPES } from 'extensions/safe/actions/safeBrowserApplication_actions';
 import initialState from 'extensions/safe/reducers/initialAppState';
-import { CONFIG } from 'appConstants';
+import { CONFIG } from '@Constants';
 import { SAFE } from 'extensions/safe/constants';
 
 const safeInitialState = initialState.safeBrowserApp;

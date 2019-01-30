@@ -28,9 +28,9 @@ import {
     I18N_CONFIG,
     PROTOCOLS,
     CONFIG
-} from 'appConstants';
+} from '@Constants';
 
-import pkg from 'appPackage';
+import pkg from '@Package';
 
 import setupBackground from './setupBackground';
 

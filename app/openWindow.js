@@ -5,7 +5,7 @@ import os from 'os';
 import windowStateKeeper from 'electron-window-state';
 import MenuBuilder from './menu';
 import { onOpenLoadExtensions } from './extensions';
-import { isRunningSpectronTestProcess, isRunningDebug } from 'appConstants';
+import { isRunningSpectronTestProcess, isRunningDebug } from '@Constants';
 import logger from 'logger';
 import {
     addTab,

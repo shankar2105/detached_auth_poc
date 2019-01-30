@@ -2,7 +2,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { remote } from 'electron';
-import pkg from 'appPackage';
+import pkg from '@Package';
 import getPort from 'get-port';
 
 const platform = process.platform;

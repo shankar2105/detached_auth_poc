@@ -9,11 +9,11 @@ import {
     isCI,
     startedRunningMock,
     isRunningSpectronTestProcessingPackagedApp
-} from 'appConstants';
+} from '@Constants';
 
 import { SAFE } from 'extensions/safe/constants';
 import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
-import * as notificationActions from 'actions/notification_actions';
+import * as notificationActions from '@Actions/notification_actions';
 import logger from 'logger';
 import { initAnon } from 'extensions/safe/safeBrowserApplication/init/initAnon';
 import initAuthedApplication from 'extensions/safe/safeBrowserApplication/init/initAuthed';

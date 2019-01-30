@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // import logger from 'logger';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 import { Row, Icon, Button } from 'antd';
 import 'antd/lib/row/style';

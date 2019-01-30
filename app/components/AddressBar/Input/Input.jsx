@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { remote } from 'electron';
 import PropTypes from 'prop-types';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 import { I18n } from 'react-redux-i18n';
 
 import logger from 'logger';

@@ -1,11 +1,11 @@
 
 // @flow
 import { remote, shell, webContents } from 'electron';
-import { TYPES } from 'actions/tabs_actions';
-import { TYPES as UI_TYPES } from 'actions/ui_actions';
+import { TYPES } from '@Actions/tabs_actions';
+import { TYPES as UI_TYPES } from '@Actions/ui_actions';
 import { makeValidAddressBarUrl, removeTrailingRedundancies } from 'utils/urlHelpers';
 import initialAppState from './initialAppState';
-import { CONFIG, isRunningUnpacked } from 'appConstants';
+import { CONFIG, isRunningUnpacked } from '@Constants';
 import path from 'path';
 import logger from 'logger';
 

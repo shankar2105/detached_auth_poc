@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import * as notificationActions from 'actions/notification_actions';
+import * as notificationActions from '@Actions/notification_actions';
 import CONSTANTS from './auth-constants';
 import logger from 'logger';
 import { createAuthRequestElement } from './components/authRequest';

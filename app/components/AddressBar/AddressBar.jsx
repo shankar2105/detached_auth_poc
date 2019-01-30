@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 // import { Column, Grid } from 'nessie-ui';
-import ButtonsLHS from 'components/AddressBar/ButtonsLHS';
-import ButtonsRHS from 'components/AddressBar/ButtonsRHS';
-import Input from 'components/AddressBar/Input';
+import ButtonsLHS from '@Components/AddressBar/ButtonsLHS';
+import ButtonsRHS from '@Components/AddressBar/ButtonsRHS';
+import Input from '@Components/AddressBar/Input';
 import logger from 'logger';
 
 import { Row, Col } from 'antd';

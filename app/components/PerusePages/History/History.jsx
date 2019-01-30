@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { parse } from 'url';
 import _ from 'lodash';
 import { Column, Page, PageHeader, H1, Row, Text } from 'nessie-ui';
-import UrlList from 'components/UrlList';
+import UrlList from '@Components/UrlList';
 import styles from './history.css';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 import { urlIsValid } from 'extensions';
 

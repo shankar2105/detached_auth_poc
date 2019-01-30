@@ -7,13 +7,13 @@ import {
     closeActiveTab,
     reopenTab,
     setActiveTab
-} from 'actions/tabs_actions';
+} from '@Actions/tabs_actions';
 
-import { selectAddressBar } from 'actions/ui_actions';
-import { isHot,isRunningDebug } from 'appConstants';
+import { selectAddressBar } from '@Actions/ui_actions';
+import { isHot,isRunningDebug } from '@Constants';
 import { getLastClosedTab } from 'reducers/tabs';
 import logger from 'logger';
-import pkg from 'appPackage';
+import pkg from '@Package';
 
 import { getExtensionMenuItems } from 'extensions';
 

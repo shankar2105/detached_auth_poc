@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logger from 'logger';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 // TODO: When I import the following, an error is thrown in CodeMirror, used by nessie-ui, that navigator is not defined
 // import { Text, Column } from 'nessie-ui';

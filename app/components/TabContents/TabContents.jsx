@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import url from 'url';
 import styles from './tabContents.css';
-import Tab from 'components/Tab';
-import { INTERNAL_PAGES } from 'appConstants';
+import Tab from '@Components/Tab';
+import { INTERNAL_PAGES } from '@Constants';
 import { isInternalPage } from 'utils/urlHelpers';
-import History from 'components/PerusePages/History';
-import Bookmarks from 'components/PerusePages/Bookmarks';
+import History from '@Components/PerusePages/History';
+import Bookmarks from '@Components/PerusePages/Bookmarks';
 import logger from 'logger';
 
 export default class TabContents extends Component

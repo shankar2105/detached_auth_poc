@@ -12,9 +12,9 @@ import extendComponent from 'utils/extendComponent';
 import { wrapAddressBarButtonsRHS } from 'extensions/components';
 import styles from './buttonsRHS.css';
 
-import CustomMenu from 'components/CustomMenu';
+import CustomMenu from '@Components/CustomMenu';
 
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 
 /**

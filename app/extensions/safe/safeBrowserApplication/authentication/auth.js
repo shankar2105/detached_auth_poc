@@ -2,8 +2,8 @@ import logger from 'logger';
 import {
     isCI,
     isRunningSpectronTestProcessingPackagedApp
-} from 'appConstants';
-import { addNotification, clearNotification } from 'actions/notification_actions';
+} from '@Constants';
+import { addNotification, clearNotification } from '@Actions/notification_actions';
 
 const tryConnect = async res =>
 {

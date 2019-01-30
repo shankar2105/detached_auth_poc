@@ -5,9 +5,9 @@ import { ipcRenderer, remote } from 'electron';
 import PropTypes from 'prop-types';
 
 import { Page, H1, PageHeader } from 'nessie-ui';
-import UrlList from 'components/UrlList';
+import UrlList from '@Components/UrlList';
 import styles from './bookmarks.css';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 const log = require( 'electron-log' );
 

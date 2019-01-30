@@ -12,13 +12,13 @@ import {
     safeBrowserAppAuthFailed
 } from 'extensions/safe/safeBrowserApplication';
 
-import { addNotification } from 'actions/notification_actions';
-import { CONFIG } from 'appConstants';
+import { addNotification } from '@Actions/notification_actions';
+import { CONFIG } from '@Constants';
 import { SAFE, SAFE_APP_ERROR_CODES } from 'extensions/safe/constants';
 
 import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
-import * as bookmarksActions from 'actions/bookmarks_actions';
-import * as tabsActions from 'actions/tabs_actions';
+import * as bookmarksActions from '@Actions/bookmarks_actions';
+import * as tabsActions from '@Actions/tabs_actions';
 
 
 // TODO: Refactor away this and use aliased actions for less... sloppy

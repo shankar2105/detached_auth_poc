@@ -9,7 +9,7 @@ import { Tag, Icon } from 'antd';
 import 'antd/lib/tag/style';
 import 'antd/lib/icon/style';
 import './wrapAddressBarInput.less';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 function mapStateToProps( state )
 {

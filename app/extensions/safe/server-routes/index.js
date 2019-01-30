@@ -1,5 +1,5 @@
 import logger from 'logger';
-import { isRunningPackaged, isRunningSpectronTestProcess, isRunningSpectronTestProcessingPackagedApp } from 'appConstants';
+import { isRunningPackaged, isRunningSpectronTestProcess, isRunningSpectronTestProcessingPackagedApp } from '@Constants';
 import path from 'path';
 import url from 'url';
 

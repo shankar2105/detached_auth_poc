@@ -11,7 +11,7 @@ import { env,
     inMainProcess,
     isCI,
     TESTENV
-} from 'appConstants';
+} from '@Constants';
 
 const log = require( 'electron-log' );
 

@@ -3,7 +3,7 @@ import {
     APP_INFO,
     CONFIG,
     PROTOCOLS
-} from 'appConstants';
+} from '@Constants';
 import { SAFE } from 'extensions/safe/constants';
 import { parseSafeAuthUrl } from 'extensions/safe/utils/safeHelpers';
 
@@ -11,7 +11,7 @@ import { handleAuthentication, attemptReconnect } from 'extensions/safe/network'
 import { initialiseApp } from '@maidsafe/safe-node-app';
 
 import { setNetworkStatus } from 'extensions/safe/actions/safeBrowserApplication_actions';
-import { addNotification, clearNotification } from 'actions/notification_actions';
+import { addNotification, clearNotification } from '@Actions/notification_actions';
 import { getSafeBrowserAppObject } from 'extensions/safe/safeBrowserApplication';
 
 

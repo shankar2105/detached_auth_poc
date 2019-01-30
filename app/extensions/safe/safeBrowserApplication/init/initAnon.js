@@ -3,7 +3,7 @@ import {
     APP_INFO,
     CONFIG,
     PROTOCOLS
-} from 'appConstants';
+} from '@Constants';
 import { SAFE } from 'extensions/safe/constants';
 import { parseSafeAuthUrl } from 'extensions/safe/utils/safeHelpers';
 

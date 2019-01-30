@@ -1,11 +1,11 @@
 import logger from 'logger';
 import { handleAuthUrl } from 'extensions/safe/actions/authenticator_actions';
-import { updateRemoteCall } from 'actions/remoteCall_actions';
+import { updateRemoteCall } from '@Actions/remoteCall_actions';
 import { parseSafeAuthUrl } from 'extensions/safe/utils/safeHelpers';
 import { getCurrentStore } from 'extensions/safe/safeBrowserApplication';
 import {
     PROTOCOLS
-} from 'appConstants';
+} from '@Constants';
 import { SAFE } from 'extensions/safe/constants';
 
 import { parse as parseURL } from 'url';

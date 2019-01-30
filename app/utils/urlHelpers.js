@@ -1,8 +1,8 @@
 import { parse } from 'url';
 import path from 'path';
-import pkg from 'appPackage';
+import pkg from '@Package';
 import logger from 'logger';
-import { PROTOCOLS } from 'appConstants';
+import { PROTOCOLS } from '@Constants';
 
 export const isInternalPage = tab =>
 {

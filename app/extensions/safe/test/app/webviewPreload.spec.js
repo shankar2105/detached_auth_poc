@@ -1,5 +1,5 @@
 import * as webviewPreload from 'extensions/safe/webviewPreload';
-import { APP_INFO, startedRunningProduction } from 'appConstants';
+import { APP_INFO, startedRunningProduction } from '@Constants';
 
 
 // avoid appveyour for its weak.ref issues right now.

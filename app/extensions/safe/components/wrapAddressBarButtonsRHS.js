@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 import { Row, Col, Switch } from 'antd';
 import 'antd/lib/row/style';
 import 'antd/lib/col/style';

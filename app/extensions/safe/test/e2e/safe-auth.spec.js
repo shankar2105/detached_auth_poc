@@ -24,7 +24,7 @@ import {
     , windowLoaded,
     isTestingPackagedApp
 } from 'spectron-lib/setupSpectronApp';
-import { CLASSES } from 'appConstants';
+import { CLASSES } from '@Constants';
 
 const NOTIFICATION_WAIT = WAIT_FOR_EXIST_TIMEOUT + 50000;
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { CLASSES, isRunningSpectronTestProcess } from 'appConstants';
+import { CLASSES, isRunningSpectronTestProcess } from '@Constants';
 import { SAFE } from 'extensions/safe/constants';
 import logger from 'logger';
 import * as SafeBrowserActions from 'extensions/safe/actions/safeBrowserApplication_actions';

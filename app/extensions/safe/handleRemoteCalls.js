@@ -1,11 +1,11 @@
 import * as theAuthApi from 'extensions/safe/auth-api/authFuncs';
 import { callIPC, setAuthCallbacks } from 'extensions/safe/ffi/ipc';
 import * as authActions from 'extensions/safe/actions/authenticator_actions';
-import * as uiActions from 'actions/ui_actions';
+import * as uiActions from '@Actions/ui_actions';
 import { SAFE } from 'extensions/safe/constants';
 import CONSTANTS from 'extensions/safe/auth-constants';
 import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
-import * as remoteCallActions from 'actions/remoteCall_actions';
+import * as remoteCallActions from '@Actions/remoteCall_actions';
 import { clearAppObj } from 'extensions/safe/safeBrowserApplication';
 import { setIsAuthorisedState } from 'extensions/safe/actions/authenticator_actions';
 

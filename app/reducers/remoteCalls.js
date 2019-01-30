@@ -2,7 +2,7 @@
 import { createActions }from 'redux-actions';
 import initialAppState from './initialAppState';
 import logger from 'logger';
-import { TYPES } from 'actions/remoteCall_actions';
+import { TYPES } from '@Actions/remoteCall_actions';
 
 const initialState = initialAppState.remoteCalls;
 
