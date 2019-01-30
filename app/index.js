@@ -5,7 +5,27 @@ import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
 
+const log = require( 'electron-log' );
+
+log.info( 'Starting render process' );
+
+window.onerror = function ( error, url, line )
+{
+    log.error( error );
+    log.error( url );
+    log.error( line );
+};
+
 const store = configureStore();
+
+// for execution via BrowserWindow later
+window.peruseStore = store;
+
+if ( window.perusePendingNavigation && window.perusePendingNavigation.length )
+{
+    store.dispatch( push( window.perusePendingNavigation ) );
+}
+
 
 render(
     <AppContainer>

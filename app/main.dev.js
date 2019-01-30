@@ -1,177 +1,212 @@
-/* eslint global-require: off */
-
+/* eslint global-require: 1, flowtype-errors/show-errors: 0 */
 /**
  * This module executes inside of electron's main process. You can start
  * electron renderer process from here and communicate with the other processes
  * through IPC.
  *
- * When running `yarn build` or `yarn build-main`, this file is compiled to
+ * When running `npm run build` or `npm run build-main`, this file is compiled to
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  *
  * @flow
  */
-import { app } from 'electron';
+
+import opn from 'opn';
+import os from 'os';
 import path from 'path';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
-import {configureStore} from '@Store/configureStore'
-import * as AuthActions from '@Actions/authenticator_actions';
-import MenuBuilder from './menu';
-import { PROTOCOLS } from '@Constants';
-import { createSafeLaunchPadWindow, createTray } from './setupLaunchPad';
+import fs from 'fs';
+
+import { app, protocol, ipcMain, shell } from 'electron';
+import logger from 'logger';
+
+import {
+    isRunningUnpacked,
+    isRunningDebug,
+    isRunningSpectronTestProcess,
+    isRunningPackaged,
+    isCI,
+    travisOS,
+    I18N_CONFIG,
+    PROTOCOLS,
+    CONFIG
+} from 'appConstants';
+
+import pkg from 'appPackage';
+
 import setupBackground from './setupBackground';
 
+import openWindow from './openWindow';
+import { configureStore } from './store/configureStore';
+import { onReceiveUrl, preAppLoad, onAppReady } from 'extensions';
 
-app.setPath('userData', path.resolve( app.getPath('temp') , 'sauther' ) )
+// import { createSafeInfoWindow, createTray } from './setupTray';
 
-console.log('>>>>>>>>>>>>>>>>>>>>>>.', app.getPath('exe'), app.getPath('userData') )
+const initialState = {};
+let bgProcessWindow = null;
 
-export default class AppUpdater {
-    constructor() {
-        log.transports.file.level = 'info';
-        autoUpdater.logger = log;
-        autoUpdater.checkForUpdatesAndNotify();
+// Add middleware from extensions here.
+const loadMiddlewarePackages = [];
+
+const store = configureStore( initialState, loadMiddlewarePackages );
+
+logger.info( 'Main process starting.' );
+
+global.mainProcessStore = store;
+
+// renderer error notifications
+ipcMain.on( 'errorInWindow', ( event, data ) =>
+{
+    logger.error( data );
+} );
+
+
+// Needed for windows w/ SAFE browser app login
+ipcMain.on( 'opn', ( event, data ) =>
+{
+    logger.info( 'Opening link in system via opn.' );
+    shell.openExternal( data );
+} );
+
+
+let mainWindow = null;
+
+// Do any pre app extension work
+preAppLoad();
+
+// Apply MockVault if wanted for prealod
+if ( process.argv.includes( '--preload' ) )
+{
+    try
+    {
+        const data = fs.readFileSync( CONFIG.PRELOADED_MOCK_VAULT_PATH );
+
+        fs.writeFileSync( path.join( os.tmpdir(), 'MockVault' ), data );
+    }
+    catch ( error )
+    {
+        logger.error( 'Error preloading MockVault' );
     }
 }
 
-// let mainWindow = null;
+protocol.registerStandardSchemes( pkg.build.protocols.schemes, { secure: true } );
 
-if (process.env.NODE_ENV === 'production') {
-    const sourceMapSupport = require('source-map-support');
+if ( isRunningPackaged )
+{
+    const sourceMapSupport = require( 'source-map-support' );
     sourceMapSupport.install();
 }
 
-if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.DEBUG_PROD === 'true'
-) {
-    require('electron-debug')();
+if ( !isCI && !isRunningSpectronTestProcess && isRunningUnpacked || isRunningDebug )
+{
+    require( 'electron-debug' )();
+    const path = require( 'path' );
+    const p = path.join( __dirname, '..', 'app', 'node_modules' );
+    require( 'module' ).globalPaths.push( p );
 }
 
-const installExtensions = async () => {
-    const installer = require('electron-devtools-installer');
-    const forceDownload = true;
-    // const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-    const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
+const installExtensions = async () =>
+{
+    if ( isCI ) return;
 
-    return Promise.all(
-        extensions.map(name =>
-            installer.default(installer[name], forceDownload)
-        )
-    ).catch(console.log);
+    logger.verbose( 'Installing devtools extensions' );
+    const installer = require( 'electron-devtools-installer' );
+    const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+    const extensions = [
+        'REACT_DEVELOPER_TOOLS',
+        'REDUX_DEVTOOLS'
+    ];
+
+    return Promise
+        .all( extensions.map( name => installer.default( installer[name], forceDownload ) ) )
+        .catch( console.log );
 };
 
-// const loadMiddlewarePackages = [];
 
-let store;
-let authPocWindow;
+const shouldQuit = app.makeSingleInstance( commandLine =>
+{
+    // We expect the URI to be the last argument
+    const uri = commandLine[commandLine.length - 1];
 
-app.setAsDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER );
+    if ( commandLine.length >= 2 && uri )
+    {
+        onReceiveUrl( store, uri );
+    }
 
-const isDefault = app.isDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER);
-// logger.info('DEFAULT!!!!!!!!!!!!!!!!!!', isDefault)
-console.log('DEFAULT!!!!!!!!!!!!!!!!!!', isDefault)
+    // Someone tried to run a second instance, we should focus our window
+    if ( mainWindow )
+    {
+        if ( mainWindow.isMinimized() ) mainWindow.restore();
+        mainWindow.focus();
+    }
+} );
+
+app.on( 'ready', async () =>
+{
+    if ( shouldQuit )
+    {
+        console.log( 'This instance should quit. Ciao!' );
+        app.exit();
+        return;
+    }
 
 
-const gotTheLock = app.requestSingleInstanceLock()
+    logger.info( 'App Ready' );
 
-if (!gotTheLock) {
-    console.error('Not got the lock. This is so sad')
-    app.quit()
-} else {
-    app.on('second-instance', (event, commandLine, workingDirectory) => {
-    // Someone tried to run a second instance, we should focus our window.
-        if ( mainWindow )
+    onAppReady( store );
+    if ( !isRunningSpectronTestProcess && isRunningUnpacked || isRunningDebug )
+    {
+        await installExtensions();
+    }
+
+    if ( ( process.platform === 'linux' ) || ( process.platform === 'win32' ) )
+    {
+        const uriArg = process.argv[process.argv.length - 1];
+        if ( process.argv.length >= 2 && uriArg && ( uriArg.indexOf( 'safe' ) === 0 ) )
         {
-            if ( mainWindow.isMinimized() ) mainWindow.restore();
-            mainWindow.focus();
+            onReceiveUrl( store, uriArg );
+
+            if ( mainWindow )
+            {
+                mainWindow.show();
+            }
         }
-    })
+    }
 
-    // Create myWindow, load the rest of the app, etc...
+    mainWindow = openWindow( store );
 
-    app.on('ready', async () => {
+    // TODO: Reenable for adding Safe Network popup
+    // createTray();
+    // createSafeInfoWindow();
 
-        if (
-            process.env.NODE_ENV === 'development' ||
-          process.env.DEBUG_PROD === 'true'
-        ) {
-            await installExtensions();
-        }
+    bgProcessWindow = await setupBackground( );
+} );
 
-        const initialState = {};
-        store = configureStore( initialState );
+app.on( 'open-url', ( e, url ) =>
+{
+    onReceiveUrl( store, url );
 
+    if ( mainWindow )
+    {
+        mainWindow.show();
+    }
+} );
 
-        createTray();
-        authPocWindow = createSafeLaunchPadWindow();
-        setupBackground();
-        // const bgWindow = setupBackground();
-        //
-
-        // mainWindow = new BrowserWindow({
-        //   show: false,
-        //   width: 1024,
-        //   height: 728
-        // });
-        //
-        // mainWindow.loadURL(`file://${__dirname}/app.html`);
-        //
-        // // @TODO: Use 'ready-to-show' event
-        // //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
-        // mainWindow.webContents.on('did-finish-load', () => {
-        //   if (!mainWindow) {
-        //     throw new Error('"mainWindow" is not defined');
-        //   }
-        //   if (process.env.START_MINIMIZED) {
-        //     mainWindow.minimize();
-        //   } else {
-        //     mainWindow.show();
-        //     mainWindow.focus();
-        //   }
-        // });
-        //
-        // mainWindow.on('closed', () => {
-        //   mainWindow = null;
-        // });
-
-        const menuBuilder = new MenuBuilder(authPocWindow);
-        menuBuilder.buildMenu();
-
-        // Remove this if your app does not use auto updates
-        // eslint-disable-next-line
-      new AppUpdater();
-    });
-}
 
 /**
  * Add event listeners...
  */
 
-app.on('window-all-closed', () => {
+app.on( 'window-all-closed', () =>
+{
+    logger.verbose( 'All Windows Closed!' );
+    app.dock.hide(); // hide the icon
+
+    global.macAllWindowsClosed = true;
+
+    // HACK: Fix this so we can have OSX convention for closing windows.
     // Respect the OSX convention of having the application in memory even
     // after all windows have been closed
-    if (process.platform !== 'darwin') {
+    if ( process.platform !== 'darwin' )
+    {
         app.quit();
     }
-});
-
-
-
-
-app.on( 'open-url', ( e, url ) =>
-{
-    // onReceiveUrl( store, url );
-    store.dispatch( AuthActions.receiveAuthUrl( url ) )
-
-    try{
-
-        authPocWindow.show();
-    }
-    catch( e )
-    {
-        console.error(' Issue opening a window. It did not exist for this app... Check that the correct app version is opening.')
-        throw new Error( e );
-    }
-
 } );
