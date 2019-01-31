@@ -284,7 +284,7 @@
     "electron-timber": "0.5.1",
     "electron-updater": "^3.2.3",
     "enum": "2.5.0",
-    "ffi": "https://github.com/node-ffi/node-ffi.git",
+    "ffi": "2.3.0",
     "fs-extra": "4.0.2",
     "get-port": "4.0.0",
     "history": "^4.7.2",
