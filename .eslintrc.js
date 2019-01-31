@@ -1,3 +1,5 @@
+const aliases = require('./.aliases.js');
+
 module.exports = {
   "extends": "airbnb",
   "env": {
@@ -23,6 +25,7 @@ module.exports = {
     "max-len": "off",
     "no-plusplus": "off",
     "brace-style": ["error", "allman"],
+    "no-param-reassign": ["error", { "props": false }],
     "compat/compat": "error",
     "consistent-return": "warn",
     "no-undef": "warn",
@@ -57,6 +60,7 @@ module.exports = {
     "no-multi-assign": "off",
     "promise/param-names": "error",
     "promise/always-return": "warn",
+    "no-prototype-builtins":"off",
     "promise/catch-or-return": "warn",
     "promise/no-native": "off",
     "react/sort-comp": ["error", {
@@ -81,28 +85,11 @@ module.exports = {
     "react",
     "jest"
   ],
-  "settings": {
-    "import/resolver": {
-      alias: {
-        map: [
-          ['actions', './app/actions'],
-          ['appPackage', './package.json'],
-          ['components', './app/components'],
-          ['containers', './app/containers'],
-          ['appConstants', './app/constants.js'],
-          ['extensions', './app/extensions'],
-          ['logger', './app/logger.js'],
-          ['store', './app/store'],
-          ['utils', './app/utils'],
-          ['reducers', './app/reducers'],
-          ['spectron-lib', './__e2e__'],
-          ['resources', '../resources']
-        ],
-        extensions: ['.ts', '.js', '.jsx', '.json']
-      },
-       "webpack": {
-         "config": "../webpack.config.eslint.js"
-       }
+  settings: {
+        'import/resolver': {
+            'babel-module': {
+                alias: aliases
+            }
+        }
     }
-  }
 }

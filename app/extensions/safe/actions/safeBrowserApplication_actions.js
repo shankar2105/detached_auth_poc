@@ -1,7 +1,13 @@
 import { createActions } from 'redux-actions';
 import { createAliasedAction } from 'electron-redux';
-import getWebIdsFromSafe from '@Extensions/safe/safeBrowserApplication/webIds';
+// import getWebIdsFromSafe from '@Extensions/safe/safeBrowserApplication/webIds';
 import logger from 'logger';
+
+import {
+    getCurrentStore,
+    getSafeBrowserAppObject,
+    safeBrowserAppIsAuthed
+} from '@Extensions/safe/safeBrowserApplication';
 
 export const TYPES = {
     SET_APP_STATUS     : 'SET_APP_STATUS',
@@ -79,7 +85,7 @@ const triggerGetWebIds = async ( ) =>
     if ( !window || !window.thisIsTheBackgroundProcess ) return;
 
     logger.verbose( 'Retrieving webIds' );
-    const ids = await getWebIdsFromSafe();
+    const ids = await getWebIds();
 };
 
 export const getAvailableWebIds = createAliasedAction(
@@ -94,28 +100,27 @@ export const getAvailableWebIds = createAliasedAction(
 );
 
 
-// module.exports = {
-//     TYPES,
-//     setAppStatus,
-//     setNetworkStatus,
-//     setIsMock,
-//
-//     enableExperiments,
-//     disableExperiments,
-//
-//     setAvailableWebIds,
-//     fetchingWebIds,
-//
-//     setReadConfigStatus,
-//     setSaveConfigStatus,
-//
-//     receivedAuthResponse,
-//
-//     reconnectSafeApp,
-//
-//     resetStore,
-//
-//     showWebIdDropdown,
-//     getAvailableWebIds
-// }
-// export default allActions;
+/**
+ * Get WebIds for the current user
+ * @return {Promise} Resolves to Array of webIds
+ */
+const getWebIds = async ( ) =>
+{
+    const currentStore = getCurrentStore();
+
+    const safeBrowserApp = getSafeBrowserAppObject();
+    logger.verbose( 'getWebIds' );
+
+    if ( !safeBrowserApp ) throw new Error( 'SafeBrowserApp should be initiated.' );
+
+    if ( !safeBrowserAppIsAuthed() ) throw new Error( 'SafeBrowserApp is not authorised' );
+
+    let webIds = [];
+
+    currentStore.dispatch( safeBrowserAppActions.fetchingWebIds() );
+    webIds = await safeBrowserApp.web.getWebIds();
+
+    currentStore.dispatch( safeBrowserAppActions.setAvailableWebIds( webIds ) );
+
+    return webIds;
+};

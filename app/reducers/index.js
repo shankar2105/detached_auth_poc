@@ -13,26 +13,13 @@ import logger from 'logger';
 import { getExtensionReducers } from '@Extensions';
 
 const additionalReducers = getExtensionReducers();
-//
-// const rootReducer = combineReducers( {
-//
-// } );
-//
-// export default rootReducer;
-//
 
-
-// @flow
-// import { combineReducers } from 'redux';
-// import counter from './counter';
-// import authenticator from './authenticator';
 
 export default function createRootReducer(history: History) {
     return combineReducers({
         router: history ? connectRouter(history) : null,
         bookmarks,
         notifications,
-        // routing,
         remoteCalls,
         tabs,
         ui,

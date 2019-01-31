@@ -25,7 +25,7 @@ import { addTab } from '@Actions/tabs_actions';
 import safeReducers from '@Extensions/safe/reducers';
 import webviewPreload from '@Extensions/safe/webviewPreload';
 import { handleRemoteCalls, remoteCallApis } from '@Extensions/safe/handleRemoteCalls';
-// import * as SafeBrowserActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
+import * as SafeBrowserActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
 
 import { addFileMenus } from '@Extensions/safe/menus';
 import { urlIsAllowedBySafe as urlIsValid } from '@Extensions/safe/utils/safeHelpers';
@@ -90,7 +90,7 @@ const getRemoteCallApis = () => remoteCallApis;
  * @type {Object}
  */
 const actionsForBrowser = {
-    // ...SafeBrowserActions
+    ...SafeBrowserActions
 };
 
 let theSafeBgProcessStore;
