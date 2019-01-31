@@ -106,7 +106,7 @@ const safeNodeAppPath = ( ) =>
     return isRunningUnpacked ? [remote.process.execPath, `${ remote.getGlobal( 'appDir' ) }/main.js`] : [remote.app.getPath( 'exe' )];
 };
 
-let safeNodeAppPathModifier = '';
+let safeNodeAppPathModifier = '..';
 
 if ( isRunningPackaged && !isRunningNodeEnvTest )
 {

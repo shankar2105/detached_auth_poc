@@ -37,7 +37,7 @@ export const {
 
 const triggerAuthDecoding = reqObject =>
 {
-    if ( !window || !window.thisIsTheBackgroundProcess ) return;
+    if ( typeof window === 'undefined' || !window.thisIsTheBackgroundProcess ) return;
 
     logger.log( 'Handling an AuthReq in BG process:', reqObject );
     callIPC.enqueueRequest( reqObject );
