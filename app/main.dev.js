@@ -120,32 +120,50 @@ const installExtensions = async () =>
         .catch( console.log );
 };
 
-
-const shouldQuit = app.makeSingleInstance( commandLine =>
-{
-    // We expect the URI to be the last argument
-    const uri = commandLine[commandLine.length - 1];
-
-    if ( commandLine.length >= 2 && uri )
-    {
-        onReceiveUrl( store, uri );
-    }
-
-    // Someone tried to run a second instance, we should focus our window
-    if ( mainWindow )
-    {
-        if ( mainWindow.isMinimized() ) mainWindow.restore();
-        mainWindow.focus();
-    }
-} );
+//
+// const shouldQuit = app.makeSingleInstance( commandLine =>
+// {
+//     // We expect the URI to be the last argument
+//     const uri = commandLine[commandLine.length - 1];
+//
+//     if ( commandLine.length >= 2 && uri )
+//     {
+//         onReceiveUrl( store, uri );
+//     }
+//
+//     // Someone tried to run a second instance, we should focus our window
+//     if ( mainWindow )
+//     {
+//         if ( mainWindow.isMinimized() ) mainWindow.restore();
+//         mainWindow.focus();
+//     }
+// } );
 
 app.on( 'ready', async () =>
 {
-    if ( shouldQuit )
-    {
-        console.log( 'This instance should quit. Ciao!' );
-        app.exit();
-        return;
+
+const gotTheLock = app.requestSingleInstanceLock()
+
+    if (!gotTheLock) {
+        console.error('Not got the lock. This is so sad')
+        app.quit()
+    } else {
+        app.on('second-instance', (event, commandLine, workingDirectory) => {
+            // We expect the URI to be the last argument
+            const uri = commandLine[commandLine.length - 1];
+
+            if ( commandLine.length >= 2 && uri )
+            {
+                onReceiveUrl( store, uri );
+            }
+
+        // Someone tried to run a second instance, we should focus our window.
+            if ( mainWindow )
+            {
+                if ( mainWindow.isMinimized() ) mainWindow.restore();
+                mainWindow.focus();
+            }
+        })
     }
 
 

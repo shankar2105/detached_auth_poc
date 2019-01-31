@@ -92,3 +92,30 @@ export const getAvailableWebIds = createAliasedAction(
             payload : triggerGetWebIds(),
         } ),
 );
+
+
+// module.exports = {
+//     TYPES,
+//     setAppStatus,
+//     setNetworkStatus,
+//     setIsMock,
+//
+//     enableExperiments,
+//     disableExperiments,
+//
+//     setAvailableWebIds,
+//     fetchingWebIds,
+//
+//     setReadConfigStatus,
+//     setSaveConfigStatus,
+//
+//     receivedAuthResponse,
+//
+//     reconnectSafeApp,
+//
+//     resetStore,
+//
+//     showWebIdDropdown,
+//     getAvailableWebIds
+// }
+// export default allActions;
