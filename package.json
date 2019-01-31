@@ -43,7 +43,9 @@
     "test-all": "yarn lint && yarn flow && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
     "test-e2e": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe electron:./ ./test/e2e/HomePage.e2e.js",
     "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/HomePage.e2e.js",
-    "test-watch": "yarn test --watch"
+    "test-watch": "yarn test --watch",
+    "rebuild": "npm rebuild --runtime=electron --target=4.0.3 --disturl=https://atom.io/download/atom-shell --build-from-source"
+
   },
   "standard-version": {
     "scripts": {
