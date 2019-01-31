@@ -35,7 +35,7 @@ export const getCurrentStore = () =>
 
 export const clearAppObj = () =>
 {
-    logger.verbose( 'Clearing safeBrowserApp object cache.' );
+    logger.log( 'Clearing safeBrowserApp object cache.' );
     safeBrowserAppObject.clearObjectCache();
 };
 
@@ -104,7 +104,7 @@ export const initSafeBrowserApp =
         };
 
         // TODO: here check store and what is desired from a connection!
-        logger.info( 'Initialising Safe Browser App with options:', options );
+        logger.log( 'Initialising Safe Browser App with options:', options );
         try
         {
             if ( authorise )
@@ -132,7 +132,7 @@ const urisUnderAuth = [];
 
 const authFromStoreResponse = async ( res, store ) =>
 {
-    logger.verbose( 'Authing from a store-passed response.', Date.now(), res );
+    logger.log( 'Authing from a store-passed response.', Date.now(), res );
 
     if ( !res.startsWith( 'safe' ) )
     {

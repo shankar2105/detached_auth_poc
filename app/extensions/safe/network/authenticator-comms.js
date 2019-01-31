@@ -25,7 +25,7 @@ export const attemptReconnect = ( passedStore, appObj ) =>
 {
     setTimeout( () =>
     {
-        logger.info( 'Attempting reconnect...' );
+        logger.log( 'Attempting reconnect...' );
         appObj.reconnect();
 
         if ( passedStore.getState().safeBrowserApp.networkStatus === SAFE.NETWORK_STATE.DISCONNECTED )
@@ -44,7 +44,7 @@ export const handleSafeAuthUrlReception = async res =>
     }
 
     let authUrl = null;
-    logger.info( 'Received URL response', res );
+    logger.log( 'Received URL response', res );
 
     if ( parseURL( res ).protocol === `${ PROTOCOLS.SAFE_AUTH }:` )
     {
@@ -77,7 +77,7 @@ export const reconnect = app =>
  */
 export const replyToRemoteCallFromAuth = request =>
 {
-    logger.verbose( 'Replying to RemoteCall From Auth' );
+    logger.log( 'Replying to RemoteCall From Auth' );
     const store = getCurrentStore();
     const state = store.getState();
     const remoteCalls = state.remoteCalls;

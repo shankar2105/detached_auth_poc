@@ -5,7 +5,7 @@ import { CONFIG, PROTOCOLS, APP_INFO, isRunningPackaged } from '@Constants';
 
 const registerSafeProtocol = () =>
 {
-    logger.verbose( `${ PROTOCOLS.SAFE } Registering` );
+    logger.log( `${ PROTOCOLS.SAFE } Registering` );
     // bind to partition.
     const partition = CONFIG.SAFE_PARTITION;
     const ses = remote.session.fromPartition( partition );
@@ -14,7 +14,7 @@ const registerSafeProtocol = () =>
     // Would ports automatically routing locally make things simpler?
     ses.protocol.registerHttpProtocol( PROTOCOLS.SAFE, ( req, cb ) =>
     {
-        logger.verbose( `safe:// req url being parsed: ${ req.url }` );
+        logger.log( `safe:// req url being parsed: ${ req.url }` );
         const parsedUrl = url.parse( req.url );
         const host = parsedUrl.host;
 

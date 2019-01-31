@@ -48,7 +48,7 @@ const loadMiddlewarePackages = [];
 
 const store = configureStore( initialState, loadMiddlewarePackages );
 
-logger.info( 'Main process starting.' );
+logger.log( 'Main process starting.' );
 
 global.mainProcessStore = store;
 
@@ -62,7 +62,7 @@ ipcMain.on( 'errorInWindow', ( event, data ) =>
 // Needed for windows w/ SAFE browser app login
 ipcMain.on( 'opn', ( event, data ) =>
 {
-    logger.info( 'Opening link in system via opn.' );
+    logger.log( 'Opening link in system via opn.' );
     shell.openExternal( data );
 } );
 
@@ -107,7 +107,7 @@ const installExtensions = async () =>
 {
     if ( isCI ) return;
 
-    logger.verbose( 'Installing devtools extensions' );
+    logger.log( 'Installing devtools extensions' );
     const installer = require( 'electron-devtools-installer' );
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
     const extensions = [
@@ -167,7 +167,7 @@ const gotTheLock = app.requestSingleInstanceLock()
     }
 
 
-    logger.info( 'App Ready' );
+    logger.log( 'App Ready' );
 
     onAppReady( store );
     if ( !isRunningSpectronTestProcess && isRunningUnpacked || isRunningDebug )
@@ -215,7 +215,7 @@ app.on( 'open-url', ( e, url ) =>
 
 app.on( 'window-all-closed', () =>
 {
-    logger.verbose( 'All Windows Closed!' );
+    logger.log( 'All Windows Closed!' );
     app.dock.hide(); // hide the icon
 
     global.macAllWindowsClosed = true;

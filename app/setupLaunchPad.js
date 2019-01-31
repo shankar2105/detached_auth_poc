@@ -77,14 +77,14 @@ export const createSafeLaunchPadWindow = () => {
         // safeLaunchPadWindow.webContents.executeJavaScript(
         //   "window.peruseNav('safeLaunchPadWindow')",
         //   () => {
-        //     logger.verbose('Safe Info Window Loaded');
+        //     logger.log('Safe Info Window Loaded');
         //   }
         // );
 
         //for debug
         showWindow();
 
-        logger.info('LAUNCH PAD: Loaded');
+        logger.log('LAUNCH PAD: Loaded');
 
         if (isRunningUnpacked) {
             safeLaunchPadWindow.openDevTools({ mode: 'undocked' });

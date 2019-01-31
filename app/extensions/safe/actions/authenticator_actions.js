@@ -39,7 +39,7 @@ const triggerAuthDecoding = reqObject =>
 {
     if ( !window || !window.thisIsTheBackgroundProcess ) return;
 
-    logger.info( 'Handling an AuthReq in BG process:', reqObject );
+    logger.log( 'Handling an AuthReq in BG process:', reqObject );
     callIPC.enqueueRequest( reqObject );
 };
 

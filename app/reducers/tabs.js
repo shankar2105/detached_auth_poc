@@ -64,7 +64,7 @@ const getCurrentWindowId = ( ) =>
 
 const addTab = ( state, tab ) =>
 {
-    logger.info('add Tab happening in reducer');
+    logger.log('add Tab happening in reducer');
     if ( !tab )
     {
         throw new Error( 'You must pass a tab object with url' );

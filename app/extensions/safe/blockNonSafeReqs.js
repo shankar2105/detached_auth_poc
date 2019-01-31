@@ -22,7 +22,7 @@ const blockNonSAFERequests = () =>
     {
         if ( urlIsAllowedBySafe( details.url ) )
         {
-            logger.debug( `Allowing url ${ details.url }` );
+            logger.log( `Allowing url ${ details.url }` );
             callback( {} );
             return;
         }
@@ -44,7 +44,7 @@ const blockNonSAFERequests = () =>
         {
             try
             {
-                logger.info( 'about to call shell.openExternal in blockNonSafeReqs?', details.url );
+                logger.log( 'about to call shell.openExternal in blockNonSafeReqs?', details.url );
                 shell.openExternal( details.url );
             }
             catch ( e )
@@ -53,7 +53,7 @@ const blockNonSAFERequests = () =>
             }
         }
 
-        logger.info( 'Blocked req:', details.url );
+        logger.log( 'Blocked req:', details.url );
         callback( { cancel: true } );
     } );
 };

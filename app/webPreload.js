@@ -39,12 +39,12 @@ store.subscribe( async () =>
         {
             if ( theCall.name === 'login' )
             {
-                logger.info( 'store subscribe calls: ', calls );
-                logger.info( 'pendingCalls: ', pendingCalls );
-                logger.info( 'call Promises: ', callPromises );
+                logger.log( 'store subscribe calls: ', calls );
+                logger.log( 'pendingCalls: ', pendingCalls );
+                logger.log( 'call Promises: ', callPromises );
 	    // QUESTION: callPromises.resolve logs `null` \
 	    // Why is the condition on line  115 passing?
-                logger.info( 'callpromises.resolve: ', callPromises.resolve );
+                logger.log( 'callpromises.resolve: ', callPromises.resolve );
             }
             pendingCalls[theCall.id] = theCall;
 

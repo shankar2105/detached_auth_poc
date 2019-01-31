@@ -60,7 +60,7 @@ export const createAuthRequestElement = authReqData =>
         }
         if ( authReqData[reqType].containers && authReqData[reqType].containers.length )
         {
-            logger.info( 'auth req containers: ', authReqData[reqType].containers );
+            logger.log( 'auth req containers: ', authReqData[reqType].containers );
             const containers = authReqData[reqType].containers.slice( 0 );
             if ( authReqData[reqType].app_container )
             {

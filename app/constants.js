@@ -159,7 +159,10 @@ export const CONFIG = {
 
 if ( inMainProcess )
 {
-    global.preloadFile = `file://${ __dirname }/webPreload.js`;
+    const devPort = process.env.PORT || 1212;
+
+    global.preloadFile = isRunningUnpacked ?
+        `http://localhost:${devPort}/webPreload.dev.js` : `file://${ __dirname }/webPreload.js`;
     global.appDir = __dirname;
     global.isCI = isCI;
     global.startedRunningMock = startedRunningMock;

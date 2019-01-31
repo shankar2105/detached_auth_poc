@@ -31,7 +31,7 @@ export const initAnon = async ( passedStore, options ) =>
     };
 
 
-    logger.info( 'Initing anon connection with these options:', appOptions );
+    logger.log( 'Initing anon connection with these options:', appOptions );
     try
     {
         // does it matter if we override?

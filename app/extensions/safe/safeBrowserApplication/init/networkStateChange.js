@@ -20,7 +20,7 @@ const onNetworkStateChange = ( store, mockAttemptReconnect ) => state =>
     const safeBrowserAppObject = getSafeBrowserAppObject();
 
     const previousState = store.getState().safeBrowserApp.networkStatus;
-    logger.info( 'previousState: ', previousState );
+    logger.log( 'previousState: ', previousState );
     store.dispatch( setNetworkStatus( state ) );
     const isDisconnected = state === SAFE.NETWORK_STATE.DISCONNECTED;
 

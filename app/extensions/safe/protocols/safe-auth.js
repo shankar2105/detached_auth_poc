@@ -6,13 +6,13 @@ import { remote } from 'electron';
 
 export const registerSafeAuthProtocol = () =>
 {
-    logger.verbose( 'Registering safe-auth scheme' );
+    logger.log( 'Registering safe-auth scheme' );
     const partition = CONFIG.SAFE_PARTITION;
     const ses = remote.session.fromPartition( partition );
 
     ses.protocol.registerHttpProtocol( PROTOCOLS.SAFE_AUTH, ( req, cb ) =>
     {
-        logger.verbose( `Procotol:: safe-auth:// url being parsed: ${ req.url }` );
+        logger.log( `Procotol:: safe-auth:// url being parsed: ${ req.url }` );
 
         // TODO. Sort out when/where with slash
         const newUrl = `http://localhost:${ CONFIG.PORT }/auth/${ req.url }`;

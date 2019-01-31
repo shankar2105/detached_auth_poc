@@ -25,7 +25,7 @@ export const wrapBrowserComponent = Browser =>
 {
     try
     {
-        logger.verbose( 'Wrapping browser' );
+        logger.log( 'Wrapping browser' );
 
         let WrappedBrowser = Browser;
 
@@ -55,7 +55,7 @@ export const wrapAddressBarButtonsLHS = Buttons =>
 {
     try
     {
-        logger.verbose( 'Wrapping Address bar buttons LHS' );
+        logger.log( 'Wrapping Address bar buttons LHS' );
         let WrappedAddressBarButtonsLHS = Buttons;
 
         allAddressBarButtonLHSExtensions.forEach( wrapper =>
@@ -83,7 +83,7 @@ export const wrapAddressBarButtonsRHS = Buttons =>
 {
     try
     {
-        logger.verbose( 'Wrapping Address bar buttons RHS' );
+        logger.log( 'Wrapping Address bar buttons RHS' );
         let WrappedAddressBarButtonsRHS = Buttons;
 
         allAddressBarButtonRHSExtensions.forEach( wrapper =>
@@ -111,7 +111,7 @@ export const wrapAddressBarInput = AddressBarInput =>
 {
     try
     {
-        logger.verbose( 'Wrapping Address bar input' );
+        logger.log( 'Wrapping Address bar input' );
         let WrappedAddressBarInput = AddressBarInput;
 
         allAddressBarInputExtensions.forEach( wrapper =>

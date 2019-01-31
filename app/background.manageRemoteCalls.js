@@ -37,7 +37,7 @@ const manageRemoteCalls = async store =>
 
                 if ( allApiCalls[theCall.name] )
                 {
-                    logger.verbose( 'Remote Calling: ', theCall.name );
+                    logger.log( 'Remote Calling: ', theCall.name );
                     store.dispatch( remoteCallActions.updateRemoteCall( { ...theCall, inProgress: true } ) );
                     const theArgs = theCall.args;
 

@@ -59,7 +59,7 @@ export const manageReadStateActions = async store =>
         store.dispatch( safeBrowserAppActions.setAppStatus( SAFE.APP_STATUS.TO_AUTH ) );
         return;
     }
-    logger.info( 'Managing a READ action' );
+    logger.log( 'Managing a READ action' );
 
     if ( !safeBrowserAppIsConnected() )
     {
@@ -68,7 +68,7 @@ export const manageReadStateActions = async store =>
 
     isReading = true;
 
-    logger.verbose( 'Attempting to READ SafeBrowserApp state from network' );
+    logger.log( 'Attempting to READ SafeBrowserApp state from network' );
     store.dispatch( safeBrowserAppActions.setReadConfigStatus( SAFE.READ_STATUS.READING ) );
 
     readConfigFromSafe( store )
@@ -141,7 +141,7 @@ export const manageSaveStateActions = async store =>
         safeBrowserApp.readStatus !== SAFE.READ_STATUS.TO_READ &&
         safeBrowserApp.readStatus !== SAFE.READ_STATUS.READING )
     {
-        logger.verbose( 'Can\'t save state, not read yet... Triggering a read.' );
+        logger.log( 'Can\'t save state, not read yet... Triggering a read.' );
         store.dispatch( safeBrowserAppActions.setReadConfigStatus( SAFE.READ_STATUS.TO_READ ) );
 
         return;
@@ -149,7 +149,7 @@ export const manageSaveStateActions = async store =>
 
     isSaving = true;
 
-    logger.verbose( 'Attempting to SAVE SafeBrowserApp state to network' );
+    logger.log( 'Attempting to SAVE SafeBrowserApp state to network' );
     store.dispatch( safeBrowserAppActions.setSaveConfigStatus( SAFE.SAVE_STATUS.SAVING ) );
     saveConfigToSafe( store )
         .then( () =>
@@ -227,7 +227,7 @@ export const saveConfigToSafe = ( store, quit ) =>
             }
             catch ( e )
             {
-                logger.verbose( 'Saved Data not found. Creating.' );
+                logger.log( 'Saved Data not found. Creating.' );
 
                 if ( e.code === SAFE_APP_ERROR_CODES.ERR_DATA_NOT_FOUND )
                 {
@@ -243,14 +243,14 @@ export const saveConfigToSafe = ( store, quit ) =>
 
             try
             {
-                logger.verbose( 'checking prev entry.' );
+                logger.log( 'checking prev entry.' );
                 previousEntry = await container.get( encryptedKey );
             }
             catch ( e )
             {
                 if ( e.code === SAFE_APP_ERROR_CODES.ERR_NO_SUCH_ENTRY )
                 {
-                    logger.verbose( 'Previous didnt exist, creating...' );
+                    logger.log( 'Previous didnt exist, creating...' );
                     mut.insert( encryptedKey, encryptedData );
                     createdNewEntry = true;
                     container.applyEntriesMutation( mut );
@@ -264,14 +264,14 @@ export const saveConfigToSafe = ( store, quit ) =>
             if ( !createdNewEntry && previousEntry &&
                 typeof previousEntry.version !== 'undefined' )
             {
-                logger.verbose( 'Previous entry exists, updating...' );
+                logger.log( 'Previous entry exists, updating...' );
 
                 version = previousEntry.version + 1;
                 await mut.update( encryptedKey, encryptedData, version );
                 container.applyEntriesMutation( mut );
             }
 
-            logger.info( 'Data saved successfully' );
+            logger.log( 'Data saved successfully' );
             resolve();
         }
         catch ( e )
@@ -319,7 +319,7 @@ export const readConfigFromSafe = store =>
             const decryptedValue = await container.decrypt( encryptedValue.buf );
             const browserState = await JSON.parse( decryptedValue.toString() );
 
-            logger.info( 'State retrieved: ', browserState );
+            logger.log( 'State retrieved: ', browserState );
             resolve( browserState );
         }
         catch ( e )

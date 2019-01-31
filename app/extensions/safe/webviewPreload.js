@@ -87,7 +87,7 @@ export const setupWebIdEventEmitter = ( passedStore, win = window ) =>
 
 export const setupSafeAPIs = ( passedStore, win = window ) =>
 {
-    logger.info( 'Setup up SAFE Dom API via @maidsafe/safe-node-app' );
+    logger.log( 'Setup up SAFE Dom API via @maidsafe/safe-node-app' );
 
     // use from passed object if present (for testing)
     win.safe = win.safe || { ...safe };
@@ -174,7 +174,7 @@ export const setupPreloadedSafeAuthApis = passedStore =>
     window.safeAuthenticator.getNetworkState = ( ) =>
     {
         const state = passedStore.getState();
-        logger.info( 'getting the network state!', state.authenticator.networkState );
+        logger.log( 'getting the network state!', state.authenticator.networkState );
         return { state: state.authenticator.networkState };
     };
 
@@ -190,7 +190,7 @@ export const setupPreloadedSafeAuthApis = passedStore =>
     window.safeAuthenticator.getAuthenticatorHandle = ( ) =>
     {
         const state = passedStore.getState();
-        logger.info( 'window method for get auth handle being called', state.authenticator.authenticatorHandle );
+        logger.log( 'window method for get auth handle being called', state.authenticator.authenticatorHandle );
         return state.authenticator.authenticatorHandle;
     };
 

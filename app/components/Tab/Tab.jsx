@@ -116,7 +116,7 @@ export default class Tab extends Component
 
     webviewFocussed (event)
     {
-        logger.verbose('Webview focussed: Triggering click event on browser window');
+        logger.log('Webview focussed: Triggering click event on browser window');
 
         var fakeClick = new MouseEvent('click', {
            view: window,
@@ -134,7 +134,7 @@ export default class Tab extends Component
         {
             if ( !webview )
             {
-                logger.verbose('No webview found so not doing: callback setup on window webview')
+                logger.log('No webview found so not doing: callback setup on window webview')
                 return;
             }
 
@@ -182,7 +182,7 @@ export default class Tab extends Component
         const { focusWebview, isActiveTab } = this.props;
         const { webview } = this;
 
-        logger.silly( 'Tab: did receive updated props' );
+        logger.log( 'Tab: did receive updated props' );
 
         if ( nextProps.shouldFocusWebview && isActiveTab )
         {
@@ -204,7 +204,7 @@ export default class Tab extends Component
         {
             if ( !webview ) return;
 
-            logger.verbose( 'New WebID set for ', nextProps.url );
+            logger.log( 'New WebID set for ', nextProps.url );
 
             this.setCurrentWebId( nextProps.webId );
         }
@@ -290,7 +290,7 @@ export default class Tab extends Component
 
     didStartLoading( )
     {
-        logger.silly( 'webview started loading' );
+        logger.log( 'webview started loading' );
         const { updateTab, index } = this.props;
 
         const tabUpdate = {
@@ -395,7 +395,7 @@ export default class Tab extends Component
 
     didStopLoading( )
     {
-        logger.verbose('Tab did stop loading')
+        logger.log('Tab did stop loading')
         const { updateTab, index, isActiveTab } = this.props;
 
         const tabUpdate = {
@@ -413,7 +413,7 @@ export default class Tab extends Component
     {
         const { updateTab, index } = this.props;
 
-        logger.verbose('Tab did finish loading')
+        logger.log('Tab did finish loading')
         const tabUpdate = {
             index,
             isLoading : false
@@ -442,7 +442,7 @@ export default class Tab extends Component
 
     pageTitleUpdated( e )
     {
-        logger.silly( 'Webview: page title updated' );
+        logger.log( 'Webview: page title updated' );
 
         const title = e.title;
         const { updateTab, index, isActiveTab } = this.props;
@@ -456,7 +456,7 @@ export default class Tab extends Component
 
     pageFaviconUpdated( e )
     {
-        logger.silly( 'Webview: page favicon updated: ', e );
+        logger.log( 'Webview: page favicon updated: ', e );
         const { updateTab, index } = this.props;
 
         const tabUpdate = {
@@ -473,7 +473,7 @@ export default class Tab extends Component
         const { url } = e;
         const noTrailingSlashUrl = removeTrailingSlash( url );
 
-        logger.verbose( 'webview did navigate' );
+        logger.log( 'webview did navigate' );
 
         // TODO: Actually overwrite history for redirect
         if ( !this.state.browserState.redirects.includes( url ) )
@@ -491,7 +491,7 @@ export default class Tab extends Component
         const { url } = e;
         const noTrailingSlashUrl = removeTrailingSlash( url );
 
-        logger.verbose( 'Webview: did navigate in page', url, this.state.browserState.url );
+        logger.log( 'Webview: did navigate in page', url, this.state.browserState.url );
 
         // TODO: Actually overwrite history for redirect
         if ( !this.state.browserState.redirects.includes( url ) )
@@ -514,7 +514,7 @@ export default class Tab extends Component
         const prev = oldURL;
         const next = newURL;
 
-        logger.silly( 'Webview: did get redirect request' );
+        logger.log( 'Webview: did get redirect request' );
 
 
         if ( prev === this.state.browserState.url )
@@ -525,11 +525,11 @@ export default class Tab extends Component
 
     willNavigate( e )
     {
-        logger.silly( 'webview will navigate', e );
+        logger.log( 'webview will navigate', e );
 
         if (!this.isFrozen() )
         {
-            logger.verbose('frozen checkkkkk in will nav')
+            logger.log('frozen checkkkkk in will nav')
             return;
         }
 
@@ -577,7 +577,7 @@ export default class Tab extends Component
 
         const theWebId = newWebId ? newWebId : webId;
 
-        logger.verbose('Setting currentWebid in tab')
+        logger.log('Setting currentWebid in tab')
 
         if ( !webview  || !theWebId ) return;
 
@@ -637,7 +637,7 @@ For updates or to submit ideas and suggestions, visit https://github.com/maidsaf
     {
         const { addTab } = this.props;
         const { url } = e;
-        logger.verbose('Tab: NewWindow event triggered for url: ', url)
+        logger.log('Tab: NewWindow event triggered for url: ', url)
 
         const activateTab = e.disposition == 'foreground-tab';
 
@@ -648,7 +648,7 @@ For updates or to submit ideas and suggestions, visit https://github.com/maidsaf
 
     isFrozen( e )
     {
-        logger.verbose('Webview is frozen...')
+        logger.log('Webview is frozen...')
         const { index } = this.props;
         const frozen = !index;
         // const frozen = staticTabData[index] || !index
@@ -688,7 +688,7 @@ For updates or to submit ideas and suggestions, visit https://github.com/maidsaf
 
     reload()
     {
-        logger.silly( 'webview reloading' );
+        logger.log( 'webview reloading' );
 
         this.with( ( wv ) =>
         {
@@ -711,11 +711,11 @@ For updates or to submit ideas and suggestions, visit https://github.com/maidsaf
     {
         const { webview } = this;
         const url = addTrailingSlashIfNeeded( input );
-        logger.silly( 'Webview: loading url:', url );
+        logger.log( 'Webview: loading url:', url );
 
         // if ( !urlHasChanged( this.state.browserState.url, url) )
         // {
-        //     logger.verbose( 'not loading URL as it has not changed');
+        //     logger.log( 'not loading URL as it has not changed');
         //     return;
         // }
 

@@ -78,7 +78,7 @@ const triggerGetWebIds = async ( ) =>
 {
     if ( !window || !window.thisIsTheBackgroundProcess ) return;
 
-    logger.verbose( 'Retrieving webIds...' );
+    logger.log( 'Retrieving webIds...' );
 
     await getWebIdsFromSafe();
 };

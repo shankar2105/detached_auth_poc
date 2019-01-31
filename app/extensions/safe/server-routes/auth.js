@@ -6,13 +6,12 @@ import path from 'path';
 const authRoute = {
     method  : 'GET',
     path    : /auth:\//,
-    handler : async ( request, res ) =>
-    {
+    handler : async ( request, res ) => {
         try
         {
             const link = request.url.split( '/auth/' )[1];
             const linkUrl = url.parse( link );
-            let authDistLocale = isRunningPackaged ? '../extensions/safe/' : './extensions/safe/';
+            let authDistLocale = isRunningPackaged ? 'extensions/safe/' : './app/extensions/safe/';
             authDistLocale = ( isRunningSpectronTestProcess && !isRunningSpectronTestProcessingPackagedApp ) ? 'extensions/safe/' : authDistLocale;
 
             const authDist = path.resolve( __dirname, authDistLocale, 'auth-web-app/dist/' );

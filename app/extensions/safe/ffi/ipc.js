@@ -37,7 +37,7 @@ const allAuthCallBacks = {};
  */
 export const setAuthCallbacks = ( req, resolve, reject ) =>
 {
-    logger.verbose( 'IPC.js Setting authCallbacks' );
+    logger.log( 'IPC.js Setting authCallbacks' );
     allAuthCallBacks[req.id] = {
         resolve, reject
     };
@@ -53,7 +53,7 @@ const parseResUrl = url =>
 
 async function sendAuthDecision( isAllowed, authReqData, reqType )
 {
-    logger.verbose( 'IPC.js: Sending auth response', isAllowed, authReqData );
+    logger.log( 'IPC.js: Sending auth response', isAllowed, authReqData );
     if ( reqType === REQ_TYPES.AUTH )
     {
         onAuthDecision( authReqData, isAllowed );
@@ -111,14 +111,14 @@ class ReqQueue
 
     add( req )
     {
-        logger.verbose( 'IPC.js adding req' );
+        logger.log( 'IPC.js adding req' );
         if ( !( req instanceof Request ) )
         {
             logger.error( 'IPC.js not a Request instance, so ignoring' );
             this.next();
             return;
         }
-        logger.verbose( 'IPC.js pushing req' );
+        logger.log( 'IPC.js pushing req' );
         this.q.push( req );
         this.processTheReq();
     }
@@ -154,7 +154,7 @@ class ReqQueue
 
             this.req.res = res;
 
-            logger.info( 'IPC.js: another response being parsed.:', this.req );
+            logger.log( 'IPC.js: another response being parsed.:', this.req );
             if ( res.authReq || res.contReq || res.mDataReq )
             {
                 let reqType = REQ_TYPES.AUTH;
@@ -195,7 +195,7 @@ class ReqQueue
             // WEB && not an auth req (that's handled above)
             if ( this.req.type === CLIENT_TYPES.WEB )
             {
-                logger.info( 'IPC.js About to open send remoteCall response for auth req', res );
+                logger.log( 'IPC.js About to open send remoteCall response for auth req', res );
 
                 replyToRemoteCallFromAuth( this.req );
 
@@ -274,7 +274,7 @@ const enqueueRequest = ( req, type ) =>
     }
     else
     {
-        logger.verbose( 'IPC.js enqueue authQ req...' );
+        logger.log( 'IPC.js enqueue authQ req...' );
         reqQ.add( request );
     }
 };
@@ -305,7 +305,7 @@ const onSharedMDataReq = e =>
 
 const onAuthDecision = ( authData, isAllowed ) =>
 {
-    logger.verbose( 'IPC.js: onAuthDecision running...', authData, isAllowed );
+    logger.log( 'IPC.js: onAuthDecision running...', authData, isAllowed );
     if ( !authData )
     {
         return Promise.reject( new Error( i18n.__( 'messages.should_not_be_empty', i18n.__( 'URL' ) ) ) );
@@ -320,7 +320,7 @@ const onAuthDecision = ( authData, isAllowed ) =>
     authenticator.encodeAuthResp( authData, isAllowed )
         .then( res =>
         {
-            logger.info( 'IPC.js: Successfully encoded auth response. Here is the res:', res );
+            logger.log( 'IPC.js: Successfully encoded auth response. Here is the res:', res );
 
             if ( allAuthCallBacks[reqQ.req.id] )
             {

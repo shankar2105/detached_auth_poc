@@ -16,7 +16,7 @@ const getWebIds = async ( ) =>
     const currentStore = getCurrentStore();
 
     const safeBrowserApp = getSafeBrowserAppObject();
-    logger.verbose( 'getWebIds' );
+    logger.log( 'getWebIds' );
 
     if ( !safeBrowserApp ) throw new Error( 'SafeBrowserApp should be initiated.' );
 

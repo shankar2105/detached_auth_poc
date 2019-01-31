@@ -84,7 +84,7 @@ const triggerGetWebIds = async ( ) =>
 {
     if ( !window || !window.thisIsTheBackgroundProcess ) return;
 
-    logger.verbose( 'Retrieving webIds' );
+    logger.log( 'Retrieving webIds' );
     const ids = await getWebIds();
 };
 
@@ -109,7 +109,7 @@ const getWebIds = async ( ) =>
     const currentStore = getCurrentStore();
 
     const safeBrowserApp = getSafeBrowserAppObject();
-    logger.verbose( 'getWebIds' );
+    logger.log( 'getWebIds' );
 
     if ( !safeBrowserApp ) throw new Error( 'SafeBrowserApp should be initiated.' );
 
