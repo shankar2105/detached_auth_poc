@@ -4,6 +4,7 @@ import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n';
+// import en from '../locales/en.json';
 
 import {
     inRendererProcess,
@@ -27,6 +28,9 @@ import createRootReducer from '../reducers';
 const initialStateFromMain = inRendererProcess ? getInitialStateRenderer() : {};
 
 
+// const translationsObject = {
+//     en
+// };
 
 let history;
 
@@ -58,10 +62,10 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
         collapsed: true
     });
 
-    // Skip redux logs in console during the tests
-    if (process.env.NODE_ENV !== 'test') {
-        middleware.push(logger);
-    }
+    // // Skip redux logs in console during the tests
+    // if (process.env.NODE_ENV !== 'test') {
+    //     middleware.push(logger);
+    // }
 
 
     // Redux DevTools Configuration
@@ -114,9 +118,9 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
     }
 
     // TODO: remove this lark?
-    syncTranslationWithStore( store );
-    store.dispatch( loadTranslations( translationsObject ) );
-    store.dispatch( setLocale( 'en' ) );
+    // syncTranslationWithStore( store );
+    // store.dispatch( loadTranslations( translationsObject ) );
+    // store.dispatch( setLocale( 'en' ) );
     return store;
 };
 

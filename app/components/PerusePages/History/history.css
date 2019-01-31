@@ -21,11 +21,11 @@
 
 .tab
 {
-    composes: tab from '@Components/Tab/tab.css';
+    composes: tab from '../../Tab/tab.css';
 
 }
 
 .activeTab
 {
-    composes: activeTab from '@Components/Tab/tab.css';
+    composes: activeTab from '../../Tab/tab.css';
 }

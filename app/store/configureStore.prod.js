@@ -4,6 +4,7 @@ import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n';
+// import en from '../locales/en.json';
 
 import {
     inRendererProcess,
@@ -27,6 +28,9 @@ import * as bookmarkActions from '../actions/bookmarks_actions';
 const initialStateFromMain = inRendererProcess ? getInitialStateRenderer() : {};
 
 
+// const translationsObject = {
+//     en
+// };
 
 let history;
 
@@ -113,9 +117,9 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
     }
 
     // TODO: remove this lark?
-    syncTranslationWithStore( store );
-    store.dispatch( loadTranslations( translationsObject ) );
-    store.dispatch( setLocale( 'en' ) );
+    // syncTranslationWithStore( store );
+    // store.dispatch( loadTranslations( translationsObject ) );
+    // store.dispatch( setLocale( 'en' ) );
     return store;
 };
 
