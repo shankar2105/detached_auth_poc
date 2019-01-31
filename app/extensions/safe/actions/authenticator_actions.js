@@ -1,7 +1,7 @@
 import { createActions } from 'redux-actions';
 import { createAliasedAction } from 'electron-redux';
-import { callIPC } from 'extensions/safe/ffi/ipc';
-import AUTH_CONSTANTS from 'extensions/safe/auth-constants';
+import { callIPC } from '@Extensions/safe/ffi/ipc';
+import AUTH_CONSTANTS from '@Extensions/safe/auth-constants';
 
 import logger from 'logger';
 

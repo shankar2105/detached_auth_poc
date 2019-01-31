@@ -4,7 +4,7 @@ import logger from 'logger';
 import * as remoteCallActions from '@Actions/remoteCall_actions';
 import safe from '@maidsafe/safe-node-app';
 import { PROTOCOLS, CONFIG } from '@Constants';
-import { manifest as authManifest } from 'extensions/safe/auth-api/manifest';
+import { manifest as authManifest } from '@Extensions/safe/auth-api/manifest';
 import { callIPC } from './ffi/ipc';
 
 // shim for rdflib.js

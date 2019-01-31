@@ -1,8 +1,8 @@
 import {
     setSaveConfigStatus,
     setReadConfigStatus
-} from 'extensions/safe/actions/safeBrowserApplication_actions';
-import { SAFE } from 'extensions/safe/constants';
+} from '@Extensions/safe/actions/safeBrowserApplication_actions';
+import { SAFE } from '@Extensions/safe/constants';
 
 import logger from 'logger';
 

@@ -1,9 +1,9 @@
 import logger from 'logger';
-import * as authenticatorActions from 'extensions/safe/actions/authenticator_actions';
+import * as authenticatorActions from '@Extensions/safe/actions/authenticator_actions';
 import { app } from 'electron';
-import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
-import { initSafeBrowserApp } from 'extensions/safe/safeBrowserApplication';
-import { getLibStatus } from 'extensions/safe/auth-api/authFuncs';
+import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
+import { initSafeBrowserApp } from '@Extensions/safe/safeBrowserApplication';
+import { getLibStatus } from '@Extensions/safe/auth-api/authFuncs';
 
 import * as ffiLoader from './auth-api/ffiLoader';
 
@@ -13,22 +13,22 @@ import registerSafeProtocol from './protocols/safe';
 import registerSafeAuthProtocol from './protocols/safe-auth';
 import blockNonSAFERequests from './blockNonSafeReqs';
 
-import { setIsMock } from 'extensions/safe/actions/safeBrowserApplication_actions';
+import { setIsMock } from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import { startedRunningMock, isRunningSpectronTestProcess, isRunningUnpacked } from '@Constants';
 import { handleSafeBrowserStoreChanges } from './safeBrowserApplication';
-import { getSafeBrowserUnauthedReqUri } from 'extensions/safe/safeBrowserApplication/init/initAnon';
+import { getSafeBrowserUnauthedReqUri } from '@Extensions/safe/safeBrowserApplication/init/initAnon';
 
-import sysUri from 'extensions/safe/ffi/sys_uri';
+import sysUri from '@Extensions/safe/ffi/sys_uri';
 import { APP_INFO, PROTOCOLS } from '@Constants';
 import { addTab } from '@Actions/tabs_actions';
 
-import safeReducers from 'extensions/safe/reducers';
-import webviewPreload from 'extensions/safe/webviewPreload';
-import { handleRemoteCalls, remoteCallApis } from 'extensions/safe/handleRemoteCalls';
-import * as SafeBrowserActions from 'extensions/safe/actions/safeBrowserApplication_actions';
+import safeReducers from '@Extensions/safe/reducers';
+import webviewPreload from '@Extensions/safe/webviewPreload';
+import { handleRemoteCalls, remoteCallApis } from '@Extensions/safe/handleRemoteCalls';
+import * as SafeBrowserActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
 
-import { addFileMenus } from 'extensions/safe/menus';
-import { urlIsAllowedBySafe as urlIsValid } from 'extensions/safe/utils/safeHelpers';
+import { addFileMenus } from '@Extensions/safe/menus';
+import { urlIsAllowedBySafe as urlIsValid } from '@Extensions/safe/utils/safeHelpers';
 
 const onWebviewPreload = store =>
     webviewPreload( store );

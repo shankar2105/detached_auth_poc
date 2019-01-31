@@ -10,8 +10,8 @@ import TabContents from '@Components/TabContents';
 import styles from './browser.css';
 import logger from 'logger';
 
-import extendComponent from 'utils/extendComponent';
-import { wrapBrowserComponent } from 'extensions/components';
+import extendComponent from '@Utils/extendComponent';
+import { wrapBrowserComponent } from '@Extensions/components';
 
 
 class Browser extends Component

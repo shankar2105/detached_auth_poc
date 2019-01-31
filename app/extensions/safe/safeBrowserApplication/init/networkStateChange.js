@@ -4,15 +4,15 @@ import {
     CONFIG,
     PROTOCOLS
 } from '@Constants';
-import { SAFE } from 'extensions/safe/constants';
-import { parseSafeAuthUrl } from 'extensions/safe/utils/safeHelpers';
+import { SAFE } from '@Extensions/safe/constants';
+import { parseSafeAuthUrl } from '@Extensions/safe/utils/safeHelpers';
 
-import { handleAuthentication, attemptReconnect } from 'extensions/safe/network';
+import { handleAuthentication, attemptReconnect } from '@Extensions/safe/network';
 import { initialiseApp } from '@maidsafe/safe-node-app';
 
-import { setNetworkStatus } from 'extensions/safe/actions/safeBrowserApplication_actions';
+import { setNetworkStatus } from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import { addNotification, clearNotification } from '@Actions/notification_actions';
-import { getSafeBrowserAppObject } from 'extensions/safe/safeBrowserApplication';
+import { getSafeBrowserAppObject } from '@Extensions/safe/safeBrowserApplication';
 
 
 const onNetworkStateChange = ( store, mockAttemptReconnect ) => state =>

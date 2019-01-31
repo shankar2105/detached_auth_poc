@@ -7,8 +7,8 @@ import { I18n } from 'react-redux-i18n';
 
 import logger from 'logger';
 
-import extendComponent from 'utils/extendComponent';
-import { wrapAddressBarInput } from 'extensions/components';
+import extendComponent from '@Utils/extendComponent';
+import { wrapAddressBarInput } from '@Extensions/components';
 
 import { Input } from 'antd';
 import 'antd/lib/input/style';

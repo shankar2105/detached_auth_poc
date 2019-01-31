@@ -8,7 +8,7 @@ import remoteCalls from './remoteCalls';
 import ui from './ui';
 import logger from 'logger';
 
-import { getExtensionReducers } from 'extensions';
+import { getExtensionReducers } from '@Extensions';
 
 const additionalReducers = getExtensionReducers();
 

@@ -1,6 +1,6 @@
 /* eslint global-require: 1, flowtype-errors/show-errors: 0 */
 import logger from 'logger';
-import { onRemoteCallInBgProcess, getRemoteCallApis } from 'extensions';
+import { onRemoteCallInBgProcess, getRemoteCallApis } from '@Extensions';
 import * as remoteCallActions from '@Actions/remoteCall_actions';
 
 let cachedRemoteCallArray = [];

@@ -2,7 +2,7 @@ import { urlIsAllowedBySafe,
     generateBoundaryStr,
     generateResponseStr,
     rangeStringToArray
-} from 'extensions/safe/utils/safeHelpers';
+} from '@Extensions/safe/utils/safeHelpers';
 
 describe( 'Safe Extension', () =>
 {

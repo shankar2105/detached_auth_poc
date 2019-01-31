@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
-import authenticator from 'extensions/safe/reducers/authenticator';
-import { TYPES } from 'extensions/safe/actions/authenticator_actions';
-import initialState from 'extensions/safe/reducers/initialAppState';
+import authenticator from '@Extensions/safe/reducers/authenticator';
+import { TYPES } from '@Extensions/safe/actions/authenticator_actions';
+import initialState from '@Extensions/safe/reducers/initialAppState';
 
 jest.mock( 'extensions/safe/ffi/ipc' );
 

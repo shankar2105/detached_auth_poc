@@ -142,6 +142,24 @@ export default merge.smart(baseConfig, {
                     }
                 ]
             },
+            // Add LESS support  - compile all other .less files and pipe it to style.css
+            {
+                test : /^((?!\.global).)*\.less/,
+                use  : [
+                    {
+                        loader : 'style-loader'
+                    },
+                    {
+                        loader : 'css-loader'
+                    },
+                    {
+                        loader  : 'less-loader',
+                        options : {
+                            javascriptEnabled : true
+                        }
+                    }
+                ]
+            },
             // WOFF Font
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,

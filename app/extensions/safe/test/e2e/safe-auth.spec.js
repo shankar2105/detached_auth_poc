@@ -12,9 +12,9 @@ import {
     createAccount,
     login,
     logout
-} from 'extensions/safe/test/e2e/lib/authenticator-drivers';
+} from '@Extensions/safe/test/e2e/lib/authenticator-drivers';
 import { BROWSER_UI, WAIT_FOR_EXIST_TIMEOUT } from 'spectron-lib/constants';
-import AUTH_UI_CLASSES from 'extensions/safe/auth-web-app/classes';
+import AUTH_UI_CLASSES from '@Extensions/safe/auth-web-app/classes';
 
 import {
     setupSpectronApp

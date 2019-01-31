@@ -36,7 +36,7 @@ import setupBackground from './setupBackground';
 
 import openWindow from './openWindow';
 import { configureStore } from './store/configureStore';
-import { onReceiveUrl, preAppLoad, onAppReady } from 'extensions';
+import { onReceiveUrl, preAppLoad, onAppReady } from '@Extensions';
 
 // import { createSafeInfoWindow, createTray } from './setupTray';
 

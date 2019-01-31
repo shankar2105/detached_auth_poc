@@ -1,4 +1,4 @@
-import * as webviewPreload from 'extensions/safe/webviewPreload';
+import * as webviewPreload from '@Extensions/safe/webviewPreload';
 import { APP_INFO, startedRunningProduction } from '@Constants';
 
 

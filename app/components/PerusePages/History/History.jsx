@@ -9,7 +9,7 @@ import UrlList from '@Components/UrlList';
 import styles from './history.css';
 import { CLASSES } from '@Constants';
 
-import { urlIsValid } from 'extensions';
+import { urlIsValid } from '@Extensions';
 
 const log = require( 'electron-log' );
 

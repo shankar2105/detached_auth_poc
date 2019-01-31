@@ -3,7 +3,7 @@
 import { remote, shell, webContents } from 'electron';
 import { TYPES } from '@Actions/tabs_actions';
 import { TYPES as UI_TYPES } from '@Actions/ui_actions';
-import { makeValidAddressBarUrl, removeTrailingRedundancies } from 'utils/urlHelpers';
+import { makeValidAddressBarUrl, removeTrailingRedundancies } from '@Utils/urlHelpers';
 import initialAppState from './initialAppState';
 import { CONFIG, isRunningUnpacked } from '@Constants';
 import path from 'path';

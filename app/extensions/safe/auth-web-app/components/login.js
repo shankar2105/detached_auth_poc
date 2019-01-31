@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { I18n } from 'react-redux-i18n';
 import classNames from 'classnames';
-import AUTH_UI_CLASSES from 'extensions/safe/auth-web-app/classes';
+import AUTH_UI_CLASSES from '@Extensions/safe/auth-web-app/classes';
 
 import CardLoaderFull from './card_loader_full';
 import Popup from './popup';

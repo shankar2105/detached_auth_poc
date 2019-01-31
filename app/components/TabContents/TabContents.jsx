@@ -5,7 +5,7 @@ import url from 'url';
 import styles from './tabContents.css';
 import Tab from '@Components/Tab';
 import { INTERNAL_PAGES } from '@Constants';
-import { isInternalPage } from 'utils/urlHelpers';
+import { isInternalPage } from '@Utils/urlHelpers';
 import History from '@Components/PerusePages/History';
 import Bookmarks from '@Components/PerusePages/Bookmarks';
 import logger from 'logger';

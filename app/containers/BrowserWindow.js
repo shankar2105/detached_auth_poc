@@ -7,7 +7,7 @@ import * as NotificationActions from '@Actions/notification_actions';
 import * as UiActions from '@Actions/ui_actions';
 import * as BookmarksActions from '@Actions/bookmarks_actions';
 import Browser from '@Components/Browser';
-import { getActionsForBrowser } from 'extensions';
+import { getActionsForBrowser } from '@Extensions';
 
 
 function mapStateToProps( state )

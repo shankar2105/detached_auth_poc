@@ -1,12 +1,12 @@
 import logger from 'logger';
-import { handleAuthUrl } from 'extensions/safe/actions/authenticator_actions';
+import { handleAuthUrl } from '@Extensions/safe/actions/authenticator_actions';
 import { updateRemoteCall } from '@Actions/remoteCall_actions';
-import { parseSafeAuthUrl } from 'extensions/safe/utils/safeHelpers';
-import { getCurrentStore } from 'extensions/safe/safeBrowserApplication';
+import { parseSafeAuthUrl } from '@Extensions/safe/utils/safeHelpers';
+import { getCurrentStore } from '@Extensions/safe/safeBrowserApplication';
 import {
     PROTOCOLS
 } from '@Constants';
-import { SAFE } from 'extensions/safe/constants';
+import { SAFE } from '@Extensions/safe/constants';
 
 import { parse as parseURL } from 'url';
 

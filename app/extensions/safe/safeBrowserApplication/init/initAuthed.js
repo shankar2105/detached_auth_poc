@@ -1,5 +1,5 @@
 import { initialiseApp } from '@maidsafe/safe-node-app';
-import onNetworkStateChange from 'extensions/safe/safeBrowserApplication/init/networkStateChange';
+import onNetworkStateChange from '@Extensions/safe/safeBrowserApplication/init/networkStateChange';
 
 import {
     APP_INFO,

@@ -6,7 +6,7 @@ import { parseAppName, getAppIconClassName } from '../utils';
 import Popup from './popup';
 import CardLoaderFull from './card_loader_full';
 import CONSTANTS from '../constants';
-import AUTH_UI_CLASSES from 'extensions/safe/auth-web-app/classes';
+import AUTH_UI_CLASSES from '@Extensions/safe/auth-web-app/classes';
 import { I18n } from 'react-redux-i18n';
 
 export default class AppList extends Component {

@@ -1,5 +1,5 @@
 // @flow
-import { TYPES } from 'extensions/safe/actions/safeBrowserApplication_actions';
+import { TYPES } from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import initialAppState from './initialAppState';
 import logger from 'logger';
 

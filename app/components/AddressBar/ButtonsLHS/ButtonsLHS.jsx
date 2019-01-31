@@ -9,8 +9,8 @@ import 'antd/lib/col/style';
 import 'antd/lib/button/style';
 import { I18n } from 'react-redux-i18n';
 
-import extendComponent from 'utils/extendComponent';
-import { wrapAddressBarButtonsLHS } from 'extensions/components';
+import extendComponent from '@Utils/extendComponent';
+import { wrapAddressBarButtonsLHS } from '@Extensions/components';
 import styles from './buttonsLHS.css';
 
 /**

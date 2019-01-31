@@ -3,20 +3,20 @@ import { getSafeBrowserAppObject } from './index.js';
 import {
     setSaveConfigStatus,
     setReadConfigStatus
-} from 'extensions/safe/actions/safeBrowserApplication_actions';
+} from '@Extensions/safe/actions/safeBrowserApplication_actions';
 
 import {
     safeBrowserAppIsAuthing,
     safeBrowserAppIsAuthed,
     safeBrowserAppIsConnected,
     safeBrowserAppAuthFailed
-} from 'extensions/safe/safeBrowserApplication';
+} from '@Extensions/safe/safeBrowserApplication';
 
 import { addNotification } from '@Actions/notification_actions';
 import { CONFIG } from '@Constants';
-import { SAFE, SAFE_APP_ERROR_CODES } from 'extensions/safe/constants';
+import { SAFE, SAFE_APP_ERROR_CODES } from '@Extensions/safe/constants';
 
-import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
+import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import * as bookmarksActions from '@Actions/bookmarks_actions';
 import * as tabsActions from '@Actions/tabs_actions';
 

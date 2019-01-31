@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {
     manageReadStateActions,
     manageSaveStateActions
-} from 'extensions/safe/safeBrowserApplication/manageBrowserConfig';
+} from '@Extensions/safe/safeBrowserApplication/manageBrowserConfig';
 
 import {
     isCI,
@@ -11,12 +11,12 @@ import {
     isRunningSpectronTestProcessingPackagedApp
 } from '@Constants';
 
-import { SAFE } from 'extensions/safe/constants';
-import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
+import { SAFE } from '@Extensions/safe/constants';
+import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import * as notificationActions from '@Actions/notification_actions';
 import logger from 'logger';
-import { initAnon } from 'extensions/safe/safeBrowserApplication/init/initAnon';
-import initAuthedApplication from 'extensions/safe/safeBrowserApplication/init/initAuthed';
+import { initAnon } from '@Extensions/safe/safeBrowserApplication/init/initAnon';
+import initAuthedApplication from '@Extensions/safe/safeBrowserApplication/init/initAuthed';
 
 let safeBrowserAppObject;
 let tempSafeBrowserObjectUntilAuthed;

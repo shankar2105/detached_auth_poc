@@ -1,11 +1,11 @@
 
-import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
+import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import logger from 'logger';
 import {
     getCurrentStore,
     getSafeBrowserAppObject,
     safeBrowserAppIsAuthed
-} from 'extensions/safe/safeBrowserApplication';
+} from '@Extensions/safe/safeBrowserApplication';
 
 /**
  * Get WebIds for the current user

@@ -10,7 +10,7 @@ import {
     createAccount,
     login,
     logout
-} from 'extensions/safe/test/e2e/lib/authenticator-drivers';
+} from '@Extensions/safe/test/e2e/lib/authenticator-drivers';
 import { BROWSER_UI, WAIT_FOR_EXIST_TIMEOUT, DEFAULT_TIMEOUT_INTERVAL } from 'spectron-lib/constants';
 import {
     setupSpectronApp

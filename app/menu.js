@@ -11,11 +11,11 @@ import {
 
 import { selectAddressBar } from '@Actions/ui_actions';
 import { isHot,isRunningDebug } from '@Constants';
-import { getLastClosedTab } from 'reducers/tabs';
+import { getLastClosedTab } from '@Reducers/tabs';
 import logger from 'logger';
 import pkg from '@Package';
 
-import { getExtensionMenuItems } from 'extensions';
+import { getExtensionMenuItems } from '@Extensions';
 
 export default class MenuBuilder
 {

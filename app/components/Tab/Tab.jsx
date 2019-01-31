@@ -6,7 +6,7 @@ import Error from '@Components/PerusePages/Error';
 import ReactDOMServer from 'react-dom/server';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { addTrailingSlashIfNeeded, removeTrailingSlash, urlHasChanged } from 'utils/urlHelpers';
+import { addTrailingSlashIfNeeded, removeTrailingSlash, urlHasChanged } from '@Utils/urlHelpers';
 import path from 'path';
 import { parse as parseURL } from 'url';
 import styles from './tab.css';

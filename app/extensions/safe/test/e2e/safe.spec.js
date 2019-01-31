@@ -6,7 +6,7 @@ import {
     setClientToMainBrowserWindow,
     delay
 } from 'spectron-lib/browser-driver';
-import { createSafeApp, createRandomDomain } from 'extensions/safe/test/e2e/lib/safe-helpers';
+import { createSafeApp, createRandomDomain } from '@Extensions/safe/test/e2e/lib/safe-helpers';
 import { BROWSER_UI, WAIT_FOR_EXIST_TIMEOUT, DEFAULT_TIMEOUT_INTERVAL } from 'spectron-lib/constants';
 import {
     setupSpectronApp

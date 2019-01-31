@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import AUTH_UI_CLASSES from 'extensions/safe/auth-web-app/classes';
+import AUTH_UI_CLASSES from '@Extensions/safe/auth-web-app/classes';
 
 import CONSTANTS from '../constants';
 import NetworkStatus from './network_status';

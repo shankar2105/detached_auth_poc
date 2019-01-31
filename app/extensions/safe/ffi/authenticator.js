@@ -21,7 +21,7 @@ import CONSTANTS from '../auth-constants';
 import errConst from '../err-constants';
 
 import { isRunningNodeEnvTest } from '@Constants';
-import { SAFE } from 'extensions/safe/constants';
+import { SAFE } from '@Extensions/safe/constants';
 // private variables
 const _registeredClientHandle = Symbol( 'registeredClientHandle' );
 const _nwState = Symbol( 'nwState' );

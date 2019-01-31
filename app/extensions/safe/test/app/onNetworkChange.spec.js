@@ -1,7 +1,7 @@
-import onNetworkStateChange from 'extensions/safe/safeBrowserApplication/init/networkStateChange';
-import { TYPES as PERUSE_TYPES } from 'extensions/safe/actions/safeBrowserApplication_actions';
+import onNetworkStateChange from '@Extensions/safe/safeBrowserApplication/init/networkStateChange';
+import { TYPES as PERUSE_TYPES } from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import { TYPES } from '@Actions/notification_actions';
-import { SAFE } from 'extensions/safe/constants';
+import { SAFE } from '@Extensions/safe/constants';
 
 // jest.mock('extensions/safe/safeBrowserApplication', () =>
 // {

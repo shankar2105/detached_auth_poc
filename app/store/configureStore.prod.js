@@ -20,7 +20,7 @@ import {
 } from 'electron-redux';
 
 import createRootReducer from '../reducers';
-// import * as bookmarkActions from '../actions/bookmarks_actions';
+import * as bookmarkActions from '../actions/bookmarks_actions';
 // import type { counterStateType } from '../reducers/types';
 
 
@@ -65,9 +65,8 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
 
 
     // Redux DevTools Configuration
-    // TODO add all actions here?
     const actionCreators = {
-        // ...bookmarkActions,
+        ...bookmarkActions,
         ...routerActions
     };
 

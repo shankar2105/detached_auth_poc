@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { shell } from 'electron';
-import * as safeBrowserAppActions from 'extensions/safe/actions/safeBrowserApplication_actions';
-import * as authenticatorActions from 'extensions/safe/actions/authenticator_actions';
+import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
+import * as authenticatorActions from '@Extensions/safe/actions/authenticator_actions';
 import i18n from 'i18n';
 import authenticator from './authenticator';
 import CONSTANTS from '../auth-constants';
@@ -10,8 +10,8 @@ import { addAuthNotification } from '../manageAuthNotifications';
 import errConst from '../err-constants';
 
 // TODO unify this with calls for safeBrowserApp store...
-import { getSafeBackgroundProcessStore } from 'extensions/safe/index';
-import { replyToRemoteCallFromAuth } from 'extensions/safe/network';
+import { getSafeBackgroundProcessStore } from '@Extensions/safe/index';
+import { replyToRemoteCallFromAuth } from '@Extensions/safe/network';
 
 const ipcEvent = null;
 

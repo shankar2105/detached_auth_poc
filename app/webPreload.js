@@ -1,7 +1,7 @@
 // following @pfrazee's beaker pattern again here.
 // import setModuleImportLocations from 'setModuleImportLocations';
 import { ipcRenderer } from 'electron';
-import { triggerOnWebviewPreload } from 'extensions';
+import { triggerOnWebviewPreload } from '@Extensions';
 
 // var { setupPreloadedSafeAuthApis } = require( './setupPreloadAPIs');
 const configureStore = require( './store/configureStore' ).configureStore;

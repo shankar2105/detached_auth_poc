@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { CLASSES, isRunningSpectronTestProcess } from '@Constants';
-import { SAFE } from 'extensions/safe/constants';
+import { SAFE } from '@Extensions/safe/constants';
 import logger from 'logger';
-import * as SafeBrowserActions from 'extensions/safe/actions/safeBrowserApplication_actions';
+import * as SafeBrowserActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
 
 function mapStateToProps( state )
 {

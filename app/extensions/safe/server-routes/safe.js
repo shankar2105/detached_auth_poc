@@ -2,12 +2,12 @@ import logger from 'logger';
 import React from 'react';
 import Error from '@Components/PerusePages/Error';
 import ReactDOMServer from 'react-dom/server';
-import { getSafeBrowserAppObject } from 'extensions/safe/safeBrowserApplication';
+import { getSafeBrowserAppObject } from '@Extensions/safe/safeBrowserApplication';
 
-import { setWebFetchStatus } from 'extensions/safe/actions/web_fetch_actions';
+import { setWebFetchStatus } from '@Extensions/safe/actions/web_fetch_actions';
 import { addTab, closeTab } from '@Actions/tabs_actions';
 import { rangeStringToArray, generateResponseStr } from '../utils/safeHelpers';
-import errConsts from 'extensions/safe/err-constants';
+import errConsts from '@Extensions/safe/err-constants';
 import { SAFE } from '../constants';
 
 const safeRoute = store => ( {

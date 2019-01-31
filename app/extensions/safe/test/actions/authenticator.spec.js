@@ -1,4 +1,4 @@
-import * as authenticator from 'extensions/safe/actions/authenticator_actions';
+import * as authenticator from '@Extensions/safe/actions/authenticator_actions';
 
 jest.mock( 'extensions/safe/ffi/ipc' );
 jest.mock( 'electron-redux', () =>

@@ -8,7 +8,7 @@ import styles from './tabBar.css';
 import MdClose from 'react-icons/lib/md/close';
 import MdAdd from 'react-icons/lib/md/add';
 import logger from 'logger';
-import { isInternalPage } from 'utils/urlHelpers';
+import { isInternalPage } from '@Utils/urlHelpers';
 import { CLASSES, INTERNAL_PAGES } from '@Constants';
 import { Column, Spinner, Row } from 'nessie-ui';
 
