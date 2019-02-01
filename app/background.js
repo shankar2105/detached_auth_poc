@@ -17,7 +17,6 @@ const initSafeServer = store =>
     onInitBgProcess( server, store );
 };
 
-logger.log('BACKGROUNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNND')
 const initBgProcess = async () =>
 {
     // Add middleware from extensions here. TODO: this should be be unified somewhere.

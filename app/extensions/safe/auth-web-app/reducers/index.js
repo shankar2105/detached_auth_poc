@@ -5,13 +5,6 @@ import app from './app';
 import auth from './auth';
 import networkState from './network_state';
 
-// const rootReducer = combineReducers( {
-//
-// } );
-//
-// export default rootReducer;
-
-
 
 // import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
@@ -23,5 +16,4 @@ export default (history) => combineReducers({
   networkState,
   routing,
   i18n : i18nReducer
-  // ... // rest of youZr reducers
 })

@@ -12,8 +12,14 @@ import {
 } from '@Constants';
 
 import { SAFE } from '@Extensions/safe/constants';
-import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
-import * as notificationActions from '@Actions/notification_actions';
+import {
+    setAppStatus,
+    receivedAuthResponse
+} from '@Extensions/safe/actions/safeBrowserApplication_actions';
+import {
+    addNotification,
+    clearNotification
+} from '@Actions/notification_actions';
 import logger from 'logger';
 import { initAnon } from '@Extensions/safe/safeBrowserApplication/init/initAnon';
 import initAuthedApplication from '@Extensions/safe/safeBrowserApplication/init/initAuthed';
@@ -31,14 +37,12 @@ let isAuthing = false;
 export const getSafeBrowserAppObject = () => safeBrowserAppObject;
 export const getCurrentStore = () => currentStore;
 
-export const clearAppObj = () => 
-{
+export const clearAppObj = () => {
     logger.log( 'Clearing safeBrowserApp object cache.' );
     safeBrowserAppObject.clearObjectCache();
 };
 
-export const safeBrowserAppIsAuthing = () => 
-{
+export const safeBrowserAppIsAuthing = () => {
     const safeBrowserAppAuthStates = [
         SAFE.APP_STATUS.TO_AUTH,
         SAFE.APP_STATUS.AUTHORISING
@@ -55,8 +59,7 @@ export const safeBrowserAppIsAuthing = () =>
 export const safeBrowserAppIsAuthed = () => currentStore.getState().safeBrowserApp.appStatus
     === SAFE.APP_STATUS.AUTHORISED;
 
-export const safeBrowserAppIsConnected = () => 
-{
+export const safeBrowserAppIsConnected = () => {
     const netState = currentStore.getState().safeBrowserApp.networkStatus;
     // Q: why do we have a loggedin state?
     return (
@@ -72,8 +75,7 @@ export const safeBrowserAppAuthFailed = () => currentStore.getState().safeBrowse
  * Setup actions to be triggered in response to store state changes.
  * @param  { ReduxStore } store [description]
  */
-export const handleSafeBrowserStoreChanges = store => 
-{
+export const handleSafeBrowserStoreChanges = store => {
     // TODO check why we need this vs passing it around
     currentStore = store;
     // lets set state for all funcs to have the same reference.
@@ -86,8 +88,7 @@ export const handleSafeBrowserStoreChanges = store =>
  * Everything we need to do to start the SafeBrowser App for fetching at least.
  * @param  {object} passedStore redux store
  */
-export const initSafeBrowserApp = async ( passedStore, authorise = false ) => 
-{
+export const initSafeBrowserApp = async ( passedStore, authorise = false ) => {
     const defaultOptions = {
         enableExperimentalApis : false,
         forceUseMock           : startedRunningMock
@@ -133,8 +134,7 @@ export const initSafeBrowserApp = async ( passedStore, authorise = false ) =>
 
 const urisUnderAuth = [];
 
-const authFromStoreResponse = async ( res, store ) => 
-{
+const authFromStoreResponse = async ( res, store ) => {
     logger.log( 'Authing from a store-passed response.', Date.now(), res );
 
     if ( !res.startsWith( 'safe' ) )
@@ -142,14 +142,14 @@ const authFromStoreResponse = async ( res, store ) =>
         // it's an error!
         logger.error( res );
         store.dispatch(
-            notificationActions.addNotification( {
+            addNotification( {
                 text : `Unable to connect to the network. ${ res }`,
                 type : 'error'
             } )
         );
 
         store.dispatch(
-            safeBrowserAppActions.setAppStatus(
+            setAppStatus(
                 SAFE.APP_STATUS.AUTHORISATION_FAILED
             )
         );
@@ -179,7 +179,7 @@ const authFromStoreResponse = async ( res, store ) =>
         if ( safeBrowserAppObject.auth.registered )
         {
             store.dispatch(
-                safeBrowserAppActions.setAppStatus( SAFE.APP_STATUS.AUTHORISED )
+                setAppStatus( SAFE.APP_STATUS.AUTHORISED )
             );
         }
     }
@@ -203,9 +203,9 @@ const authFromStoreResponse = async ( res, store ) =>
             if ( isRunningSpectronTestProcessingPackagedApp || isCI ) return;
 
             store.dispatch(
-                notificationActions.addNotification( {
+                addNotification( {
                     text      : message,
-                    onDismiss : notificationActions.clearNotification
+                    onDismiss : clearNotification
                 } )
             );
         }
@@ -223,15 +223,13 @@ let prevSafeBrowserAppExperimentalState;
  * based upon the application auth state
  * @param  {Object} state Application state (from redux)
  */
-const manageAuthorisationActions = async store => 
-{
+const manageAuthorisationActions = async store => {
     // TODO: Do this via aliased action.
     const safeBrowserState = store.getState().safeBrowserApp;
 
     debouncedPassAuthUriToStore = debouncedPassAuthUriToStore
-        || _.debounce( responseUri => 
-{
-            store.dispatch( safeBrowserAppActions.receivedAuthResponse( '' ) );
+        || _.debounce( responseUri => {
+            store.dispatch( receivedAuthResponse( '' ) );
             authFromStoreResponse( responseUri, store );
             isAuthing = false;
         }, 500 );
@@ -243,7 +241,7 @@ const manageAuthorisationActions = async store =>
         isAuthing = true;
 
         store.dispatch(
-            safeBrowserAppActions.setAppStatus( SAFE.APP_STATUS.AUTHORISING )
+            setAppStatus( SAFE.APP_STATUS.AUTHORISING )
         );
 
         const authorise = true;

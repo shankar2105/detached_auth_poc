@@ -26,9 +26,7 @@ class WebIdEvents extends EventEmitter
 const webIdEventEmitter = new WebIdEvents();
 
 export const onPreload = ( passedStore, win = window ) => {
-    console.log( 'PN preload' );
     console.trace();
-    // logger.log( 'PN preload' );
     watchForExpermentalChangesAndReload( passedStore, win );
     setupPreloadedSafeAuthApis( passedStore, win );
     setupWebIdEventEmitter( passedStore, win );

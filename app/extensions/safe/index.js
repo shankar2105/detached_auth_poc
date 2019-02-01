@@ -252,8 +252,6 @@ const onReceiveUrl = async ( store, url ) =>
             // so we know the libs are ready/ loaded
             // (and we assume, _that_ happens at the correc time due to browser hooks)
             await waitForBasicConnection( store );
-
-            logger.log( 'DONE WAITING', url );
         }
         store.dispatch( authenticatorActions.handleAuthUrl( url ) );
     }
