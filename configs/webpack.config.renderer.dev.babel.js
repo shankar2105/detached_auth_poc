@@ -53,9 +53,9 @@ export default merge.smart( baseConfig, {
         devserver      : `webpack-dev-server/client?http://localhost:${ port }/`,
         only           : 'webpack/hot/only-dev-server',
         renderer       : require.resolve( '../app/index' ),
-        background     : require.resolve( '../app/background' ),
-        webPreload     : require.resolve( '../app/webPreload' ),
-        browserPreload : require.resolve( '../app/browserPreload' )
+        background     : require.resolve( '../app/background' )
+        // ,
+        // browserPreload : require.resolve( '../app/browserPreload' )
     },
 
     output : {

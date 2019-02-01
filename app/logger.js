@@ -5,6 +5,7 @@ import {
     isRunningUnpacked,
     isRunningPackaged,
     isRunningDebug,
+    inBgProcess,
     startedRunningProduction,
     startedRunningMock,
     isRunningSpectronTestProcess,
@@ -15,15 +16,13 @@ import {
 } from '@Constants';
 import log from 'electron-timber';
 import fileLogger from 'electron-log';
-// const log = require( 'electron-log' );
 
 let processLog = log;
 
-if ( global.thisIsTheBackgroundProcess )
+if( inBgProcess )
 {
-    processLog = processLog.create( { name: 'Background' } );
+    processLog = processLog.create({name:'background'})
 }
-
 if ( fileLogger.transports )
 {
     // Log level
@@ -43,6 +42,7 @@ if ( fileLogger.transports )
     );
 
     // Set a function which formats output
+    fileLogger.transports.console.level = false;
     // fileLogger.transports.console.format = ( msg ) => util.format( ...msg.data );
 
     fileLogger.transports.file.format = '{h}:{i}:{s}:{ms} {text}';
@@ -53,29 +53,25 @@ if ( fileLogger.transports )
 }
 
 const combinedLogger = {
-    info : ( ...args ) => 
-{
+    info : ( ...args ) => {
         processLog.log( ...args );
         fileLogger.info( ...args );
     },
-    log : ( ...args ) => 
-{
+    log : ( ...args ) => {
         processLog.log( ...args );
         fileLogger.info( ...args );
     },
-    error : ( ...args ) => 
-{
+    error : ( ...args ) => {
         fileLogger.error( ...args );
         processLog.error( ...args );
     },
-    warn : ( ...args ) => 
-{
+    warn : ( ...args ) => {
         fileLogger.warn( ...args );
         processLog.warn( ...args );
     }
 };
 
-export default log;
+export default combinedLogger;
 
 // HACK: for jest
 if ( inMainProcess )
@@ -110,8 +106,7 @@ if ( inMainProcess )
     combinedLogger.log( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     combinedLogger.log( '' );
 
-    process.on( 'uncaughtTypeError', err => 
-{
+    process.on( 'uncaughtTypeError', err => {
         combinedLogger.error(
             '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
         );
@@ -124,8 +119,7 @@ if ( inMainProcess )
         );
     } );
 
-    process.on( 'uncaughtException', err => 
-{
+    process.on( 'uncaughtException', err => {
         combinedLogger.error(
             '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
         );
@@ -138,8 +132,7 @@ if ( inMainProcess )
         );
     } );
 
-    process.on( 'unhandledRejection', ( reason, p ) => 
-{
+    process.on( 'unhandledRejection', ( reason, p ) => {
         combinedLogger.error(
             '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
         );

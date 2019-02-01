@@ -15,7 +15,7 @@ CheckNodeEnv( 'production' );
 export default merge.smart( baseConfig, {
     devtool : 'source-map',
 
-    mode : 'production',
+    mode : 'development',
 
     target : 'electron-renderer',
 
@@ -26,24 +26,24 @@ export default merge.smart( baseConfig, {
         filename : './app/webPreload.prod.js'
     },
 
-    optimization : {
-        minimizer : process.env.E2E_BUILD
-            ? []
-            : [
-                new TerserPlugin( {
-                    parallel  : true,
-                    sourceMap : true,
-                    cache     : true
-                } )
-            ]
-    },
+    // optimization : {
+    //     minimizer : process.env.E2E_BUILD
+    //         ? []
+    //         : [
+    //             new TerserPlugin( {
+    //                 parallel  : true,
+    //                 sourceMap : true,
+    //                 cache     : true
+    //             } )
+    //         ]
+    // },
 
     plugins : [
-        new BundleAnalyzerPlugin( {
-            analyzerMode :
-                process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
-            openAnalyzer : process.env.OPEN_ANALYZER === 'true'
-        } ),
+        // new BundleAnalyzerPlugin( {
+        //     analyzerMode :
+        //         process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
+        //     openAnalyzer : process.env.OPEN_ANALYZER === 'true'
+        // } ),
 
         /**
          * Create global constants which can be configured at compile time.
