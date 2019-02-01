@@ -4,12 +4,12 @@ import logger from 'logger';
 
 const app = express();
 
-const setupServer = () =>
-{
-    app.listen( CONFIG.PORT, () => logger.log( `Peruse internal server listening on port ${ CONFIG.PORT }!` ) );
+const setupServer = () => {
+    app.listen(CONFIG.PORT, () =>
+        logger.log(`Peruse internal server listening on port ${CONFIG.PORT}!`)
+    );
 
     return app;
 };
-
 
 export default setupServer;

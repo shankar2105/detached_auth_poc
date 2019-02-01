@@ -9,31 +9,30 @@ import * as BookmarksActions from '@Actions/bookmarks_actions';
 import Browser from '@Components/Browser';
 import { getActionsForBrowser } from '@Extensions';
 
-
-function mapStateToProps( state )
-{
+function mapStateToProps(state) {
     return {
-        bookmarks      : state.bookmarks,
-        notifications  : state.notifications,
-        tabs           : state.tabs,
-        ui             : state.ui,
-        safeBrowserApp : state.safeBrowserApp
+        bookmarks: state.bookmarks,
+        notifications: state.notifications,
+        tabs: state.tabs,
+        ui: state.ui,
+        safeBrowserApp: state.safeBrowserApp
     };
 }
 
-function mapDispatchToProps( dispatch )
-{
+function mapDispatchToProps(dispatch) {
     const extensionActions = getActionsForBrowser();
-    const actions =
-        {
-            ...BookmarksActions,
-            ...NotificationActions,
-            ...TabActions,
-            ...UiActions,
+    const actions = {
+        ...BookmarksActions,
+        ...NotificationActions,
+        ...TabActions,
+        ...UiActions,
 
-            ...extensionActions
-        };
-    return bindActionCreators( actions, dispatch );
+        ...extensionActions
+    };
+    return bindActionCreators(actions, dispatch);
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( Browser );
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Browser);

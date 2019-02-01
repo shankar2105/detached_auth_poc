@@ -45,7 +45,6 @@
     "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/HomePage.e2e.js",
     "test-watch": "yarn test --watch",
     "rebuild": "npm rebuild --runtime=electron --target=4.0.3 --disturl=https://atom.io/download/atom-shell --build-from-source"
-
   },
   "standard-version": {
     "scripts": {
@@ -200,7 +199,7 @@
     "deps_downloader": "https://s3.eu-west-2.amazonaws.com/deps-downloader/deps_downloader-0.1.0.tgz",
     "detect-port": "^1.3.0",
     "devtron": "^1.4.0",
-    "electron": "4.0.3",
+    "electron": "2",
     "electron-builder": "20.38.5",
     "electron-devtools-installer": "^2.2.4",
     "electron-window-state": "^4.1.1",
@@ -254,7 +253,7 @@
     "sass-loader": "^7.1.0",
     "should": "13.1.3",
     "sinon": "^7.1.1",
-    "spectron": "5.0.0",
+    "spectron": "3",
     "standard-version": "4.4.0",
     "style-loader": "^0.23.1",
     "stylelint": "^9.8.0",

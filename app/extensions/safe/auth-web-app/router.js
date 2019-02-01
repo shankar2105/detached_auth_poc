@@ -7,13 +7,12 @@ import CreateAccount from './containers/create_account';
 import Home from './containers/app_list';
 
 export default (
-
     <App>
         <Switch>
-            <Route exact path="/" component={ Home } />
-            <Route path="/app_details" component={ AppDetails } />
-            <Route path="/login" component={ Login } />
-            <Route path="/create-account" component={ CreateAccount } />
+            <Route exact path="/" component={Home} />
+            <Route path="/app_details" component={AppDetails} />
+            <Route path="/login" component={Login} />
+            <Route path="/create-account" component={CreateAccount} />
         </Switch>
     </App>
 );

@@ -1,13 +1,15 @@
 // @flow
 import { handleActions } from 'redux-actions';
-import initialAppState from './initialAppState';
 import { setWebFetchStatus } from '@Extensions/safe/actions/web_fetch_actions';
+import initialAppState from './initialAppState';
 
 const initialState = initialAppState.webFetch;
 
-export default handleActions( {
-    [setWebFetchStatus]( state, { payload } )
+export default handleActions(
     {
-        return Object.assign( {}, state, payload );
-    }
-}, initialState );
+        [setWebFetchStatus](state, { payload }) {
+            return Object.assign({}, state, payload);
+        }
+    },
+    initialState
+);

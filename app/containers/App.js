@@ -14,9 +14,11 @@ export default class App extends React.Component<Props> {
 
     render() {
         const { children } = this.props;
-        return (<React.Fragment>
-            <SpriteMap/>
-            {children}
-        </React.Fragment>);
+        return (
+            <React.Fragment>
+                <SpriteMap />
+                {children}
+            </React.Fragment>
+        );
     }
 }

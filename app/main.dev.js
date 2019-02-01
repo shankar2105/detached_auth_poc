@@ -46,26 +46,22 @@ let bgProcessWindow = null;
 // Add middleware from extensions here.
 const loadMiddlewarePackages = [];
 
-const store = configureStore( initialState, loadMiddlewarePackages );
+const store = configureStore(initialState, loadMiddlewarePackages);
 
-logger.log( 'Main process starting.' );
+logger.log('Main process starting.');
 
 global.mainProcessStore = store;
 
 // renderer error notifications
-ipcMain.on( 'errorInWindow', ( event, data ) =>
-{
-    logger.error( data );
-} );
-
+ipcMain.on('errorInWindow', (event, data) => {
+    logger.error(data);
+});
 
 // Needed for windows w/ SAFE browser app login
-ipcMain.on( 'opn', ( event, data ) =>
-{
-    logger.log( 'Opening link in system via opn.' );
-    shell.openExternal( data );
-} );
-
+ipcMain.on('opn', (event, data) => {
+    logger.log('Opening link in system via opn.');
+    shell.openExternal(data);
+});
 
 let mainWindow = null;
 
@@ -73,149 +69,143 @@ let mainWindow = null;
 preAppLoad();
 
 // Apply MockVault if wanted for prealod
-if ( process.argv.includes( '--preload' ) )
-{
-    try
-    {
-        const data = fs.readFileSync( CONFIG.PRELOADED_MOCK_VAULT_PATH );
+if (process.argv.includes('--preload')) {
+    try {
+        const data = fs.readFileSync(CONFIG.PRELOADED_MOCK_VAULT_PATH);
 
-        fs.writeFileSync( path.join( os.tmpdir(), 'MockVault' ), data );
-    }
-    catch ( error )
-    {
-        logger.error( 'Error preloading MockVault' );
+        fs.writeFileSync(path.join(os.tmpdir(), 'MockVault'), data);
+    } catch (error) {
+        logger.error('Error preloading MockVault');
     }
 }
 
-protocol.registerStandardSchemes( pkg.build.protocols.schemes, { secure: true } );
+protocol.registerStandardSchemes(pkg.build.protocols.schemes, { secure: true });
 
-if ( isRunningPackaged )
-{
-    const sourceMapSupport = require( 'source-map-support' );
+if (isRunningPackaged) {
+    const sourceMapSupport = require('source-map-support');
     sourceMapSupport.install();
 }
 
-if ( !isCI && !isRunningSpectronTestProcess && isRunningUnpacked || isRunningDebug )
-{
-    require( 'electron-debug' )();
-    const path = require( 'path' );
-    const p = path.join( __dirname, '..', 'app', 'node_modules' );
-    require( 'module' ).globalPaths.push( p );
+if (
+    (!isCI && !isRunningSpectronTestProcess && isRunningUnpacked) ||
+    isRunningDebug
+) {
+    require('electron-debug')();
+    const path = require('path');
+    const p = path.join(__dirname, '..', 'app', 'node_modules');
+    require('module').globalPaths.push(p);
 }
 
-const installExtensions = async () =>
-{
-    if ( isCI ) return;
+const installExtensions = async () => {
+    if (isCI) return;
 
-    logger.log( 'Installing devtools extensions' );
-    const installer = require( 'electron-devtools-installer' );
+    logger.log('Installing devtools extensions');
+    const installer = require('electron-devtools-installer');
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-    const extensions = [
-        'REACT_DEVELOPER_TOOLS',
-        'REDUX_DEVTOOLS'
-    ];
+    const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
-    return Promise
-        .all( extensions.map( name => installer.default( installer[name], forceDownload ) ) )
-        .catch( console.log );
+    return Promise.all(
+        extensions.map(name =>
+            installer.default(installer[name], forceDownload)
+        )
+    ).catch(console.log);
 };
 
-//
-// const shouldQuit = app.makeSingleInstance( commandLine =>
-// {
-//     // We expect the URI to be the last argument
-//     const uri = commandLine[commandLine.length - 1];
-//
-//     if ( commandLine.length >= 2 && uri )
-//     {
-//         onReceiveUrl( store, uri );
-//     }
-//
-//     // Someone tried to run a second instance, we should focus our window
-//     if ( mainWindow )
-//     {
-//         if ( mainWindow.isMinimized() ) mainWindow.restore();
-//         mainWindow.focus();
-//     }
-// } );
+const shouldQuit = app.makeSingleInstance(commandLine => {
+    // We expect the URI to be the last argument
+    const uri = commandLine[commandLine.length - 1];
 
-app.on( 'ready', async () =>
-{
-
-const gotTheLock = app.requestSingleInstanceLock()
-
-    if (!gotTheLock) {
-        console.error('Not got the lock. This is so sad')
-        app.quit()
-    } else {
-        app.on('second-instance', (event, commandLine, workingDirectory) => {
-            // We expect the URI to be the last argument
-            const uri = commandLine[commandLine.length - 1];
-
-            if ( commandLine.length >= 2 && uri )
-            {
-                onReceiveUrl( store, uri );
-            }
-
-        // Someone tried to run a second instance, we should focus our window.
-            if ( mainWindow )
-            {
-                if ( mainWindow.isMinimized() ) mainWindow.restore();
-                mainWindow.focus();
-            }
-        })
+    if (commandLine.length >= 2 && uri) {
+        onReceiveUrl(store, uri);
     }
 
+    // Someone tried to run a second instance, we should focus our window
+    if (mainWindow) {
+        if (mainWindow.isMinimized()) mainWindow.restore();
+        mainWindow.focus();
+    }
+});
 
-    logger.log( 'App Ready' );
+app.on('ready', async () => {
+    // For electron upgrade:
+    //      const gotTheLock = app.requestSingleInstanceLock()
+    //
+    //     if (!gotTheLock) {
+    //         console.error('Not got the lock. This is so sad')
+    //         app.quit()
+    //     } else {
+    //         app.on('second-instance', (event, commandLine, workingDirectory) => {
+    //             // We expect the URI to be the last argument
+    //             const uri = commandLine[commandLine.length - 1];
+    //
+    //             if ( commandLine.length >= 2 && uri )
+    //             {
+    //                 onReceiveUrl( store, uri );
+    //             }
+    //
+    //         // Someone tried to run a second instance, we should focus our window.
+    //             if ( mainWindow )
+    //             {
+    //                 if ( mainWindow.isMinimized() ) mainWindow.restore();
+    //                 mainWindow.focus();
+    //             }
+    //         })
+    //     }
 
-    onAppReady( store );
-    if ( !isRunningSpectronTestProcess && isRunningUnpacked || isRunningDebug )
-    {
+    if (shouldQuit) {
+        console.log('This instance should quit. Ciao!');
+        app.exit();
+        return;
+    }
+
+    logger.log('App Ready');
+
+    onAppReady(store);
+    if (
+        (!isRunningSpectronTestProcess && isRunningUnpacked) ||
+        isRunningDebug
+    ) {
         await installExtensions();
     }
 
-    if ( ( process.platform === 'linux' ) || ( process.platform === 'win32' ) )
-    {
+    if (process.platform === 'linux' || process.platform === 'win32') {
         const uriArg = process.argv[process.argv.length - 1];
-        if ( process.argv.length >= 2 && uriArg && ( uriArg.indexOf( 'safe' ) === 0 ) )
-        {
-            onReceiveUrl( store, uriArg );
+        if (
+            process.argv.length >= 2 &&
+            uriArg &&
+            uriArg.indexOf('safe') === 0
+        ) {
+            onReceiveUrl(store, uriArg);
 
-            if ( mainWindow )
-            {
+            if (mainWindow) {
                 mainWindow.show();
             }
         }
     }
 
-    mainWindow = openWindow( store );
+    mainWindow = openWindow(store);
 
     // TODO: Reenable for adding Safe Network popup
     // createTray();
     // createSafeInfoWindow();
 
-    bgProcessWindow = await setupBackground( );
-} );
+    bgProcessWindow = await setupBackground();
+});
 
-app.on( 'open-url', ( e, url ) =>
-{
-    onReceiveUrl( store, url );
+app.on('open-url', (e, url) => {
+    onReceiveUrl(store, url);
 
-    if ( mainWindow )
-    {
+    if (mainWindow) {
         mainWindow.show();
     }
-} );
-
+});
 
 /**
  * Add event listeners...
  */
 
-app.on( 'window-all-closed', () =>
-{
-    logger.log( 'All Windows Closed!' );
+app.on('window-all-closed', () => {
+    logger.log('All Windows Closed!');
     app.dock.hide(); // hide the icon
 
     global.macAllWindowsClosed = true;
@@ -223,8 +213,7 @@ app.on( 'window-all-closed', () =>
     // HACK: Fix this so we can have OSX convention for closing windows.
     // Respect the OSX convention of having the application in memory even
     // after all windows have been closed
-    if ( process.platform !== 'darwin' )
-    {
+    if (process.platform !== 'darwin') {
         app.quit();
     }
-} );
+});

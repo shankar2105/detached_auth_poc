@@ -3,7 +3,11 @@ import thunk from 'redux-thunk';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
-import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n';
+import {
+    loadTranslations,
+    setLocale,
+    syncTranslationWithStore
+} from 'react-redux-i18n';
 // import en from '../locales/en.json';
 
 import {
@@ -17,16 +21,14 @@ import addMiddlewares from '@Store/addMiddlewares';
 import {
     getInitialStateRenderer,
     replayActionMain,
-    replayActionRenderer,
+    replayActionRenderer
 } from 'electron-redux';
 
 import createRootReducer from '../reducers';
 // import * as bookmarkActions from '../actions/bookmarks_actions';
 // import type { counterStateType } from '../reducers/types';
 
-
 const initialStateFromMain = inRendererProcess ? getInitialStateRenderer() : {};
-
 
 // const translationsObject = {
 //     en
@@ -34,27 +36,28 @@ const initialStateFromMain = inRendererProcess ? getInitialStateRenderer() : {};
 
 let history;
 
-if( inRendererProcess )
-{
+if (inRendererProcess) {
     history = createHashHistory();
 }
 
 const rootReducer = createRootReducer(history);
 
 // const configureStore = (initialState?: counterStateType) => {
-const configureStore = (initialState = initialStateFromMain, thisIsTheBackgroundProcess = false ) => {
+const configureStore = (
+    initialState = initialStateFromMain,
+    thisIsTheBackgroundProcess = false
+) => {
     // Redux Configuration
     const middleware = [];
     const enhancers = [];
 
     // Router Middleware
-    if( history )
-    {
-        const router = routerMiddleware( history );
-        middleware.push( router );
+    if (history) {
+        const router = routerMiddleware(history);
+        middleware.push(router);
     }
 
-    addMiddlewares( middleware, thisIsTheBackgroundProcess );
+    addMiddlewares(middleware, thisIsTheBackgroundProcess);
 
     // Logging Middleware
     const logger = createLogger({
@@ -67,7 +70,6 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
     //     middleware.push(logger);
     // }
 
-
     // Redux DevTools Configuration
     // TODO add all actions here?
     const actionCreators = {
@@ -77,19 +79,17 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
 
     let composeEnhancers;
 
-    if ( !isRunningSpectronTestProcess && inRendererProcess )
-    {
-    // If Redux DevTools Extension is installed use it, otherwise use Redux compose
-    /* eslint-disable no-underscore-dangle */
+    if (!isRunningSpectronTestProcess && inRendererProcess) {
+        // If Redux DevTools Extension is installed use it, otherwise use Redux compose
+        /* eslint-disable no-underscore-dangle */
         composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
             ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-                // Options: http://extension.remotedev.io/docs/API/Arguments.html
-                actionCreators
-            })
+                  // Options: http://extension.remotedev.io/docs/API/Arguments.html
+                  actionCreators
+              })
             : compose;
-    /* eslint-enable no-underscore-dangle */
-    }
-    else{
+        /* eslint-enable no-underscore-dangle */
+    } else {
         composeEnhancers = compose;
     }
 
@@ -108,13 +108,10 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
         );
     }
 
-    if ( inRendererProcess )
-    {
-        replayActionRenderer( store );
-    }
-    else
-    {
-        replayActionMain( store );
+    if (inRendererProcess) {
+        replayActionRenderer(store);
+    } else {
+        replayActionMain(store);
     }
 
     // TODO: remove this lark?

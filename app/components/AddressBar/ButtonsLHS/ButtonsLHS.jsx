@@ -17,10 +17,8 @@ import styles from './buttonsLHS.css';
  * Left hand side buttons for the Address Bar
  * @extends Component
  */
-class ButtonsLHS extends Component
-{
-    render()
-    {
+class ButtonsLHS extends Component {
+    render() {
         const {
             activeTab,
             handleBack,
@@ -35,36 +33,36 @@ class ButtonsLHS extends Component
                 type="flex"
                 justify="end"
                 align="middle"
-                gutter={ { xs: 2, sm: 4, md: 6 } }
+                gutter={{ xs: 2, sm: 4, md: 6 }}
             >
                 <Col>
                     <Button
-                        className={ CLASSES.BACKWARDS }
-                        disabled={ !canGoBackwards }
+                        className={CLASSES.BACKWARDS}
+                        disabled={!canGoBackwards}
                         icon="left"
                         shape="circle"
-                        label={ I18n.t( 'aria.navigate_back' ) }
-                        onClick={ handleBack }
+                        label={I18n.t('aria.navigate_back')}
+                        onClick={handleBack}
                     />
                 </Col>
                 <Col>
                     <Button
-                        className={ CLASSES.FORWARDS }
-                        disabled={ !canGoForwards }
+                        className={CLASSES.FORWARDS}
+                        disabled={!canGoForwards}
                         shape="circle"
                         icon="right"
-                        label={ I18n.t( 'aria.navigate_forward' ) }
-                        onClick={ handleForward }
+                        label={I18n.t('aria.navigate_forward')}
+                        onClick={handleForward}
                     />
                 </Col>
                 <Col>
                     <Button
-                        className={ CLASSES.REFRESH }
+                        className={CLASSES.REFRESH}
                         shape="circle"
                         icon="reload"
-                        label={ I18n.t( 'aria.reload_page' ) }
-                        disabled={ activeTab.isLoading }
-                        onClick={ handleRefresh }
+                        label={I18n.t('aria.reload_page')}
+                        disabled={activeTab.isLoading}
+                        onClick={handleRefresh}
                     />
                 </Col>
             </Row>
@@ -72,4 +70,4 @@ class ButtonsLHS extends Component
     }
 }
 
-export default extendComponent( ButtonsLHS, wrapAddressBarButtonsLHS );
+export default extendComponent(ButtonsLHS, wrapAddressBarButtonsLHS);
