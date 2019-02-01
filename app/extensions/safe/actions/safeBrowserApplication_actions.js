@@ -7,7 +7,7 @@ import {
     getCurrentStore,
     getSafeBrowserAppObject,
     safeBrowserAppIsAuthed
-} from '@Extensions/safe/safeBrowserApplication';
+} from '@Extensions/safe/safeBrowserApplication/theApplication';
 
 export const TYPES = {
     SET_APP_STATUS     : 'SET_APP_STATUS',

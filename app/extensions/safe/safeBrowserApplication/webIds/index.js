@@ -4,13 +4,13 @@ import {
     getCurrentStore,
     getSafeBrowserAppObject,
     safeBrowserAppIsAuthed
-} from '@Extensions/safe/safeBrowserApplication';
+} from '@Extensions/safe/safeBrowserApplication/theApplication';
 
 /**
  * Get WebIds for the current user
  * @return {Promise} Resolves to Array of webIds
  */
-const getWebIds = async () => 
+const getWebIds = async () =>
 {
     const currentStore = getCurrentStore();
 

@@ -6,7 +6,7 @@ import { SAFE } from '@Extensions/safe/constants';
 import CONSTANTS from '@Extensions/safe/auth-constants';
 import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import * as remoteCallActions from '@Actions/remoteCall_actions';
-import { clearAppObj } from '@Extensions/safe/safeBrowserApplication';
+import { clearAppObj } from '@Extensions/safe/safeBrowserApplication/theApplication';
 import { setIsAuthorisedState } from '@Extensions/safe/actions/authenticator_actions';
 
 import logger from 'logger';

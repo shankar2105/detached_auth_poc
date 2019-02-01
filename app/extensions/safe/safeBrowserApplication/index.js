@@ -1,6 +1,19 @@
 import _ from 'lodash';
 
 import {
+    setCurrentStore,
+    getIsAuthing,
+    setIsAuthing,
+    // getSafeBrowserAppObject,
+    // getCurrentStore,
+    // clearAppObj,
+    // safeBrowserAppIsAuthing,
+    safeBrowserAppIsAuthed,
+    // safeBrowserAppIsConnected,
+    // safeBrowserAppAuthFailed
+} from '@Extensions/safe/safeBrowserApplication/theApplication';
+
+import {
     manageReadStateActions,
     manageSaveStateActions
 } from '@Extensions/safe/safeBrowserApplication/manageBrowserConfig';
@@ -24,52 +37,8 @@ import logger from 'logger';
 import { initAnon } from '@Extensions/safe/safeBrowserApplication/init/initAnon';
 import initAuthedApplication from '@Extensions/safe/safeBrowserApplication/init/initAuthed';
 
-let safeBrowserAppObject;
+// let safeBrowserAppObject;
 let tempSafeBrowserObjectUntilAuthed;
-
-// TODO: HACK for store for now... dont resave store on each change...
-let currentStore;
-
-// TODO: Refactor away this and use aliased actions for less... sloppy
-// flow and make this more reasonable.
-let isAuthing = false;
-
-export const getSafeBrowserAppObject = () => safeBrowserAppObject;
-export const getCurrentStore = () => currentStore;
-
-export const clearAppObj = () => {
-    logger.log( 'Clearing safeBrowserApp object cache.' );
-    safeBrowserAppObject.clearObjectCache();
-};
-
-export const safeBrowserAppIsAuthing = () => {
-    const safeBrowserAppAuthStates = [
-        SAFE.APP_STATUS.TO_AUTH,
-        SAFE.APP_STATUS.AUTHORISING
-    ];
-
-    return (
-        isAuthing
-        || safeBrowserAppAuthStates.includes(
-            currentStore.getState().safeBrowserApp.appStatus
-        )
-    );
-};
-
-export const safeBrowserAppIsAuthed = () => currentStore.getState().safeBrowserApp.appStatus
-    === SAFE.APP_STATUS.AUTHORISED;
-
-export const safeBrowserAppIsConnected = () => {
-    const netState = currentStore.getState().safeBrowserApp.networkStatus;
-    // Q: why do we have a loggedin state?
-    return (
-        netState === SAFE.NETWORK_STATE.CONNECTED
-        || netState === SAFE.NETWORK_STATE.LOGGED_IN
-    );
-};
-
-export const safeBrowserAppAuthFailed = () => currentStore.getState().safeBrowserApp.appStatus
-    === SAFE.APP_STATUS.AUTHORISATION_FAILED;
 
 /**
  * Setup actions to be triggered in response to store state changes.
@@ -77,7 +46,8 @@ export const safeBrowserAppAuthFailed = () => currentStore.getState().safeBrowse
  */
 export const handleSafeBrowserStoreChanges = store => {
     // TODO check why we need this vs passing it around
-    currentStore = store;
+    setCurrentStore( store );
+
     // lets set state for all funcs to have the same reference.
     manageSaveStateActions( store );
     manageReadStateActions( store );
@@ -169,14 +139,18 @@ const authFromStoreResponse = async ( res, store ) => {
 
         if ( tempSafeBrowserObjectUntilAuthed )
         {
-            safeBrowserAppObject = tempSafeBrowserObjectUntilAuthed;
+            const app = tempSafeBrowserObjectUntilAuthed;
+            setSafeBrowserAppObject( app );
             tempSafeBrowserObjectUntilAuthed = null;
         }
-        safeBrowserAppObject = await safeBrowserAppObject.auth.loginFromUri(
+
+        const newApp = await safeBrowserAppObject.auth.loginFromUri(
             res
         );
 
-        if ( safeBrowserAppObject.auth.registered )
+        setSafeBrowserAppObject( newApp );
+
+        if ( newApp.auth.registered )
         {
             store.dispatch(
                 setAppStatus( SAFE.APP_STATUS.AUTHORISED )
@@ -225,20 +199,22 @@ let prevSafeBrowserAppExperimentalState;
  */
 const manageAuthorisationActions = async store => {
     // TODO: Do this via aliased action.
+
+    // const
     const safeBrowserState = store.getState().safeBrowserApp;
 
     debouncedPassAuthUriToStore = debouncedPassAuthUriToStore
         || _.debounce( responseUri => {
             store.dispatch( receivedAuthResponse( '' ) );
             authFromStoreResponse( responseUri, store );
-            isAuthing = false;
+            setIsAuthing( false );
         }, 500 );
 
-    if ( safeBrowserState.appStatus === SAFE.APP_STATUS.TO_AUTH && !isAuthing )
+    if ( safeBrowserState.appStatus === SAFE.APP_STATUS.TO_AUTH && !getIsAuthing() )
     {
         // cannot rely solely on store as can change in other ways
         // before this is updated properly. This prevents that.
-        isAuthing = true;
+        setIsAuthing( true );
 
         store.dispatch(
             setAppStatus( SAFE.APP_STATUS.AUTHORISING )

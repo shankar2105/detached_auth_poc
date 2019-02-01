@@ -2,7 +2,7 @@ import logger from 'logger';
 import React from 'react';
 import Error from '@Components/PerusePages/Error';
 import ReactDOMServer from 'react-dom/server';
-import { getSafeBrowserAppObject } from '@Extensions/safe/safeBrowserApplication';
+import { getSafeBrowserAppObject } from '@Extensions/safe/safeBrowserApplication/theApplication';
 
 import { setWebFetchStatus } from '@Extensions/safe/actions/web_fetch_actions';
 import { addTab, closeTab } from '@Actions/tabs_actions';
@@ -13,7 +13,7 @@ import { SAFE } from '../constants';
 const safeRoute = store => ( {
     method  : 'GET',
     path    : /safe:\//,
-    handler : async ( request, res ) => 
+    handler : async ( request, res ) =>
 {
         const link = request.url.substr( 1 ); // remove initial /
         const sendErrResponse = ( error, errSubHeader ) => res.send(
@@ -90,7 +90,7 @@ const safeRoute = store => ( {
                         === SAFE.NETWORK_STATE.CONNECTED
                     )
                     {
-                        store.getState().tabs.forEach( tab => 
+                        store.getState().tabs.forEach( tab =>
 {
                             logger.log( tab.url, link, link.includes( tab.url ) );
                             if ( link.includes( tab.url ) && !tab.isActive )

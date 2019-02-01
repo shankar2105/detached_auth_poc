@@ -14,9 +14,9 @@ import {
     addNotification,
     clearNotification
 } from '@Actions/notification_actions';
-import { getSafeBrowserAppObject } from '@Extensions/safe/safeBrowserApplication';
+import { getSafeBrowserAppObject } from '@Extensions/safe/safeBrowserApplication/theApplication';
 
-const onNetworkStateChange = ( store, mockAttemptReconnect ) => state => 
+const onNetworkStateChange = ( store, mockAttemptReconnect ) => state =>
 {
     const safeBrowserAppObject = getSafeBrowserAppObject();
 

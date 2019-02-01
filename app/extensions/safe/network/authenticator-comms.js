@@ -2,13 +2,13 @@ import logger from 'logger';
 import { handleAuthUrl } from '@Extensions/safe/actions/authenticator_actions';
 import { updateRemoteCall } from '@Actions/remoteCall_actions';
 import { parseSafeAuthUrl } from '@Extensions/safe/utils/safeHelpers';
-import { getCurrentStore } from '@Extensions/safe/safeBrowserApplication';
+import { getCurrentStore } from '@Extensions/safe/safeBrowserApplication/theApplication';
 import { PROTOCOLS } from '@Constants';
 import { SAFE } from '@Extensions/safe/constants';
 
 import { parse as parseURL } from 'url';
 
-export const handleAuthentication = ( passedStore, uriOrReqObject ) => 
+export const handleAuthentication = ( passedStore, uriOrReqObject ) =>
 {
     if (
         typeof uriOrReqObject !== 'string'
@@ -21,9 +21,9 @@ export const handleAuthentication = ( passedStore, uriOrReqObject ) =>
     passedStore.dispatch( handleAuthUrl( uriOrReqObject ) );
 };
 
-export const attemptReconnect = ( passedStore, appObj ) => 
+export const attemptReconnect = ( passedStore, appObj ) =>
 {
-    setTimeout( () => 
+    setTimeout( () =>
 {
         logger.log( 'Attempting reconnect...' );
         appObj.reconnect();
@@ -38,7 +38,7 @@ export const attemptReconnect = ( passedStore, appObj ) =>
     }, 5000 );
 };
 
-export const handleSafeAuthUrlReception = async res => 
+export const handleSafeAuthUrlReception = async res =>
 {
     if ( typeof res !== 'string' )
     {
@@ -62,7 +62,7 @@ export const handleSafeAuthUrlReception = async res =>
 /**
  * Reconnect the application with SAFE Network when disconnected
  */
-export const reconnect = app => 
+export const reconnect = app =>
 {
     if ( !app )
     {
@@ -76,14 +76,14 @@ export const reconnect = app =>
  * (ClientType === 'WEB' )
  * @param  {Object} request request object from ipc.js
  */
-export const replyToRemoteCallFromAuth = request => 
+export const replyToRemoteCallFromAuth = request =>
 {
     logger.log( 'Replying to RemoteCall From Auth' );
     const store = getCurrentStore();
     const state = store.getState();
     const remoteCalls = state.remoteCalls;
 
-    const remoteCallToReply = remoteCalls.find( theCall => 
+    const remoteCallToReply = remoteCalls.find( theCall =>
 {
         if ( theCall.name !== 'authenticateFromUriObject' ) return;
 
