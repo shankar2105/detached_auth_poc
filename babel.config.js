@@ -29,7 +29,7 @@ module.exports = api =>
                         electron : require( 'electron/package.json' ).version
                     },
                     useBuiltIns : 'usage',
-                    modules     : 'umd'
+                    // modules     : 'umd'
                 }
             ],
             require( '@babel/preset-flow' ),

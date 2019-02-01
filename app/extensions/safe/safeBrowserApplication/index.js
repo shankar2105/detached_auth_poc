@@ -4,13 +4,7 @@ import {
     setCurrentStore,
     getIsAuthing,
     setIsAuthing,
-    // getSafeBrowserAppObject,
-    // getCurrentStore,
-    // clearAppObj,
-    // safeBrowserAppIsAuthing,
-    safeBrowserAppIsAuthed,
-    // safeBrowserAppIsConnected,
-    // safeBrowserAppAuthFailed
+    safeBrowserAppIsAuthed
 } from '@Extensions/safe/safeBrowserApplication/theApplication';
 
 import {

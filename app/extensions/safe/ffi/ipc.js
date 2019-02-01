@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import { shell } from 'electron';
-import * as safeBrowserAppActions from '@Extensions/safe/actions/safeBrowserApplication_actions';
+import { receivedAuthResponse } from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import {
     setReAuthoriseState as setReAuthoriseStateAction,
     setIsAuthorisedState as setIsAuthorisedStateAction
 } from '@Extensions/safe/actions/authenticator_actions';
 import i18n from 'i18n';
 import logger from 'logger';
-import { getSafeBackgroundProcessStore } from '@Extensions/safe/index';
+// import { getSafeBackgroundProcessStore } from '@Extensions/safe/index';
 import { replyToRemoteCallFromAuth } from '@Extensions/safe/network';
 import authenticator from './authenticator';
 import CONSTANTS from '../auth-constants';
@@ -15,6 +15,12 @@ import { addAuthNotification } from '../manageAuthNotifications';
 import errConst from '../err-constants';
 
 // TODO unify this with calls for safeBrowserApp store...
+let theSafeBgProcessStore;
+
+export const setSafeBgProcessStore = ( passedStore ) =>
+{
+    theSafeBgProcessStore = passedStore;
+}
 
 const ipcEvent = null;
 
@@ -180,7 +186,7 @@ class ReqQueue
 
                     if (
                         res.isAuthorised
-                        && getSafeBackgroundProcessStore().getState().authenticator
+                        && theSafeBgProcessStore.getState().authenticator
                             .reAuthoriseState
                     )
                     {
@@ -192,7 +198,7 @@ class ReqQueue
                             res,
                             app,
                             sendAuthDecision,
-                            getSafeBackgroundProcessStore()
+                            theSafeBgProcessStore
                         );
                     }
 
@@ -200,7 +206,7 @@ class ReqQueue
                     return;
                 }
 
-                // if (res.isAuthorised && getSafeBackgroundProcessStore().getState().authenticator.reAuthoriseState)
+                // if (res.isAuthorised && theSafeBgProcessStore.getState().authenticator.reAuthoriseState)
                 // {
                 //     sendAuthDecision( true, res, reqType );
                 // }
@@ -230,13 +236,13 @@ class ReqQueue
 
                 // TODO/BOOKMARK: leaving off here. share MData req URI is causing error when used to call auth_decode_ipc_msg in authenticator.js
 
-                const bgStore = getSafeBackgroundProcessStore();
+                const bgStore = theSafeBgProcessStore;
 
                 // TODO: Setup proper rejection from when unauthed.
                 if ( bgStore )
                 {
                     bgStore.dispatch(
-                        safeBrowserAppActions.receivedAuthResponse( err.message )
+                        receivedAuthResponse( err.message )
                     );
                 }
 

@@ -6,7 +6,7 @@ import { initSafeBrowserApp } from '@Extensions/safe/safeBrowserApplication';
 import { getLibStatus } from '@Extensions/safe/auth-api/authFuncs';
 
 import { parse as parseURL } from 'url';
-
+import { setSafeBgProcessStore } from '@Extensions/safe/ffi/ipc';
 import { setIsMock } from '@Extensions/safe/actions/safeBrowserApplication_actions';
 import {
     startedRunningMock,
@@ -96,28 +96,29 @@ const actionsForBrowser = {
     ...SafeBrowserActions
 };
 
-let theSafeBgProcessStore;
+// let theSafeBgProcessStore;
 
-export const getSafeBackgroundProcessStore = () =>
-{
-    if ( !theSafeBgProcessStore )
-    {
-        throw new Error(
-            `No background process store defined. ${
-                process.mainModule.filename
-            }'`
-        );
-    }
-
-    return theSafeBgProcessStore;
-};
+// export const getSafeBackgroundProcessStore = () =>
+// {
+//     if ( !theSafeBgProcessStore )
+//     {
+//         throw new Error(
+//             `No background process store defined. ${
+//                 process.mainModule.filename
+//             }'`
+//         );
+//     }
+//
+//     return theSafeBgProcessStore;
+// };
 
 const onInitBgProcess = async store =>
 {
     logger.log( 'Registering SAFE Network Protocols' );
     try
     {
-        theSafeBgProcessStore = store;
+        setSafeBgProcessStore( store );
+        // theSafeBgProcessStore = store;
 
         registerSafeProtocol( store );
         registerSafeAuthProtocol( store );
