@@ -3,13 +3,17 @@ import { connectRouter, routerMiddleware, push } from 'connected-react-router';
 import promise from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 import { createHashHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 import { createLogger } from 'redux-logger';
 import {
     loadTranslations,
     setLocale,
     syncTranslationWithStore
 } from 'react-redux-i18n';
-import rootReducer from './reducers';
+// import rootReducer from './reducers';
+
+import createRootReducer from './reducers';
+
 
 import en from '../locales/en.json';
 
@@ -27,6 +31,7 @@ const logger = createLogger( {
 } );
 
 export const history = createHashHistory();
+// const history = createBrowserHistory();
 
 const router = routerMiddleware( history );
 
@@ -40,13 +45,23 @@ const enhancer = compose(
 export function configureStore( initialState )
 {
     const store = createStore(
-        connectRouter( history )( rootReducer ),
+        createRootReducer( history ), // root reducer with router state
         initialState,
         enhancer
     );
-
+    //     const store = createStore(
+    //         connectRouter( history )( rootReducer ),
+    //         initialState,
+    //         enhancer
+    //     );
+    //
     syncTranslationWithStore( store );
     store.dispatch( loadTranslations( translationsObject ) );
     store.dispatch( setLocale( 'en' ) );
     return store;
 }
+
+
+// configureStore.js
+// import { applyMiddleware, compose, createStore } from 'redux'
+// import { routerMiddleware } from 'connected-react-router'
