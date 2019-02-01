@@ -27,10 +27,11 @@ const safeRead = store => ({
 });
 
 export const addFileMenus = (store, menu) => {
-    if (!store || typeof store !== 'object')
+    if (!store || typeof store !== 'object') {
         throw new Error(
             'Must pass the store to enable dispatching actions from the menus.'
         );
+    }
 
     if (!menu) throw new Error('Must pass a menu to extend.');
 

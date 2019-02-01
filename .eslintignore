@@ -40,8 +40,9 @@ app/*.prod.js
 app/*.js.map
 app/style.css
 app/style.css.map
-dist
+dist/
 dll
+app/extensions/safe/iconfont/iconfont.js
 
 .idea
 npm-debug.log.*

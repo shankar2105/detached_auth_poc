@@ -96,12 +96,13 @@ const actionsForBrowser = {
 let theSafeBgProcessStore;
 
 export const getSafeBackgroundProcessStore = () => {
-    if (!theSafeBgProcessStore)
+    if (!theSafeBgProcessStore) {
         throw new Error(
             `No background process store defined. ${
                 process.mainModule.filename
             }'`
         );
+    }
 
     return theSafeBgProcessStore;
 };

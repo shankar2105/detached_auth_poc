@@ -56,10 +56,11 @@ export const getRemoteCallApis = () => {
     allPackages.forEach(extension => {
         if (extension.getRemoteCallApis) {
             const extApis = extension.getRemoteCallApis();
-            if (typeof extApis !== 'object')
+            if (typeof extApis !== 'object') {
                 throw new Error(
                     'Extensions apis must be passed as an object containing relevant api functions.'
                 );
+            }
 
             apisToAdd = { ...apisToAdd, ...extApis };
         }
@@ -79,10 +80,11 @@ export const getActionsForBrowser = () => {
     allPackages.forEach(extension => {
         if (extension.actionsForBrowser) {
             const extActions = extension.actionsForBrowser;
-            if (typeof extActions !== 'object')
+            if (typeof extActions !== 'object') {
                 throw new Error(
                     'Browser actions must be passed as an object containing relevant api functions.'
                 );
+            }
 
             actionsToAdd = { ...actionsToAdd, ...extActions };
         }
@@ -97,10 +99,11 @@ export const getExtensionReducers = () => {
         if (extension.addReducersToPeruse) {
             const extReducers = extension.addReducersToPeruse();
 
-            if (typeof extReducers !== 'object')
+            if (typeof extReducers !== 'object') {
                 throw new Error(
                     'Extensions reducers must be passed as an object containing relevant reducers.'
                 );
+            }
 
             reducersToAdd = { ...reducersToAdd, ...extReducers };
         }
