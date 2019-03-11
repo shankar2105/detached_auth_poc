@@ -1,8 +1,8 @@
 # Logs
 logs
 *.log
-*.prod.js
-*.prod.js.map
+app/*.prod.js
+app/*.prod.js.map
 
 # Runtime data
 pids

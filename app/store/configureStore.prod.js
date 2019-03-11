@@ -18,9 +18,6 @@ import {
 } from 'electron-redux';
 
 import createRootReducer from '../reducers';
-// import * as counterActions from '../actions/counter';
-// import type { counterStateType } from '../reducers/types';
-
 
 const initialStateFromMain = inRendererProcess ? getInitialStateRenderer() : {};
 
@@ -64,7 +61,7 @@ const configureStore = (initialState = initialStateFromMain, thisIsTheBackground
 
     // Redux DevTools Configuration
     const actionCreators = {
-        // ...counterActions,
+        ...counterActions,
         ...routerActions
     };
 

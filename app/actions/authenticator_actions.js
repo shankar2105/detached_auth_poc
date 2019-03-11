@@ -1,9 +1,9 @@
 import { createActions } from 'redux-actions';
 import { createAliasedAction } from 'electron-redux';
-import {callIPC} from '@FFI/ipc';
+// import {callIPC} from '@FFI/ipc';
 
 // import {AUTH_CONSTANTS} from '@Constants';
-import authenticator from '@FFI/authenticator';
+// import authenticator from '@FFI/authenticator';
 
 import logger from 'logger';
 
@@ -48,7 +48,7 @@ const triggerAuthDecoding = ( reqObject ) =>
 {
     if ( !window || !window.thisIsTheBackgroundProcess ) return;
 
-    callIPC.enqueueRequest( reqObject );
+    // callIPC.enqueueRequest( reqObject );
 
     return reqObject;
 };
@@ -69,7 +69,7 @@ const effectLoginToSafe = ( { secret, password } ) =>
     if ( !window || !window.thisIsTheBackgroundProcess ) return;
     logger.info('Effecting SAFE Login')
 
-    return authenticator.login( secret, password );
+    // return authenticator.login( secret, password );
     // callIPC.enqueueRequest( loginDetails );
 };
 

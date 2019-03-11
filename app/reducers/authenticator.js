@@ -1,16 +1,10 @@
-// @flow
-import { TYPES } from '../actions/authenticator_actions';
-import type { Action } from './types';
+// import { TYPES } from '../actions/authenticator_actions';
 
-const {
-    LOGIN_TO_SAFE,
-    RECEIVE_AUTH_URL
-    }  = TYPES;
 
 const initialState = {
     receivedAuthUrls : []
 }
-export default function counter(state: object = initialState, action: Action) {
+export default function counter(state = initialState, action) {
     const payload = action.payload;
 
     switch (action.type) {

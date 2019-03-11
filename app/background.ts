@@ -9,12 +9,12 @@ import {
 } from '@Constants';
 
 // setup of auth APIs
-import lib from './ffi/lib';
-import authenticator from './ffi/authenticator';
-import sysUri from './ffi/sys_uri';
+// import lib from './ffi/lib';
+// import authenticator from './ffi/authenticator';
+// import sysUri from './ffi/sys_uri';
 
-const loadLibrary = (isMock = false, libPath) => lib.load(isMock, libPath);
-const getLibStatus = () => authenticator.getLibStatus() && sysUri.isLibLoaded;
+// const loadLibrary = (isMock = false, libPath) => lib.load(isMock, libPath);
+// const getLibStatus = () => authenticator.getLibStatus() && sysUri.isLibLoaded;
 
 // import i18n from 'i18n';
 // import { startedRunningMock } from '@Constants';
@@ -27,7 +27,7 @@ logger.info("Welcome to the BG process it's ID is: ", PID);
 // import setupServer from './server';
 // import { remote } from 'electron';
 
-window.thisIsTheBackgroundProcess = true;
+// window.thisIsTheBackgroundProcess = true;
 //
 // const initSafeServer = ( store ) =>
 // {
@@ -51,26 +51,26 @@ const initBgProcess = async () => {
     // / STARTING AUTH:
 
     // load the auth/safe libs
-    await loadLibrary(startedRunningMock);
+    // await loadLibrary(startedRunningMock);
 
     logger.info('THOSE LIBS ARE LOAAADDEDDDDDD');
-    let prevAuthLibStatus;
+    // let prevAuthLibStatus;
 
-    store.subscribe(() => {
-        const authLibStatus = getLibStatus();
-
-        if (authLibStatus && authLibStatus !== prevAuthLibStatus) {
-            logger.verbose('Authenticator lib status: ', authLibStatus);
-            prevAuthLibStatus = authLibStatus;
-            // store.dispatch(
-            //     authenticatorActions.setAuthLibStatus(authLibStatus)
-            // );
-
-            // initSafeBro§wserApp(store);
-        }
-
-        // handleSafeBrowserStoreChanges(store);
-    });
+    // store.subscribe(() => {
+    //     const authLibStatus = getLibStatus();
+    //
+    //     if (authLibStatus && authLibStatus !== prevAuthLibStatus) {
+    //         logger.verbose('Authenticator lib status: ', authLibStatus);
+    //         prevAuthLibStatus = authLibStatus;
+    //         // store.dispatch(
+    //         //     authenticatorActions.setAuthLibStatus(authLibStatus)
+    //         // );
+    //
+    //         // initSafeBro§wserApp(store);
+    //     }
+    //
+    //     // handleSafeBrowserStoreChanges(store);
+    // });
 
     const mainAppInfo = APP_INFO.info;
     const authAppInfo = {

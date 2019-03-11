@@ -1,41 +1,31 @@
 import thunk from 'redux-thunk';
-import { inRendererProcess } from '@Constants';
+import { inRendererProcess, inBgProcess } from '@Constants';
 import promiseMiddleware from 'redux-promise';
 
-import {
-    forwardToRenderer,
-    forwardToMain,
-    triggerAlias
-} from 'electron-redux';
+import { forwardToRenderer, forwardToMain, triggerAlias } from 'electron-redux';
 
-
-const addMiddlewares = ( middleware, isBackgroundProcess = false ) =>
+const addMiddlewares = middleware =>
 {
-
     middleware.push( thunk );
 
     middleware.unshift( promiseMiddleware );
 
-    console.log( process.pid, 'is adding middleware', isBackgroundProcess)
-    if ( isBackgroundProcess )
+    if ( inBgProcess )
     {
-        console.log('THIS PROCESS HAS triggerAlias&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
         middleware.push( triggerAlias );
     }
 
     if ( inRendererProcess )
     {
-        console.log('------------------------------------------------in renderrr')
         // must be first
         middleware.unshift( forwardToMain );
     }
 
     if ( !inRendererProcess )
     {
-        console.log('------------------------------------------------in so much main')
         // must be last
         middleware.push( forwardToRenderer );
     }
-}
+};
 
 export default addMiddlewares;
