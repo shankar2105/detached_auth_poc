@@ -12,18 +12,18 @@ import TerserPlugin from 'terser-webpack-plugin';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
-CheckNodeEnv('production');
-export default merge.smart(baseConfig, {
+CheckNodeEnv( 'production' );
+export default merge.smart( baseConfig, {
     devtool: 'source-map',
 
     mode: 'production',
 
     target: 'electron-renderer',
 
-    entry: path.join(__dirname, '..', 'app/index'),
+    entry: path.join( __dirname, '..', 'app/index.tsx' ),
 
     output: {
-        path: path.join(__dirname, '..', 'app/dist'),
+        path: path.join( __dirname, '..', 'app/dist' ),
         publicPath: './dist/',
         filename: 'renderer.prod.js'
     },
@@ -45,6 +45,9 @@ export default merge.smart(baseConfig, {
                         options: {
                             sourceMap: true
                         }
+                    },
+                    {
+                        loader: 'postcss-loader'
                     }
                 ]
             },
@@ -59,54 +62,29 @@ export default merge.smart(baseConfig, {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            localIdentName: '[name]__[local]__[hash:base64:5]',
+                            localIdentName: '[name]__[local]',
                             sourceMap: true
                         }
+                    },
+                    {
+                        loader: 'postcss-loader'
                     }
                 ]
             },
-            // Add SASS support  - compile all .global.scss files and pipe it to style.css
+            // Add LESS support  - compile all other .less files and pipe it to style.css
             {
-                test: /\.global\.(scss|sass)$/,
+                test: /^((?!\.global).)*\.less/,
                 use: [
                     {
-                        loader: MiniCssExtractPlugin.loader
+                        loader: 'style-loader'
                     },
                     {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            importLoaders: 1
-                        }
+                        loader: 'css-loader'
                     },
                     {
-                        loader: 'sass-loader',
+                        loader: 'less-loader',
                         options: {
-                            sourceMap: true
-                        }
-                    }
-                ]
-            },
-            // Add SASS support  - compile all other .scss files and pipe it to style.css
-            {
-                test: /^((?!\.global).)*\.(scss|sass)$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]__[hash:base64:5]',
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
+                            javascriptEnabled: true
                         }
                     }
                 ]
@@ -172,20 +150,20 @@ export default merge.smart(baseConfig, {
         minimizer: process.env.E2E_BUILD
             ? []
             : [
-                  new TerserPlugin({
-                      parallel: true,
-                      sourceMap: true,
-                      cache: true
-                  }),
-                  new OptimizeCSSAssetsPlugin({
-                      cssProcessorOptions: {
-                          map: {
-                              inline: false,
-                              annotation: true
-                          }
-                      }
-                  })
-              ]
+                new TerserPlugin( {
+                    parallel: true,
+                    sourceMap: true,
+                    cache: true
+                } ),
+                new OptimizeCSSAssetsPlugin( {
+                    cssProcessorOptions: {
+                        map: {
+                            inline: false,
+                            annotation: true
+                        }
+                    }
+                } )
+            ]
     },
 
     plugins: [
@@ -198,18 +176,18 @@ export default merge.smart(baseConfig, {
          * NODE_ENV should be production so that modules do not perform certain
          * development checks
          */
-        new webpack.EnvironmentPlugin({
+        new webpack.EnvironmentPlugin( {
             NODE_ENV: 'production'
-        }),
+        } ),
 
-        new MiniCssExtractPlugin({
+        new MiniCssExtractPlugin( {
             filename: 'style.css'
-        }),
+        } ),
 
-        new BundleAnalyzerPlugin({
+        new BundleAnalyzerPlugin( {
             analyzerMode:
                 process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
             openAnalyzer: process.env.OPEN_ANALYZER === 'true'
-        })
+        } )
     ]
-});
+} );

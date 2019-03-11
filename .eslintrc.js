@@ -1,73 +1,161 @@
-const aliases = require('./.aliases.js');
+const aliases = require('./.aliases.config');
 
 module.exports = {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
+    extends: [
+        'airbnb-typescript',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:jest/recommended',
+        'plugin:promise/recommended',
+        'plugin:unicorn/recommended',
+        'prettier',
+        'prettier/react',
+        'prettier/@typescript-eslint'
+    ],
     parserOptions: {
+        ecmaFeatures: {
+            jsx: true
+        },
+        useJSXTextNode: false,
+        project: './tsconfig.json',
+        tsconfigRootDir: '.',
         sourceType: 'module',
-        allowImportExportEverywhere: true
-    },
-    extends: ['airbnb', 'prettier', 'prettier/flowtype', 'prettier/react'],
-    env: {
-        browser: true,
-        node: true
+        allowImportExportEverywhere: false,
+        codeFrame: true
     },
     rules: {
-        'arrow-parens': ['off'],
-        'compat/compat': 'error',
-        'consistent-return': 'off',
-        'comma-dangle': 'off',
-        'flowtype/boolean-style': ['error', 'boolean'],
-        'flowtype/define-flow-type': 'warn',
-        'flowtype/delimiter-dangle': ['error', 'never'],
-        'flowtype/generic-spacing': ['error', 'never'],
-        'flowtype/no-primitive-constructor-types': 'error',
-        'flowtype/no-weak-types': 'warn',
-        'flowtype/object-type-delimiter': ['error', 'comma'],
-        'flowtype/require-parameter-type': 'off',
-        'flowtype/require-return-type': 'off',
-        'flowtype/require-valid-file-annotation': 'off',
-        'flowtype/semi': ['error', 'always'],
-        'flowtype/space-after-type-colon': ['error', 'always'],
-        'flowtype/space-before-generic-bracket': ['error', 'never'],
-        'flowtype/space-before-type-colon': ['error', 'never'],
-        'flowtype/union-intersection-spacing': ['error', 'always'],
-        'flowtype/use-flow-type': 'error',
-        'flowtype/valid-syntax': 'error',
-        'generator-star-spacing': 'off',
-        // 'import/no-unresolved': 'error', // off as not working for babel aliases
-        'import/no-extraneous-dependencies': 'off',
-        indent: ['error', 4, { SwitchCase: 1 }],
-        'jsx-a11y/anchor-is-valid': 'off',
-        'no-console': 'off',
-        'no-use-before-define': 'off',
-        'no-multi-assign': 'off',
-        'promise/param-names': 'error',
-        'promise/always-return': 'error',
-        'promise/catch-or-return': 'error',
-        'promise/no-native': 'off',
-        'react/sort-comp': [
+        'unicorn/catch-error-name': 'off',
+        'unicorn/filename-case': 'off',
+        'unicorn/prefer-exponentiation-operator': 'off',
+        'unicorn/prefer-query-selector': 'off',
+        'unicorn/prefer-text-content': 'off',
+        'unicorn/no-for-loop': 'off',
+        'unicorn/throw-new-error': 'off',
+        'unicorn/regex-shorthand': 'error',
+        'unicorn/no-new-buffer': 'off',
+        'unicorn/no-unsafe-regex': 'error',
+        'no-prototype-builtins': 'off',
+        'unicorn/prefer-type-error': 'off',
+        'unicorn/new-for-builtins': 'off',
+        'import/prefer-default-export': 'off',
+        'import/no-default-export': 'error',
+        'react/prefer-stateless-function': 'off',
+        'jest/no-jasmine-globals': 'off',
+        'jest/valid-describe': 'off',
+        'react/destructuring-assignment': 'off',
+        'space-in-parens': ['error', 'always'],
+        'react/jsx-filename-extension': 'off',
+        'no-shadow': 'error',
+        'react/prefer-stateless-function': 'error',
+        '@typescript-eslint/interface-name-prefix': 'off',
+        '@typescript-eslint/array-type': ['error', 'generic'],
+        '@typescript-eslint/tslint/config': [
             'error',
             {
-                order: [
-                    'type-annotations',
-                    'static-methods',
-                    'lifecycle',
-                    'everything-else',
-                    'render'
-                ]
+                rules: {
+                    'file-name-casing': [
+                        true,
+                        { '.tsx': 'pascal-case', '.ts': 'camel-case' }
+                    ],
+                    'no-parameter-reassignment': true,
+                    'await-promise': true,
+                    'ban-comma-operator': true,
+                    'function-constructor': true,
+                    'no-bitwise': true,
+                    'no-conditional-assignment': true,
+                    'no-debugger': true,
+                    'no-duplicate-super': true,
+                    'no-duplicate-variable': true,
+                    'no-empty': true,
+                    'no-floating-promises': true,
+                    'no-implicit-dependencies': [
+                        true,
+                        'dev',
+                        Object.keys(aliases)
+                    ],
+                    'no-invalid-template-strings': true,
+                    'no-invalid-this': true,
+                    'no-return-await': true,
+                    'no-sparse-arrays': true,
+                    'no-string-literal': true,
+                    'no-string-throw': true,
+                    'no-switch-case-fall-through': true,
+                    'no-this-assignment': [
+                        true,
+                        { 'allow-destructuring': true }
+                    ],
+                    'no-unsafe-any': true,
+                    'no-unused-expression': true,
+                    'no-use-before-declare': true,
+                    'no-var-keyword': true,
+                    'prefer-object-spread': true,
+                    'restrict-plus-operands': true,
+                    'switch-default': true,
+                    'unnecessary-constructor': true,
+                    'cyclomatic-complexity': true,
+                    deprecation: true,
+                    'no-default-export': false,
+                    'no-default-import': [
+                        true,
+                        {
+                            fromModules:
+                                '^palantir-|^_internal-*|^\\./|^\\.\\./'
+                        }
+                    ],
+                    'no-duplicate-imports': true,
+                    'prefer-const': true,
+                    'arrow-return-shorthand': true,
+                    'no-unnecessary-callback-wrapper': true,
+                    'no-unnecessary-initializer': true,
+                    'no-unnecessary-qualifier': true,
+                    'prefer-method-signature': true,
+                    'prefer-template': true,
+                    'return-undefined': true
+                }
             }
         ],
-        'react/jsx-no-bind': 'off',
-        'react/jsx-filename-extension': [
-            'error',
-            { extensions: ['.js', '.jsx'] }
-        ],
-        'react/prefer-stateless-function': 'off'
+        indent: 'off',
+        '@typescript-eslint/indent': ['error', 4]
     },
-    plugins: ['flowtype', 'import', 'promise', 'compat', 'react'],
+    overrides: [
+        {
+            files: ['*config*.js'],
+            rules: {
+                'no-console': 'off',
+                'import/no-extraneous-dependencies': 'off',
+                'import/no-default-export': 'off',
+                '@typescript-eslint/tslint/config': 'off',
+                '@typescript-eslint/no-var-requires': 'off'
+            }
+        },
+        {
+            files: ['*.js'],
+            rules: {
+                '@typescript-eslint/tslint/config': 'off',
+                '@typescript-eslint/no-var-requires': 'off'
+            }
+        },
+        {
+            files: ['*.tsx'],
+            rules: {
+                'react/prop-types': 'off',
+                'member-access': 'off',
+                '@typescript-eslint/explicit-function-return-type': 'off',
+                '@typescript-eslint/explicit-member-accessibility': 'off'
+            }
+        }
+    ],
+    plugins: [
+        '@typescript-eslint',
+        'jest',
+        'promise',
+        'unicorn',
+        '@typescript-eslint/tslint'
+    ],
     settings: {
         'import/resolver': {
             'babel-module': {
+                root: ['.'],
                 alias: aliases
             }
         }
