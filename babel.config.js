@@ -12,7 +12,7 @@ const productionPlugins = [
     require('babel-plugin-transform-react-remove-prop-types')
 ];
 
-const { aliases } = require('./.aliases.js');
+const aliases = require('./.aliases.js');
 
 module.exports = api => {
     // see docs about api at https://babeljs.io/docs/en/config-files#apicache

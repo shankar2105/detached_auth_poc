@@ -1,4 +1,4 @@
-import { TYPES } from '../actions/authenticator_actions';
+import { AUTH_TYPES } from '../actions/authenticator_actions';
 
 const initialState = {
     receivedAuthUrls: []

@@ -39,7 +39,7 @@ export const {
 );
 
 const triggerAuthDecoding = reqObject => {
-    if (!window || !window.thisIsTheBackgroundProcess) return;
+    if ( !window || !window.thisIsTheBackgroundProcess ) return;
 
 
     return reqObject;
@@ -47,16 +47,16 @@ const triggerAuthDecoding = reqObject => {
 
 export const receiveAuthUrl = createAliasedAction(
     TYPES.RECEIVE_AUTH_URL,
-    reqObject => ({
+    reqObject => ( {
         // the real action
         type: TYPES.RECEIVE_AUTH_URL,
-        payload: triggerAuthDecoding(reqObject)
-    })
+        payload: triggerAuthDecoding( reqObject )
+    } )
 );
 
-const effectLoginToSafe = ({ secret, password }) => {
-    if (!window || !window.thisIsTheBackgroundProcess) return;
-    logger.info('Effecting SAFE Login');
+const effectLoginToSafe = ( { secret, password } ) => {
+    if ( !window || !window.thisIsTheBackgroundProcess ) return;
+    logger.info( 'Effecting SAFE Login' );
 
     // return authenticator.login( secret, password );
     // callIPC.enqueueRequest( loginDetails );
@@ -65,11 +65,11 @@ const effectLoginToSafe = ({ secret, password }) => {
 export const loginToSafe = createAliasedAction(
     TYPES.LOGIN_TO_SAFE,
     loginDetails => {
-        console.log('logindeets in aliassss', loginDetails);
+        console.log( 'logindeets in aliassss', loginDetails );
         return {
             // the real action
             type: TYPES.LOGIN_TO_SAFE,
-            payload: effectLoginToSafe(loginDetails)
+            payload: effectLoginToSafe( loginDetails )
         };
     }
 );

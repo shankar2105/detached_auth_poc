@@ -1,9 +1,9 @@
-export const aliases = {
+module.exports = {
     test: './test',
     '@Actions': './app/actions',
     '@Store': './app/store',
-    logger: './app/logger.js',
+    logger: './app/logger.ts',
     '@Components': './app/components',
-    '@Constants': './app/constants.js',
+    '@Constants': './app/constants.ts',
     '@Package': './package.json'
 };
