@@ -10,7 +10,7 @@ import logger from 'logger';
 import SafeLib from './safe_lib';
 import authenticator from './authenticator';
 import * as types from './refs/types';
-import {AUTH_CONSTANTS} from '@Constants';
+import { AUTH_CONSTANTS } from '@Constants';
 
 const _mods = Symbol('_mods');
 const _libPath = Symbol('_libPath');
@@ -23,7 +23,8 @@ class LibLoader {
 
     load(isMock = false) {
         if (isMock) {
-            this[_libPath] = AUTH_CONSTANTS.LIB_PATH_MOCK.SAFE_AUTH[os.platform()];
+            this[_libPath] =
+                AUTH_CONSTANTS.LIB_PATH_MOCK.SAFE_AUTH[os.platform()];
         }
 
         logger.verbose('Auth lib location loading: ', this[_libPath]);

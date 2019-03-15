@@ -4,7 +4,7 @@ import ffi from 'ffi';
 /* eslint-enable import/no-unresolved, import/extensions */
 import os from 'os';
 import path from 'path';
-import {AUTH_CONSTANTS} from '@Constants';
+import { AUTH_CONSTANTS } from '@Constants';
 import ArrayType from 'ref-array';
 import * as type from './refs/types';
 

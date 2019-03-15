@@ -22,9 +22,9 @@ import { createSafeLaunchPadWindow, createTray } from './setupLaunchPad';
 import setupBackground from './setupBackground';
 
 
-app.setPath('userData', path.resolve( app.getPath('temp') , 'sauther' ) )
+app.setPath( 'userData', path.resolve( app.getPath( 'temp' ) , 'sauther' ) )
 
-console.log('>>>>>>>>>>>>>>>>>>>>>>.', app.getPath('exe'), app.getPath('userData') )
+console.log( '>>>>>>>>>>>>>>>>>>>>>>.', app.getPath( 'exe' ), app.getPath( 'userData' ) )
 
 export default class AppUpdater {
     constructor() {
@@ -36,8 +36,8 @@ export default class AppUpdater {
 
 // let mainWindow = null;
 
-if (process.env.NODE_ENV === 'production') {
-    const sourceMapSupport = require('source-map-support');
+if ( process.env.NODE_ENV === 'production' ) {
+    const sourceMapSupport = require( 'source-map-support' );
     sourceMapSupport.install();
 }
 
@@ -45,20 +45,20 @@ if (
     process.env.NODE_ENV === 'development' ||
     process.env.DEBUG_PROD === 'true'
 ) {
-    require('electron-debug')();
+    require( 'electron-debug' )();
 }
 
 const installExtensions = async () => {
-    const installer = require('electron-devtools-installer');
+    const installer = require( 'electron-devtools-installer' );
     const forceDownload = true;
     // const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
     const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
     return Promise.all(
-        extensions.map(name =>
-            installer.default(installer[name], forceDownload)
+        extensions.map( name =>
+            installer.default( installer[name], forceDownload )
         )
-    ).catch(console.log);
+    ).catch( console.log );
 };
 
 // const loadMiddlewarePackages = [];
@@ -75,22 +75,22 @@ let authPocWindow;
 
 const gotTheLock = app.requestSingleInstanceLock()
 
-if (!gotTheLock) {
-    console.error('Not got the lock. This is so sad')
+if ( !gotTheLock ) {
+    console.error( 'Not got the lock. This is so sad' )
     app.quit()
 } else {
-    app.on('second-instance', (event, commandLine, workingDirectory) => {
+    app.on( 'second-instance', ( event, commandLine, workingDirectory ) => {
     // Someone tried to run a second instance, we should focus our window.
         if ( mainWindow )
         {
             if ( mainWindow.isMinimized() ) mainWindow.restore();
             mainWindow.focus();
         }
-    })
+    } )
 
     // Create myWindow, load the rest of the app, etc...
 
-    app.on('ready', async () => {
+    app.on( 'ready', async () => {
 
         if (
             process.env.NODE_ENV === 'development' ||
@@ -135,26 +135,26 @@ if (!gotTheLock) {
         //   mainWindow = null;
         // });
 
-        const menuBuilder = new MenuBuilder(authPocWindow);
+        const menuBuilder = new MenuBuilder( authPocWindow );
         menuBuilder.buildMenu();
 
         // Remove this if your app does not use auto updates
         // eslint-disable-next-line
       new AppUpdater();
-    });
+    } );
 }
 
 /**
  * Add event listeners...
  */
 
-app.on('window-all-closed', () => {
+app.on( 'window-all-closed', () => {
     // Respect the OSX convention of having the application in memory even
     // after all windows have been closed
-    if (process.platform !== 'darwin') {
+    if ( process.platform !== 'darwin' ) {
         app.quit();
     }
-});
+} );
 
 
 
@@ -170,7 +170,7 @@ app.on( 'open-url', ( e, url ) =>
     }
     catch( e )
     {
-        console.error(' Issue opening a window. It did not exist for this app... Check that the correct app version is opening.')
+        console.error( ' Issue opening a window. It did not exist for this app... Check that the correct app version is opening.' )
         throw new Error( e );
     }
 

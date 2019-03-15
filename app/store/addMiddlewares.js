@@ -4,27 +4,23 @@ import promiseMiddleware from 'redux-promise';
 
 import { forwardToRenderer, forwardToMain, triggerAlias } from 'electron-redux';
 
-const addMiddlewares = middleware =>
-{
-    middleware.push( thunk );
+const addMiddlewares = middleware => {
+    middleware.push(thunk);
 
-    middleware.unshift( promiseMiddleware );
+    middleware.unshift(promiseMiddleware);
 
-    if ( inBgProcess )
-    {
-        middleware.push( triggerAlias );
+    if (inBgProcess) {
+        middleware.push(triggerAlias);
     }
 
-    if ( inRendererProcess )
-    {
+    if (inRendererProcess) {
         // must be first
-        middleware.unshift( forwardToMain );
+        middleware.unshift(forwardToMain);
     }
 
-    if ( !inRendererProcess )
-    {
+    if (!inRendererProcess) {
         // must be last
-        middleware.push( forwardToRenderer );
+        middleware.push(forwardToRenderer);
     }
 };
 

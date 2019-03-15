@@ -25,7 +25,6 @@ export const createTray = () => {
         ) {
             safeLaunchPadWindow.openDevTools({ mode: 'undocked' });
             // mainWindow.openDevTools({ mode:'undocked' });
-
         }
     });
 };
@@ -81,7 +80,7 @@ export const createSafeLaunchPadWindow = () => {
         //   }
         // );
 
-        //for debug
+        // for debug
         showWindow();
 
         logger.info('LAUNCH PAD: Loaded');
@@ -108,7 +107,6 @@ const showWindow = () => {
     safeLaunchPadWindow.show();
     safeLaunchPadWindow.focus();
 };
-
 
 ipcMain.on('show-safeLaunchPadWindow', () => {
     showWindow();

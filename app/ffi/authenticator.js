@@ -373,12 +373,11 @@ class Authenticator extends SafeLib {
     }
 
     login(locator, secret) {
-
-        console.log('We are logging in SO HARD w/', locator, secret)
+        console.log('We are logging in SO HARD w/', locator, secret);
         return new Promise((resolve, reject) => {
             const validationErr = this._isUserCredentialsValid(locator, secret);
             if (validationErr) {
-                logger.error(validationErr)
+                logger.error(validationErr);
                 return reject(validationErr);
             }
 
@@ -401,7 +400,10 @@ class Authenticator extends SafeLib {
                                 return reject(JSON.stringify(result));
                             }
                             this.registeredClientHandle = clientHandle;
-                            logger.verbose('AUTH: Callback after login. Handle:', this.registeredClientHandle)
+                            logger.verbose(
+                                'AUTH: Callback after login. Handle:',
+                                this.registeredClientHandle
+                            );
                             this._pushNetworkState(
                                 CONSTANTS.NETWORK_STATUS.CONNECTED
                             );
@@ -413,13 +415,13 @@ class Authenticator extends SafeLib {
                 );
 
                 const onResult = (err, res) => {
-                    console.log('RESULT of login', res)
+                    console.log('RESULT of login', res);
                     if (err || res !== 0) {
                         this[_isAuthorisedListener].broadcast(err);
                         return reject(err);
                     }
                 };
-                logger.verbose('about to do the login')
+                logger.verbose('about to do the login');
                 this.safeLib.login.async(
                     types.allocCString(locator),
                     types.allocCString(secret),
@@ -458,7 +460,11 @@ class Authenticator extends SafeLib {
     }
 
     decodeRequest(uri) {
-        logger.verbose('Authenticator.js decoding !!!!request', uri, this.registeredClientHandle);
+        logger.verbose(
+            'Authenticator.js decoding !!!!request',
+            uri,
+            this.registeredClientHandle
+        );
 
         return new Promise((resolve, reject) => {
             if (!uri) {
@@ -470,11 +476,16 @@ class Authenticator extends SafeLib {
                 .replace('safe-auth:', '')
                 .replace('/', '');
 
-            logger.verbose('uri we working on now', parsedURI, this.registeredClientHandle)
+            logger.verbose(
+                'uri we working on now',
+                parsedURI,
+                this.registeredClientHandle
+            );
 
             if (!this.registeredClientHandle) {
-
-                logger.verbose('no registered handle. GET OUTTA HERE you unauthed su')
+                logger.verbose(
+                    'no registered handle. GET OUTTA HERE you unauthed su'
+                );
                 return this._decodeUnRegisteredRequest(
                     parsedURI,
                     resolve,
@@ -634,15 +645,19 @@ class Authenticator extends SafeLib {
                             return;
                         }
 
-                        logger.verbose('Error in auth callback.', result, JSON.stringify(result));
-                        console.log('errrorrr', result)
+                        logger.verbose(
+                            'Error in auth callback.',
+                            result,
+                            JSON.stringify(result)
+                        );
+                        console.log('errrorrr', result);
                         this[_reqErrListener].broadcast(JSON.stringify(result));
                         reject(result);
                     }
                 )
             );
 
-            logger.verbose('Thats all auth CBs setup..........')
+            logger.verbose('Thats all auth CBs setup..........');
             try {
                 this.safeLib.auth_decode_ipc_msg(
                     this.registeredClientHandle,

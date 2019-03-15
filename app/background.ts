@@ -21,7 +21,7 @@ import {
 // import { I18N_CONFIG, startedRunningMock } from '@Constants';
 const PID = process.pid;
 
-logger.info("Welcome to the BG process it's ID is: ", PID);
+logger.info( "Welcome to the BG process it's ID is: ", PID );
 // import manageRemoteCalls from './background.manageRemoteCalls';
 // import { onInitBgProcess, getExtensionReduxMiddleware }  from './extensions';
 // import setupServer from './server';
@@ -39,21 +39,21 @@ const initBgProcess = async () => {
     // Add middleware from extensions here. TODO: this should be be unified somewhere.
     // const loadMiddlewarePackages = getExtensionReduxMiddleware() || [];
     const thisIsTheBackgroundProcess = true;
-    const store = configureStore(undefined, thisIsTheBackgroundProcess);
+    const store = configureStore( undefined, thisIsTheBackgroundProcess );
 
-    console.log('HERE I AMMMM', isRunningDevelopment, store.getState());
+    console.log( 'HERE I AMMMM', isRunningDevelopment, store.getState() );
 
-    store.subscribe(() => {
-        logger.info('chchchchchaaaanges');
+    store.subscribe( () => {
+        logger.info( 'chchchchchaaaanges' );
         // manageRemoteCalls( store );
-    });
+    } );
 
     // / STARTING AUTH:
 
     // load the auth/safe libs
     // await loadLibrary(startedRunningMock);
 
-    logger.info('THOSE LIBS ARE LOAAADDEDDDDDD');
+    logger.info( 'THOSE LIBS ARE LOAAADDEDDDDDD' );
     // let prevAuthLibStatus;
 
     // store.subscribe(() => {
@@ -80,7 +80,7 @@ const initBgProcess = async () => {
         icon: 'iconPath'
     };
 
-    logger.verbose('Auth application info', authAppInfo);
+    logger.verbose( 'Auth application info', authAppInfo );
     //
     // try{
     //
@@ -95,6 +95,6 @@ const initBgProcess = async () => {
 
 initBgProcess();
 
-window.onerror = function windowErrors(error) {
-    logger.error('errorInBackgroundWindow', error);
-};
+window.addEventListener( 'error', function windowErrors( error ) {
+    logger.error( 'errorInBackgroundWindow', error );
+} );

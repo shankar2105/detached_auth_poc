@@ -1,9 +1,8 @@
 import { TYPES } from '../actions/authenticator_actions';
 
-
 const initialState = {
-    receivedAuthUrls : []
-}
+    receivedAuthUrls: []
+};
 export default function counter(state = initialState, action) {
     const payload = action.payload;
 
@@ -13,7 +12,7 @@ export default function counter(state = initialState, action) {
         case TYPES.RECEIVE_AUTH_URL: {
             const updatedState = { ...state };
             const oldAuthUrls = state.receivedAuthUrls;
-            updatedState.receivedAuthUrls = [ ...oldAuthUrls, payload ];
+            updatedState.receivedAuthUrls = [...oldAuthUrls, payload];
 
             return updatedState;
         }
