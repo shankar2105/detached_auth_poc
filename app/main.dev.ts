@@ -66,11 +66,11 @@ const installExtensions = async () => {
 let store;
 let authPocWindow;
 
-app.setAsDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER );
-
-const isDefault = app.isDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER);
+// app.setAsDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER );
+//
+// const isDefault = app.isDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER);
 // logger.info('DEFAULT!!!!!!!!!!!!!!!!!!', isDefault)
-console.log('DEFAULT!!!!!!!!!!!!!!!!!!', isDefault)
+// console.log('DEFAULT!!!!!!!!!!!!!!!!!!', isDefault)
 
 
 const gotTheLock = app.requestSingleInstanceLock()

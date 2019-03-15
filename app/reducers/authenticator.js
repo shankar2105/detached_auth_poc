@@ -1,4 +1,4 @@
-// import { TYPES } from '../actions/authenticator_actions';
+import { TYPES } from '../actions/authenticator_actions';
 
 
 const initialState = {
@@ -8,9 +8,9 @@ export default function counter(state = initialState, action) {
     const payload = action.payload;
 
     switch (action.type) {
-        case LOGIN_TO_SAFE:
+        case TYPES.LOGIN_TO_SAFE:
             return state;
-        case RECEIVE_AUTH_URL: {
+        case TYPES.RECEIVE_AUTH_URL: {
             const updatedState = { ...state };
             const oldAuthUrls = state.receivedAuthUrls;
             updatedState.receivedAuthUrls = [ ...oldAuthUrls, payload ];
