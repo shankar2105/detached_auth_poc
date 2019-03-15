@@ -1,6 +1,6 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Home from "../components/Home";
+import { Home } from "../components/Home";
 import * as AuthenticatorActions from "../actions/authenticator_actions";
 
 function mapStateToProps( state ) {
@@ -11,7 +11,7 @@ function mapStateToProps( state ) {
 function mapDispatchToProps( dispatch ) {
     return bindActionCreators( AuthenticatorActions, dispatch );
 }
-export default connect(
+export const HomePage = connect(
     mapStateToProps,
     mapDispatchToProps
 )( Home );

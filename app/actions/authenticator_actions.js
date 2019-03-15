@@ -1,13 +1,9 @@
 import { createActions } from 'redux-actions';
 import { createAliasedAction } from 'electron-redux';
-// import {callIPC} from '@FFI/ipc';
-
-// import {AUTH_CONSTANTS} from '@Constants';
-// import authenticator from '@FFI/authenticator';
 
 import logger from 'logger';
 
-export const TYPES = {
+export const ACTION_TYPES = {
     SET_AUTH_LIB_STATUS: 'SET_AUTH_LIB_STATUS',
     SET_AUTH_HANDLE: 'SET_AUTH_HANDLE',
     SET_AUTH_NETWORK_STATUS: 'SET_AUTH_NETWORK_STATUS',
@@ -39,14 +35,12 @@ export const {
     TYPES.REMOVE_AUTH_REQUEST,
     TYPES.SET_RE_AUTHORISE_STATE,
     TYPES.SET_IS_AUTHORISED_STATE
-    //
-    // ,TYPES.RECEIVE_AUTH_URL
+
 );
 
 const triggerAuthDecoding = reqObject => {
     if (!window || !window.thisIsTheBackgroundProcess) return;
 
-    // callIPC.enqueueRequest( reqObject );
 
     return reqObject;
 };

@@ -4,7 +4,7 @@ import * as React from "react";
 interface Props {
     children: React.Node
 }
-export default class App extends React.Component<{}, {}> {
+export class App extends React.Component<{}, {}> {
     props: Props;
 
     render() {
