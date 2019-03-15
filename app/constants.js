@@ -176,7 +176,7 @@ export const CONFIG = {
 
 if ( inMainProcess )
 {
-    const devPort = process.env.PORT || 1212;
+    const devPort = process.env.PORT || 1232;
 
     global.preloadFile = `file://${ __dirname }/webPreload.prod.js`;
     global.appDir = __dirname;

@@ -14,13 +14,10 @@ import chalk from 'chalk';
 import merge from 'webpack-merge';
 import { spawn, execSync } from 'child_process';
 import baseConfig from './webpack.config.base';
-// import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
 const CircularDependencyPlugin = require( 'circular-dependency-plugin' );
 
-// CheckNodeEnv( 'development' );
-
-const port = process.env.PORT || 1212;
+const port = process.env.PORT || 1232;
 const publicPath = `http://localhost:${ port }/dist`;
 const dll = path.join( __dirname, '..', 'dll' );
 const manifest = path.resolve( dll, 'renderer.json' );
@@ -54,8 +51,6 @@ export default merge.smart( baseConfig, {
         only       : 'webpack/hot/only-dev-server',
         renderer   : require.resolve( '../app/index.tsx' ),
         background : require.resolve( '../app/background.ts' )
-        // ,
-        // browserPreload : require.resolve( '../app/browserPreload' )
     },
 
     output : {

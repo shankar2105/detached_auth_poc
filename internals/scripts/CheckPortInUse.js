@@ -3,7 +3,7 @@ import detectPort from 'detect-port';
 
 ( function CheckPortInUse()
 {
-    const port = process.env.PORT || '1212';
+    const port = process.env.PORT || '1232';
 
     detectPort( port, ( err, availablePort ) =>
     {
