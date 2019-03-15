@@ -11,10 +11,10 @@ let tray;
 let safeLaunchPadWindow;
 
 export const createTray = () => {
-    tray = new Tray('resources/icon.png');
-    tray.on('right-click', toggleWindow);
-    tray.on('double-click', toggleWindow);
-    tray.on('click', event => {
+    tray = new Tray( 'resources/icon.png' );
+    tray.on( 'right-click', toggleWindow );
+    tray.on( 'double-click', toggleWindow );
+    tray.on( 'click', event => {
         toggleWindow();
 
         // Show devtools when command clicked
@@ -23,10 +23,10 @@ export const createTray = () => {
             process.defaultApp &&
             event.metaKey
         ) {
-            safeLaunchPadWindow.openDevTools({ mode: 'undocked' });
+            safeLaunchPadWindow.openDevTools( { mode: 'undocked' } );
             // mainWindow.openDevTools({ mode:'undocked' });
         }
-    });
+    } );
 };
 
 const getWindowPosition = () => {
@@ -41,13 +41,13 @@ const getWindowPosition = () => {
     );
 
     // Position safeLaunchPadWindow 4 pixels vertically below the tray icon
-    const y = Math.round(trayBounds.y + trayBounds.height + 4);
+    const y = Math.round( trayBounds.y + trayBounds.height + 4 );
 
     return { x, y };
 };
 
 export const createSafeLaunchPadWindow = () => {
-    safeLaunchPadWindow = new BrowserWindow({
+    safeLaunchPadWindow = new BrowserWindow( {
         width: 300,
         height: 450,
         show: false,
@@ -62,17 +62,17 @@ export const createSafeLaunchPadWindow = () => {
             backgroundThrottling: false,
             nodeIntegration: true
         }
-    });
-    safeLaunchPadWindow.loadURL(`file://${CONFIG.APP_HTML_PATH}`);
+    } );
+    safeLaunchPadWindow.loadURL( `file://${CONFIG.APP_HTML_PATH}` );
 
     // Hide the safeLaunchPadWindow when it loses focus
-    safeLaunchPadWindow.on('blur', () => {
-        if (!safeLaunchPadWindow.webContents.isDevToolsOpened()) {
+    safeLaunchPadWindow.on( 'blur', () => {
+        if ( !safeLaunchPadWindow.webContents.isDevToolsOpened() ) {
             safeLaunchPadWindow.hide();
         }
-    });
+    } );
 
-    safeLaunchPadWindow.webContents.on('did-finish-load', () => {
+    safeLaunchPadWindow.webContents.on( 'did-finish-load', () => {
         // safeLaunchPadWindow.webContents.executeJavaScript(
         //   "window.peruseNav('safeLaunchPadWindow')",
         //   () => {
@@ -83,18 +83,18 @@ export const createSafeLaunchPadWindow = () => {
         // for debug
         showWindow();
 
-        logger.info('LAUNCH PAD: Loaded');
+        logger.info( 'LAUNCH PAD: Loaded' );
 
-        if (isRunningUnpacked) {
-            safeLaunchPadWindow.openDevTools({ mode: 'undocked' });
+        if ( isRunningUnpacked ) {
+            safeLaunchPadWindow.openDevTools( { mode: 'undocked' } );
         }
-    });
+    } );
 
     return safeLaunchPadWindow;
 };
 
 const toggleWindow = () => {
-    if (safeLaunchPadWindow.isVisible()) {
+    if ( safeLaunchPadWindow.isVisible() ) {
         safeLaunchPadWindow.hide();
     } else {
         showWindow();
@@ -103,11 +103,11 @@ const toggleWindow = () => {
 
 const showWindow = () => {
     const position = getWindowPosition();
-    safeLaunchPadWindow.setPosition(position.x, position.y, false);
+    safeLaunchPadWindow.setPosition( position.x, position.y, false );
     safeLaunchPadWindow.show();
     safeLaunchPadWindow.focus();
 };
 
-ipcMain.on('show-safeLaunchPadWindow', () => {
+ipcMain.on( 'show-safeLaunchPadWindow', () => {
     showWindow();
-});
+} );

@@ -12,7 +12,7 @@ const WINDOWS = 'win32';
 const allPassedArgs = process.argv;
 
 let shouldRunMockNetwork = fs.existsSync(
-    path.resolve(__dirname, '../..', 'startAsMock')
+    path.resolve( __dirname, '../..', 'startAsMock' )
 );
 
 let hasDebugFlag = false;
@@ -24,7 +24,7 @@ export const isRunningSpectronTestProcessingPackagedApp =
     isRunningSpectronTestProcess && isRunningPackaged;
 
 export const inBgProcess = !!(
-    typeof document !== 'undefined' && document.title.startsWith('Background')
+    typeof document !== 'undefined' && document.title.startsWith( 'Background' )
 );
 // override for spectron dev mode
 if (
@@ -34,21 +34,21 @@ if (
     shouldRunMockNetwork = true;
 }
 
-if (allPassedArgs.includes('--mock')) {
+if ( allPassedArgs.includes( '--mock' ) ) {
     shouldRunMockNetwork = true;
 }
 
-if (allPassedArgs.includes('--live')) {
+if ( allPassedArgs.includes( '--live' ) ) {
     shouldRunMockNetwork = false;
 }
 
-if (allPassedArgs.includes('--debug')) {
+if ( allPassedArgs.includes( '--debug' ) ) {
     hasDebugFlag = true;
 }
 
 let forcedPort;
-if (allPassedArgs.includes('--port')) {
-    const index = allPassedArgs.indexOf('--port');
+if ( allPassedArgs.includes( '--port' ) ) {
+    const index = allPassedArgs.indexOf( '--port' );
 
     forcedPort = allPassedArgs[index + 1];
 }
@@ -59,10 +59,10 @@ export const env = shouldStartAsMockFromFlagsOrPackage
     ? 'development'
     : process.env.NODE_ENV || 'production';
 
-export const isRunningDevelopment = /^dev/.test(env);
+export const isRunningDevelopment = /^dev/.test( env );
 
 export const isCI =
-    remote && remote.getGlobal ? remote.getGlobal('isCI') : process.env.CI;
+    remote && remote.getGlobal ? remote.getGlobal( 'isCI' ) : process.env.CI;
 export const travisOS = process.env.TRAVIS_OS_NAME || '';
 // other considerations?
 export const isHot = process.env.HOT || 0;
@@ -73,10 +73,10 @@ const startAsMockNetwork = shouldStartAsMockFromFlagsOrPackage;
 // only to be used for inital store setting in main process. Not guaranteed correct for renderers.
 export const startedRunningMock =
     remote && remote.getGlobal
-        ? remote.getGlobal('startedRunningMock')
-        : startAsMockNetwork || /^dev/.test(env);
+        ? remote.getGlobal( 'startedRunningMock' )
+        : startAsMockNetwork || /^dev/.test( env );
 export const startedRunningProduction = !startedRunningMock;
-export const isRunningNodeEnvTest = /^test/.test(env);
+export const isRunningNodeEnvTest = /^test/.test( env );
 export const isRunningDebug = hasDebugFlag || isRunningSpectronTestProcess;
 export const inRendererProcess = typeof window !== 'undefined';
 export const inMainProcess = typeof remote === 'undefined';
@@ -92,7 +92,7 @@ const preloadLocation = isRunningUnpacked ? '' : '../';
 
 let safeNodeAppPathModifier = '..';
 
-if (isRunningPackaged && !isRunningNodeEnvTest) {
+if ( isRunningPackaged && !isRunningNodeEnvTest ) {
     safeNodeAppPathModifier = '../../app.asar.unpacked/';
 }
 
@@ -103,8 +103,8 @@ if (isRunningPackaged && !isRunningNodeEnvTest) {
  */
 const safeNodeLibPath = () => {
     // only exists in render processes
-    if (remote && remote.getGlobal && !isRunningNodeEnvTest) {
-        return remote.getGlobal('SAFE_NODE_LIB_PATH');
+    if ( remote && remote.getGlobal && !isRunningNodeEnvTest ) {
+        return remote.getGlobal( 'SAFE_NODE_LIB_PATH' );
     }
 
     return path.resolve(
@@ -116,21 +116,21 @@ const safeNodeLibPath = () => {
 
 // HACK: Prevent jest dying due to no electron globals
 const safeNodeAppPath = () => {
-    if (!remote || !remote.app) {
+    if ( !remote || !remote.app ) {
         return '';
     }
 
     return isRunningUnpacked
         ? [
-              remote.process.execPath,
-              `${remote.getGlobal('appDir')}/main.prod.js`
-          ]
-        : [remote.app.getPath('exe')];
+            remote.process.execPath,
+            `${remote.getGlobal( 'appDir' )}/main.prod.js`
+        ]
+        : [remote.app.getPath( 'exe' )];
 };
 
 export const I18N_CONFIG = {
     locales: ['en'],
-    directory: path.resolve(__dirname, 'locales'),
+    directory: path.resolve( __dirname, 'locales' ),
     objectNotation: true
 };
 
@@ -148,7 +148,7 @@ export const INTERNAL_PAGES = {
 
 const getRandomPort = async () => {
     let port = await getPort();
-    if (forcedPort) {
+    if ( forcedPort ) {
         port = forcedPort;
     }
 
@@ -158,18 +158,18 @@ const getRandomPort = async () => {
 };
 
 export const CONFIG = {
-    PORT: remote ? remote.getGlobal('port') : getRandomPort(),
+    PORT: remote ? remote.getGlobal( 'port' ) : getRandomPort(),
     SAFE_PARTITION: 'persist:safe-tab',
     SAFE_NODE_LIB_PATH: safeNodeLibPath(),
-    APP_HTML_PATH: path.resolve(__dirname, './app.html'),
+    APP_HTML_PATH: path.resolve( __dirname, './app.html' ),
     DATE_FORMAT: 'h:MM-mmm dd',
     NET_STATUS_CONNECTED: 'Connected',
     STATE_KEY: 'safeBrowserState',
     BROWSER_TYPE_TAG: 8467,
-    PRELOADED_MOCK_VAULT_PATH: path.join(__dirname, '..', 'PreloadDevVault')
+    PRELOADED_MOCK_VAULT_PATH: path.join( __dirname, '..', 'PreloadDevVault' )
 };
 
-if (inMainProcess) {
+if ( inMainProcess ) {
     const devPort = process.env.PORT || 1232;
 
     global.preloadFile = `file://${__dirname}/webPreload.prod.js`;
@@ -205,9 +205,9 @@ const appInfo = {
 };
 
 // OSX: Add bundle for electron in dev mode
-if (isRunningUnpacked && process.platform === 'darwin') {
+if ( isRunningUnpacked && process.platform === 'darwin' ) {
     appInfo.info.bundle = 'com.github.electron';
-} else if (process.platform === 'darwin') {
+} else if ( process.platform === 'darwin' ) {
     appInfo.info.bundle = 'com.electron.safe-browser';
 }
 
@@ -249,8 +249,8 @@ export const CLASSES = {
 const getDomClasses = () => {
     const domClasses = {};
 
-    Object.keys(CLASSES).forEach(
-        theClass => (domClasses[theClass] = `.${CLASSES[theClass]}`)
+    Object.keys( CLASSES ).forEach(
+        theClass => ( domClasses[theClass] = `.${CLASSES[theClass]}` )
     );
 
     return domClasses;

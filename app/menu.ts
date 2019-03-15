@@ -4,7 +4,7 @@ import { app, Menu, shell, BrowserWindow } from 'electron';
 export default class MenuBuilder {
     // mainWindow: BrowserWindow;
 
-    constructor(mainWindow) {
+    constructor( mainWindow ) {
         this.mainWindow = mainWindow;
     }
 
@@ -21,26 +21,26 @@ export default class MenuBuilder {
                 ? this.buildDarwinTemplate()
                 : this.buildDefaultTemplate();
 
-        const menu = Menu.buildFromTemplate(template);
-        Menu.setApplicationMenu(menu);
+        const menu = Menu.buildFromTemplate( template );
+        Menu.setApplicationMenu( menu );
 
         return menu;
     }
 
     setupDevelopmentEnvironment() {
         this.mainWindow.openDevTools();
-        this.mainWindow.webContents.on('context-menu', (e, props) => {
+        this.mainWindow.webContents.on( 'context-menu', ( e, props ) => {
             const { x, y } = props;
 
-            Menu.buildFromTemplate([
+            Menu.buildFromTemplate( [
                 {
                     label: 'Inspect element',
                     click: () => {
-                        this.mainWindow.inspectElement(x, y);
+                        this.mainWindow.inspectElement( x, y );
                     }
                 }
-            ]).popup(this.mainWindow);
-        });
+            ] ).popup( this.mainWindow );
+        } );
     }
 
     buildDarwinTemplate() {
@@ -164,7 +164,7 @@ export default class MenuBuilder {
                 {
                     label: 'Learn More',
                     click() {
-                        shell.openExternal('http://electron.atom.io');
+                        shell.openExternal( 'http://electron.atom.io' );
                     }
                 },
                 {
@@ -231,41 +231,41 @@ export default class MenuBuilder {
                 submenu:
                     process.env.NODE_ENV === 'development'
                         ? [
-                              {
-                                  label: '&Reload',
-                                  accelerator: 'Ctrl+R',
-                                  click: () => {
-                                      this.mainWindow.webContents.reload();
-                                  }
-                              },
-                              {
-                                  label: 'Toggle &Full Screen',
-                                  accelerator: 'F11',
-                                  click: () => {
-                                      this.mainWindow.setFullScreen(
-                                          !this.mainWindow.isFullScreen()
-                                      );
-                                  }
-                              },
-                              {
-                                  label: 'Toggle &Developer Tools',
-                                  accelerator: 'Alt+Ctrl+I',
-                                  click: () => {
-                                      this.mainWindow.toggleDevTools();
-                                  }
-                              }
-                          ]
+                            {
+                                label: '&Reload',
+                                accelerator: 'Ctrl+R',
+                                click: () => {
+                                    this.mainWindow.webContents.reload();
+                                }
+                            },
+                            {
+                                label: 'Toggle &Full Screen',
+                                accelerator: 'F11',
+                                click: () => {
+                                    this.mainWindow.setFullScreen(
+                                        !this.mainWindow.isFullScreen()
+                                    );
+                                }
+                            },
+                            {
+                                label: 'Toggle &Developer Tools',
+                                accelerator: 'Alt+Ctrl+I',
+                                click: () => {
+                                    this.mainWindow.toggleDevTools();
+                                }
+                            }
+                        ]
                         : [
-                              {
-                                  label: 'Toggle &Full Screen',
-                                  accelerator: 'F11',
-                                  click: () => {
-                                      this.mainWindow.setFullScreen(
-                                          !this.mainWindow.isFullScreen()
-                                      );
-                                  }
-                              }
-                          ]
+                            {
+                                label: 'Toggle &Full Screen',
+                                accelerator: 'F11',
+                                click: () => {
+                                    this.mainWindow.setFullScreen(
+                                        !this.mainWindow.isFullScreen()
+                                    );
+                                }
+                            }
+                        ]
             },
             {
                 label: 'Help',
@@ -273,7 +273,7 @@ export default class MenuBuilder {
                     {
                         label: 'Learn More',
                         click() {
-                            shell.openExternal('http://electron.atom.io');
+                            shell.openExternal( 'http://electron.atom.io' );
                         }
                     },
                     {

@@ -7,7 +7,7 @@ import webpack from 'webpack';
 import { dependencies } from '../package.json';
 
 export default {
-    externals: [...Object.keys(dependencies || {})],
+    externals: [...Object.keys( dependencies || {} )],
     module: {
         rules: [
             {
@@ -24,7 +24,7 @@ export default {
     },
 
     output: {
-        path: path.join(__dirname, '..', 'app'),
+        path: path.join( __dirname, '..', 'app' ),
         // https://github.com/webpack/webpack/issues/1114
         libraryTarget: 'commonjs2'
     },
@@ -37,9 +37,9 @@ export default {
     },
 
     plugins: [
-        new webpack.EnvironmentPlugin({
+        new webpack.EnvironmentPlugin( {
             NODE_ENV: 'production'
-        }),
+        } ),
 
         new webpack.NamedModulesPlugin()
     ]
