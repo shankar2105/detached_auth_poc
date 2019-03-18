@@ -50,7 +50,6 @@ module.exports = {
             'error',
             {
                 rules: {
-                    'member-access': [true, 'no-public'],
                     'file-name-casing': [
                         true,
                         { '.tsx': 'pascal-case', '.ts': 'camel-case' }
@@ -88,7 +87,7 @@ module.exports = {
                     'unnecessary-constructor': true,
                     'cyclomatic-complexity': true,
                     deprecation: true,
-                    'no-default-export': off,
+                    'no-default-export': false,
                     'no-default-import': [
                         true,
                         {

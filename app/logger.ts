@@ -10,8 +10,7 @@ import {
     isRunningSpectronTestProcess,
     isRunningSpectronTestProcessingPackagedApp,
     inMainProcess,
-    isCI,
-    TESTENV
+    isCI
 } from '@Constants';
 
 import log from 'electron-log';

@@ -35,11 +35,11 @@ declare namespace window {
 }
 
 const configureStore = (
-    initialState :{}
+    initialState : {} = initialStateFromMain
 ) => {
     // Redux Configuration
-    const middleware : [] = [];
-    const enhancers : [] = [];
+    const middleware : any[] = [];
+    const enhancers : any[] = [];
 
     // Router Middleware
     if ( ourHistory ) {

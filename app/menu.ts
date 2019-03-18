@@ -1,17 +1,14 @@
 
 import { app, Menu, shell, BrowserWindow } from 'electron';
 
-type Props = {
-    mainWindow : BrowserWindow
-}
+export class MenuBuilder {
+    mainWindow : BrowserWindow;
 
-export class MenuBuilder<Props> {
-
-    constructor( mainWindow: BrowserWindow ) {
+    private constructor( mainWindow : BrowserWindow ) {
         this.mainWindow = mainWindow;
     }
 
-    buildMenu() {
+    private buildMenu() {
         if (
             process.env.NODE_ENV === 'development' ||
             process.env.DEBUG_PROD === 'true'
@@ -30,7 +27,7 @@ export class MenuBuilder<Props> {
         return menu;
     }
 
-    setupDevelopmentEnvironment() {
+    private setupDevelopmentEnvironment() {
         this.mainWindow.openDevTools();
         this.mainWindow.webContents.on( 'context-menu', ( e, props ) => {
             const { x, y } = props;
@@ -46,7 +43,7 @@ export class MenuBuilder<Props> {
         } );
     }
 
-    buildDarwinTemplate() {
+    private buildDarwinTemplate() {
         const subMenuAbout = {
             label: 'Electron',
             submenu: [
@@ -211,7 +208,7 @@ export class MenuBuilder<Props> {
         ];
     }
 
-    buildDefaultTemplate() {
+    private buildDefaultTemplate() {
         const templateDefault = [
             {
                 label: '&File',

@@ -4,10 +4,13 @@ import { remote } from 'electron';
 import pkg from '@Package';
 import getPort from 'get-port';
 
-export const platform = process.platform;
-const OSX = 'darwin';
-const LINUX = 'linux';
-const WINDOWS = 'win32';
+export const {platform} = process;
+// const OSX = 'darwin';
+// const LINUX = 'linux';
+// const WINDOWS = 'win32';
+// export
+
+declare const document : Document;
 
 const allPassedArgs = process.argv;
 
@@ -17,7 +20,7 @@ let shouldRunMockNetwork = fs.existsSync(
 
 let hasDebugFlag = false;
 
-export const isRunningSpectronTestProcess = process.env.SPECTRON_TEST || false;
+export const isRunningSpectronTestProcess = !!process.env.SPECTRON_TEST || false;
 export const isRunningUnpacked = process.env.IS_UNPACKED;
 export const isRunningPackaged = !isRunningUnpacked;
 export const isRunningSpectronTestProcessingPackagedApp =
@@ -59,7 +62,7 @@ export const env = shouldStartAsMockFromFlagsOrPackage
     ? 'development'
     : process.env.NODE_ENV || 'production';
 
-export const isRunningDevelopment = /^dev/.test( env );
+export const isRunningDevelopment = env.startsWith('dev');
 
 export const isCI =
     remote && remote.getGlobal ? remote.getGlobal( 'isCI' ) : process.env.CI;
@@ -67,16 +70,15 @@ export const travisOS = process.env.TRAVIS_OS_NAME || '';
 // other considerations?
 export const isHot = process.env.HOT || 0;
 
-// const startAsMockNetwork = shouldStartAsMockFromFlagsOrPackage;
 const startAsMockNetwork = shouldStartAsMockFromFlagsOrPackage;
 
 // only to be used for inital store setting in main process. Not guaranteed correct for renderers.
 export const startedRunningMock =
     remote && remote.getGlobal
         ? remote.getGlobal( 'startedRunningMock' )
-        : startAsMockNetwork || /^dev/.test( env );
+        : startAsMockNetwork || isRunningDevelopment;
 export const startedRunningProduction = !startedRunningMock;
-export const isRunningNodeEnvTest = /^test/.test( env );
+export const isRunningNodeEnvTest = env.startsWith('test');
 export const isRunningDebug = hasDebugFlag || isRunningSpectronTestProcess;
 export const inRendererProcess = typeof window !== 'undefined';
 export const inMainProcess = typeof remote === 'undefined';
@@ -146,19 +148,23 @@ export const INTERNAL_PAGES = {
     BOOKMARKS: 'bookmarks'
 };
 
-const getRandomPort = async () => {
-    let port = await getPort();
-    if ( forcedPort ) {
-        port = forcedPort;
+const getRandomPort = async ( portOverride : number ) => {
+    let portToUse : number;
+    if ( portOverride ) {
+        portToUse = portOverride;
+    }
+    else
+    {
+        portToUse = await getPort();
     }
 
-    global.port = port;
+    global.port = portToUse;
 
-    return port;
+    return portToUse;
 };
 
 export const CONFIG = {
-    PORT: remote ? remote.getGlobal( 'port' ) : getRandomPort(),
+    PORT: remote ? remote.getGlobal( 'port' ) : getRandomPort( forcedPort ),
     SAFE_PARTITION: 'persist:safe-tab',
     SAFE_NODE_LIB_PATH: safeNodeLibPath(),
     APP_HTML_PATH: path.resolve( __dirname, './app.html' ),
