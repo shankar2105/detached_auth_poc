@@ -15,9 +15,8 @@ import path from 'path';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import {configureStore} from '@Store/configureStore'
-import * as AuthActions from '@Actions/authenticator_actions';
 import MenuBuilder from './menu';
-import { PROTOCOLS } from '@Constants';
+// import { PROTOCOLS } from '@Constants';
 import { createSafeLaunchPadWindow, createTray } from './setupLaunchPad';
 import setupBackground from './setupBackground';
 
@@ -161,9 +160,6 @@ app.on( 'window-all-closed', () => {
 
 app.on( 'open-url', ( e, url ) =>
 {
-    // onReceiveUrl( store, url );
-    store.dispatch( AuthActions.receiveAuthUrl( url ) )
-
     try{
 
         authPocWindow.show();

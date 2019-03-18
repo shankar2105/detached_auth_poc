@@ -14,7 +14,7 @@ import {
     TESTENV
 } from '@Constants';
 
-const log = require( 'electron-log' );
+import log from 'electron-log';
 
 if ( log.transports ) {
     // Log level
@@ -75,30 +75,28 @@ if ( log.info && log.verbose && inMainProcess ) {
     log.verbose( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     log.verbose( '' );
 
-    process.on( 'uncaughtTypeError', err => {
+    process.on( 'uncaughtTypeError', ( err : Error ) => {
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
         log.error( 'whoops! there was an uncaught type error:' );
-        log.error( err );
-        log.error( err.file );
-        log.error( err.line );
+        log.error( err, err.line );
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     } );
 
     process.on( 'uncaughtException', err => {
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
         log.error( 'whoops! there was an uncaught error:' );
-        log.error( err );
-        log.error( err.file );
-        log.error( err.line );
+        log.error( err, err.line );
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     } );
 
-    process.on( 'unhandledRejection', ( reason, p ) => {
+    process.on( 'unhandledRejection', ( err : Error ) => {
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
-        log.error( 'Unhandled Rejection. Reason:', reason.message || reason );
-        log.error( 'At:', p );
+        log.error( 'Unhandled Rejection. Reason:', err.message || err );
+        log.error(  err.line );
+        log.error(  err.file );
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     } );
 }
 
+/* eslint-ignore import/no-default-export */
 export default log;

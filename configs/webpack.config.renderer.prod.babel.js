@@ -71,27 +71,6 @@ export default merge.smart( baseConfig, {
                     }
                 ]
             },
-            // Add SASS support  - compile all other .scss files and pipe it to style.css
-            {
-                test: /^((?!\.global).)*\.(scss|sass)$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]',
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader'
-                    }
-                ]
-            },
             // Add LESS support  - compile all other .less files and pipe it to style.css
             {
                 test: /^((?!\.global).)*\.less/,

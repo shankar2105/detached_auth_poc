@@ -116,6 +116,7 @@ module.exports = {
         {
             files: ['*config*.js'],
             rules: {
+                'no-console' : 'off',
                 'import/no-extraneous-dependencies' : 'off',
                 'import/no-default-export' : 'off',
                 '@typescript-eslint/tslint/config': 'off',
