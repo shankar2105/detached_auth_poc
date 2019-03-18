@@ -12,18 +12,18 @@ import TerserPlugin from 'terser-webpack-plugin';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
-CheckNodeEnv( 'production' );
-export default merge.smart( baseConfig, {
+CheckNodeEnv('production');
+export default merge.smart(baseConfig, {
     devtool: 'source-map',
 
     mode: 'production',
 
     target: 'electron-renderer',
 
-    entry: path.join( __dirname, '..', 'app/index.tsx' ),
+    entry: path.join(__dirname, '..', 'app/index.tsx'),
 
     output: {
-        path: path.join( __dirname, '..', 'app/dist' ),
+        path: path.join(__dirname, '..', 'app/dist'),
         publicPath: './dist/',
         filename: 'renderer.prod.js'
     },
@@ -171,20 +171,20 @@ export default merge.smart( baseConfig, {
         minimizer: process.env.E2E_BUILD
             ? []
             : [
-                new TerserPlugin( {
-                    parallel: true,
-                    sourceMap: true,
-                    cache: true
-                } ),
-                new OptimizeCSSAssetsPlugin( {
-                    cssProcessorOptions: {
-                        map: {
-                            inline: false,
-                            annotation: true
-                        }
-                    }
-                } )
-            ]
+                  new TerserPlugin({
+                      parallel: true,
+                      sourceMap: true,
+                      cache: true
+                  }),
+                  new OptimizeCSSAssetsPlugin({
+                      cssProcessorOptions: {
+                          map: {
+                              inline: false,
+                              annotation: true
+                          }
+                      }
+                  })
+              ]
     },
 
     plugins: [
@@ -197,18 +197,18 @@ export default merge.smart( baseConfig, {
          * NODE_ENV should be production so that modules do not perform certain
          * development checks
          */
-        new webpack.EnvironmentPlugin( {
+        new webpack.EnvironmentPlugin({
             NODE_ENV: 'production'
-        } ),
+        }),
 
-        new MiniCssExtractPlugin( {
+        new MiniCssExtractPlugin({
             filename: 'style.css'
-        } ),
+        }),
 
-        new BundleAnalyzerPlugin( {
+        new BundleAnalyzerPlugin({
             analyzerMode:
                 process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
             openAnalyzer: process.env.OPEN_ANALYZER === 'true'
-        } )
+        })
     ]
-} );
+});
