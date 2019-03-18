@@ -62,7 +62,7 @@ export const env = shouldStartAsMockFromFlagsOrPackage
     ? 'development'
     : process.env.NODE_ENV || 'production';
 
-export const isRunningDevelopment = env.startsWith('dev');
+export const isRunningDevelopment = env.startsWith( 'dev' );
 
 export const isCI =
     remote && remote.getGlobal ? remote.getGlobal( 'isCI' ) : process.env.CI;
@@ -78,7 +78,7 @@ export const startedRunningMock =
         ? remote.getGlobal( 'startedRunningMock' )
         : startAsMockNetwork || isRunningDevelopment;
 export const startedRunningProduction = !startedRunningMock;
-export const isRunningNodeEnvTest = env.startsWith('test');
+export const isRunningNodeEnvTest = env.startsWith( 'test' );
 export const isRunningDebug = hasDebugFlag || isRunningSpectronTestProcess;
 export const inRendererProcess = typeof window !== 'undefined';
 export const inMainProcess = typeof remote === 'undefined';

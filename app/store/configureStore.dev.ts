@@ -31,7 +31,7 @@ const rootReducer : Reducer = createRootReducer( ourHistory );
 // declare var window : Window;
 
 declare namespace window {
-    function __REDUX_DEVTOOLS_EXTENSION_COMPOSE__( actionCreators: {});
+    function __REDUX_DEVTOOLS_EXTENSION_COMPOSE__( actionCreators: {} );
 }
 
 const configureStore = (
