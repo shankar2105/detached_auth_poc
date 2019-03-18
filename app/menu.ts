@@ -1,10 +1,13 @@
 
 import { app, Menu, shell, BrowserWindow } from 'electron';
 
-export default class MenuBuilder {
-    // mainWindow: BrowserWindow;
+type Props = {
+    mainWindow : BrowserWindow
+}
 
-    constructor( mainWindow ) {
+export class MenuBuilder<Props> {
+
+    constructor( mainWindow: BrowserWindow ) {
         this.mainWindow = mainWindow;
     }
 

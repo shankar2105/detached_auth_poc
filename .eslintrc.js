@@ -88,7 +88,7 @@ module.exports = {
                     'unnecessary-constructor': true,
                     'cyclomatic-complexity': true,
                     deprecation: true,
-                    'no-default-export': true,
+                    'no-default-export': off,
                     'no-default-import': [
                         true,
                         {

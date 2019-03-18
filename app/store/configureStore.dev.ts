@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { createHashHistory } from 'history';
+import { createStore, applyMiddleware, compose, Store, Reducer } from 'redux';
+import { createHashHistory, History } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
+
 import {
     inRendererProcess,
-    // isRunningUnpacked,
     isRunningSpectronTestProcess
 } from '@Constants';
 
@@ -17,36 +16,38 @@ import {
     replayActionRenderer
 } from 'electron-redux';
 
-import createRootReducer from '../reducers';
-// import * as counterActions from '../actions/counter';
-// import type { counterStateType } from '../reducers/types';
+import { createRootReducer } from '../reducers';
 
-const initialStateFromMain = inRendererProcess ? getInitialStateRenderer() : {};
+const initialStateFromMain : {} = inRendererProcess ? getInitialStateRenderer() : {};
 
-let history;
+let ourHistory : History;
 
 if ( inRendererProcess ) {
-    history = createHashHistory();
+    ourHistory  = createHashHistory();
 }
 
-const rootReducer = createRootReducer( history );
+const rootReducer : Reducer = createRootReducer( ourHistory );
 
-// const configureStore = (initialState?: counterStateType) => {
+// declare var window : Window;
+
+declare namespace window {
+    function __REDUX_DEVTOOLS_EXTENSION_COMPOSE__( actionCreators: {});
+}
+
 const configureStore = (
-    initialState = initialStateFromMain,
-    thisIsTheBackgroundProcess = false
+    initialState :{}
 ) => {
     // Redux Configuration
-    const middleware = [];
-    const enhancers = [];
+    const middleware : [] = [];
+    const enhancers : [] = [];
 
     // Router Middleware
-    if ( history ) {
-        const router = routerMiddleware( history );
+    if ( ourHistory ) {
+        const router = routerMiddleware( ourHistory );
         middleware.push( router );
     }
 
-    addMiddlewares( middleware, thisIsTheBackgroundProcess );
+    addMiddlewares( middleware );
 
     // Logging Middleware
     const logger = createLogger( {
@@ -61,7 +62,6 @@ const configureStore = (
 
     // Redux DevTools Configuration
     const actionCreators = {
-        // ...counterActions,
         ...routerActions
     };
 
@@ -83,10 +83,10 @@ const configureStore = (
 
     // Apply Middleware & Compose Enhancers
     enhancers.push( applyMiddleware( ...middleware ) );
-    const enhancer = composeEnhancers( ...enhancers );
+    const enhancer : {} = composeEnhancers( ...enhancers );
 
     // Create Store
-    const store = createStore( rootReducer, initialState, enhancer );
+    const store : Store = createStore( rootReducer, initialState, enhancer );
 
     if ( module.hot ) {
         module.hot.accept(

@@ -22,5 +22,5 @@
             "@Package": ["package.json"]
         }
     },
-    "exclude": ["app/*.prod.js"]
+    "exclude": ["app/*.prod.js", "app/dist", "node_modules"]
 }

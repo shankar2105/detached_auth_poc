@@ -15,16 +15,15 @@ import path from 'path';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import {configureStore} from '@Store/configureStore'
-import MenuBuilder from './menu';
+import { MenuBuilder } from './menu';
 // import { PROTOCOLS } from '@Constants';
 import { createSafeLaunchPadWindow, createTray } from './setupLaunchPad';
-import setupBackground from './setupBackground';
+import { setupBackground } from './setupBackground';
 
 
 app.setPath( 'userData', path.resolve( app.getPath( 'temp' ) , 'sauther' ) )
 
-console.log( '>>>>>>>>>>>>>>>>>>>>>>.', app.getPath( 'exe' ), app.getPath( 'userData' ) )
-
+/* eslint import/no-default-export : off */
 export default class AppUpdater {
     constructor() {
         log.transports.file.level = 'info';
@@ -68,9 +67,6 @@ let authPocWindow;
 // app.setAsDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER );
 //
 // const isDefault = app.isDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER);
-// logger.info('DEFAULT!!!!!!!!!!!!!!!!!!', isDefault)
-// console.log('DEFAULT!!!!!!!!!!!!!!!!!!', isDefault)
-
 
 const gotTheLock = app.requestSingleInstanceLock()
 
