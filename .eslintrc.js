@@ -114,6 +114,15 @@ module.exports = {
     },
     overrides: [
         {
+            files: ['*config*.js'],
+            rules: {
+                'import/no-extraneous-dependencies' : 'off',
+                'import/no-default-export' : 'off',
+                '@typescript-eslint/tslint/config': 'off',
+                '@typescript-eslint/no-var-requires': 'off'
+            }
+        },
+        {
             files: ['*.js'],
             rules: {
                 '@typescript-eslint/tslint/config': 'off',
