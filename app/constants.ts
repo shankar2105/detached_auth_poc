@@ -123,7 +123,7 @@ const safeNodeAppPath = () => {
         return '';
     }
 
-    const nodeAppPath : string[] = isRunningUnpacked
+    const nodeAppPath : Array<string> = isRunningUnpacked
         ? [
             remote.process.execPath,
             `${remote.getGlobal( 'appDir' )}/main.prod.js`
@@ -202,7 +202,7 @@ interface AppInfo {
         scope: null | string;
         name: string;
         vendor: string;
-        customExecPath: string | string[];
+        customExecPath: string | Array<string>;
         bundle? : string;
     };
 
@@ -211,7 +211,7 @@ interface AppInfo {
         own_container: boolean;
     };
     permissions: {
-        _public: string[]
+        _public: Array<string>
     };
 }
 const appInfo : AppInfo = {

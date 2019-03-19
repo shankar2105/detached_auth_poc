@@ -1,16 +1,11 @@
 
 import { app, Menu, shell, BrowserWindow } from 'electron';
+import { Application } from './application.d'
 
-interface PeruseBrowserWindow extends BrowserWindow {
-    openDevTools : Function;
-    toggleDevTools : Function;
-    inspectElement : Function,
-
-}
 export class MenuBuilder {
-    private mainWindow : PeruseBrowserWindow;
+    private mainWindow : Application.Window;
 
-    public constructor( mainWindow : PeruseBrowserWindow ) {
+    public constructor( mainWindow : Application.Window ) {
         this.mainWindow = mainWindow;
     }
 

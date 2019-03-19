@@ -16,6 +16,8 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import {configureStore} from '@Store/configureStore'
 import { MenuBuilder } from './menu';
+import { Application } from './application'
+
 // import { PROTOCOLS } from '@Constants';
 import { createSafeLaunchPadWindow, createTray } from './setupLaunchPad';
 import { setupBackground } from './setupBackground';
@@ -31,8 +33,6 @@ export default class AppUpdater {
         autoUpdater.checkForUpdatesAndNotify();
     }
 }
-
-const mainWindow = null;
 
 if ( process.env.NODE_ENV === 'production' ) {
     const sourceMapSupport = require( 'source-map-support' );
@@ -62,7 +62,8 @@ const installExtensions = async () => {
 // const loadMiddlewarePackages = [];
 
 let store;
-let authPocWindow;
+let mainWindow : Application.Window;
+
 
 // app.setAsDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER );
 //
@@ -99,7 +100,7 @@ if ( !gotTheLock ) {
 
 
         createTray();
-        authPocWindow = createSafeLaunchPadWindow();
+        mainWindow = createSafeLaunchPadWindow();
         setupBackground();
         // const bgWindow = setupBackground();
         //
@@ -130,7 +131,7 @@ if ( !gotTheLock ) {
         //   mainWindow = null;
         // });
 
-        const menuBuilder = new MenuBuilder( authPocWindow );
+        const menuBuilder = new MenuBuilder( mainWindow );
         menuBuilder.buildMenu();
 
         // Remove this if your app does not use auto updates
@@ -158,7 +159,7 @@ app.on( 'open-url', ( e, url ) =>
 {
     try{
 
-        authPocWindow.show();
+        mainWindow.show();
     }
     catch( e )
     {
