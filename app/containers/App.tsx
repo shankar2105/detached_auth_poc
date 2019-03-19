@@ -1,8 +1,7 @@
-
-import * as React from "react";
+import * as React from 'react';
 
 interface Props {
-    children: React.ReactChild
+    children: React.ReactChild;
 }
 export class App extends React.Component<{}, {}> {
     props: Props;

@@ -10,10 +10,7 @@ import { createHashHistory, History } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 
-import {
-    inRendererProcess,
-    isRunningSpectronTestProcess
-} from '@Constants';
+import { inRendererProcess, isRunningSpectronTestProcess } from '@Constants';
 
 import { addMiddlewares } from '@Store/addMiddlewares';
 
@@ -25,26 +22,26 @@ import {
 
 import { createRootReducer } from '../reducers';
 
-const initialStateFromMain : {} = inRendererProcess ? getInitialStateRenderer() : {};
+const initialStateFromMain: {} = inRendererProcess
+    ? getInitialStateRenderer()
+    : {};
 
-let ourHistory : History;
+let ourHistory: History;
 
 if ( inRendererProcess ) {
-    ourHistory  = createHashHistory();
+    ourHistory = createHashHistory();
 }
 
-const rootReducer : Reducer = createRootReducer( ourHistory );
+const rootReducer: Reducer = createRootReducer( ourHistory );
 
 declare namespace window {
     function __REDUX_DEVTOOLS_EXTENSION_COMPOSE__( actionCreators: {} );
 }
 
-export const configureStore = (
-    initialState : {} = initialStateFromMain
-) => {
+export const configureStore = ( initialState: {} = initialStateFromMain ) => {
     // Redux Configuration
-    const middleware : Array<any> = [];
-    const enhancers : Array<StoreEnhancer> = [];
+    const middleware: Array<any> = [];
+    const enhancers: Array<StoreEnhancer> = [];
 
     // Router Middleware
     if ( ourHistory ) {
@@ -88,10 +85,10 @@ export const configureStore = (
 
     // Apply Middleware & Compose Enhancers
     enhancers.push( applyMiddleware( ...middleware ) );
-    const enhancer : StoreEnhancer = composeEnhancers( ...enhancers );
+    const enhancer: StoreEnhancer = composeEnhancers( ...enhancers );
 
     // Create Store
-    const store : Store = createStore( rootReducer, initialState, enhancer );
+    const store: Store = createStore( rootReducer, initialState, enhancer );
 
     if ( module.hot ) {
         module.hot.accept(
@@ -110,4 +107,4 @@ export const configureStore = (
     return store;
 };
 
-export const history = ourHistory ;
+export const history = ourHistory;

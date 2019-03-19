@@ -1,6 +1,6 @@
 // import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { Home } from "../components/Home";
+import { connect } from 'react-redux';
+import { Home } from '../components/Home';
 // import {  }
 function mapStateToProps( state ) {
     return {
@@ -13,7 +13,7 @@ function mapDispatchToProps( dispatch ) {
     return {};
 }
 
-export const HomePage : React.ComponentClass  = connect(
+export const HomePage: React.ComponentClass = connect(
     mapStateToProps,
     mapDispatchToProps
 )( Home );

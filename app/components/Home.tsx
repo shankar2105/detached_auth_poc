@@ -1,14 +1,12 @@
-
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Input, Row, Col, Button } from "antd";
-import routes from "../constants/routes.json";
-import styles from "./Home.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Input, Row, Col, Button } from 'antd';
+// import routes from "../constants/routes.json";
+import styles from './Home.css';
 
 interface Props {}
 export class Home extends Component<{}, {}> {
     props: Props;
-
 
     render() {
         return (
@@ -17,10 +15,10 @@ export class Home extends Component<{}, {}> {
                 <h6>safe-auth://home/#/login</h6>
                 <Col>
                     <Row>
-                        <Input placeholder="secret"/>
+                        <Input placeholder="secret" />
                     </Row>
                     <Row>
-                        <Input placeholder="password"  />
+                        <Input placeholder="password" />
                     </Row>
                     <Row>
                         <Button>Log innn</Button>

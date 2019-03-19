@@ -5,23 +5,24 @@ import { remote } from 'electron';
 import pkg from '@Package';
 import getPort from 'get-port';
 
-export const {platform} = process;
+export const { platform } = process;
 // const OSX = 'darwin';
 // const LINUX = 'linux';
 // const WINDOWS = 'win32';
 // export
 
-declare const document : Document;
+declare const document: Document;
 
 const allPassedArgs = process.argv;
 
-let shouldRunMockNetwork : boolean = fs.existsSync(
+let shouldRunMockNetwork: boolean = fs.existsSync(
     path.resolve( __dirname, '../..', 'startAsMock' )
 );
 
 let hasDebugFlag = false;
 
-export const isRunningSpectronTestProcess = !!process.env.SPECTRON_TEST || false;
+export const isRunningSpectronTestProcess =
+    !!process.env.SPECTRON_TEST || false;
 export const isRunningUnpacked = process.env.IS_UNPACKED;
 export const isRunningPackaged = !isRunningUnpacked;
 export const isRunningSpectronTestProcessingPackagedApp =
@@ -50,14 +51,14 @@ if ( allPassedArgs.includes( '--debug' ) ) {
     hasDebugFlag = true;
 }
 
-let forcedPort : number;
+let forcedPort: number;
 if ( allPassedArgs.includes( '--port' ) ) {
     const index = allPassedArgs.indexOf( '--port' );
 
     forcedPort = Number( allPassedArgs[index + 1] );
 }
 
-export const shouldStartAsMockFromFlagsOrPackage : boolean = shouldRunMockNetwork;
+export const shouldStartAsMockFromFlagsOrPackage: boolean = shouldRunMockNetwork;
 
 export const env = shouldStartAsMockFromFlagsOrPackage
     ? 'development'
@@ -65,7 +66,7 @@ export const env = shouldStartAsMockFromFlagsOrPackage
 
 export const isRunningDevelopment = env.startsWith( 'dev' );
 
-export const isCI : boolean =
+export const isCI: boolean =
     remote && remote.getGlobal ? remote.getGlobal( 'isCI' ) : process.env.CI;
 export const travisOS = process.env.TRAVIS_OS_NAME || '';
 // other considerations?
@@ -74,7 +75,7 @@ export const isHot = process.env.HOT || 0;
 const startAsMockNetwork = shouldStartAsMockFromFlagsOrPackage;
 
 // only to be used for inital store setting in main process. Not guaranteed correct for renderers.
-export const startedRunningMock : boolean =
+export const startedRunningMock: boolean =
     remote && remote.getGlobal
         ? remote.getGlobal( 'startedRunningMock' )
         : startAsMockNetwork || isRunningDevelopment;
@@ -123,7 +124,7 @@ const safeNodeAppPath = () => {
         return '';
     }
 
-    const nodeAppPath : Array<string> = isRunningUnpacked
+    const nodeAppPath: Array<string> = isRunningUnpacked
         ? [
             remote.process.execPath,
             `${remote.getGlobal( 'appDir' )}/main.prod.js`
@@ -151,13 +152,11 @@ export const INTERNAL_PAGES = {
     BOOKMARKS: 'bookmarks'
 };
 
-const getRandomPort = async ( portOverride : number ) => {
-    let portToUse : number;
+const getRandomPort = async ( portOverride: number ) => {
+    let portToUse: number;
     if ( portOverride ) {
         portToUse = portOverride;
-    }
-    else
-    {
+    } else {
         portToUse = await getPort();
     }
 
@@ -203,7 +202,7 @@ interface AppInfo {
         name: string;
         vendor: string;
         customExecPath: string | Array<string>;
-        bundle? : string;
+        bundle?: string;
     };
 
     opts: {
@@ -211,10 +210,10 @@ interface AppInfo {
         own_container: boolean;
     };
     permissions: {
-        _public: Array<string>
+        _public: Array<string>;
     };
 }
-const appInfo : AppInfo = {
+const appInfo: AppInfo = {
     info: {
         id: pkg.identifier,
         scope: null,

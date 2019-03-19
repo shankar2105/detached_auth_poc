@@ -14,16 +14,15 @@ import { app } from 'electron';
 import path from 'path';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import {configureStore} from '@Store/configureStore'
+import { configureStore } from '@Store/configureStore';
 import { MenuBuilder } from './menu';
-import { Application } from './application'
+import { Application } from './application';
 
 // import { PROTOCOLS } from '@Constants';
 import { createSafeLaunchPadWindow, createTray } from './setupLaunchPad';
 import { setupBackground } from './setupBackground';
 
-
-app.setPath( 'userData', path.resolve( app.getPath( 'temp' ) , 'sauther' ) )
+app.setPath( 'userData', path.resolve( app.getPath( 'temp' ), 'sauther' ) );
 
 /* eslint-disable-next-line import/no-default-export */
 export default class AppUpdater {
@@ -62,42 +61,38 @@ const installExtensions = async () => {
 // const loadMiddlewarePackages = [];
 
 let store;
-let mainWindow : Application.Window;
-
+let mainWindow: Application.Window;
 
 // app.setAsDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER );
 //
 // const isDefault = app.isDefaultProtocolClient( PROTOCOLS.SAFE_LAUNCHER);
 
-const gotTheLock = app.requestSingleInstanceLock()
+const gotTheLock = app.requestSingleInstanceLock();
 
 if ( !gotTheLock ) {
-    console.error( 'Not got the lock. This is so sad' )
-    app.quit()
+    console.error( 'Not got the lock. This is so sad' );
+    app.quit();
 } else {
     app.on( 'second-instance', ( event, commandLine, workingDirectory ) => {
-    // Someone tried to run a second instance, we should focus our window.
-        if ( mainWindow )
-        {
+        // Someone tried to run a second instance, we should focus our window.
+        if ( mainWindow ) {
             if ( mainWindow.isMinimized() ) mainWindow.restore();
             mainWindow.focus();
         }
-    } )
+    } );
 
     // Create myWindow, load the rest of the app, etc...
 
     app.on( 'ready', async () => {
-
         if (
             process.env.NODE_ENV === 'development' ||
-          process.env.DEBUG_PROD === 'true'
+            process.env.DEBUG_PROD === 'true'
         ) {
             await installExtensions();
         }
 
         const initialState = {};
         store = configureStore( initialState );
-
 
         createTray();
         mainWindow = createSafeLaunchPadWindow();
@@ -136,7 +131,7 @@ if ( !gotTheLock ) {
 
         // Remove this if your app does not use auto updates
         // eslint-disable-next-line
-      new AppUpdater();
+        new AppUpdater();
     } );
 }
 
@@ -152,19 +147,13 @@ app.on( 'window-all-closed', () => {
     }
 } );
 
-
-
-
-app.on( 'open-url', ( e, url ) =>
-{
-    try{
-
+app.on( 'open-url', ( e, url ) => {
+    try {
         mainWindow.show();
-    }
-    catch( e )
-    {
-        console.error( ' Issue opening a window. It did not exist for this app... Check that the correct app version is opening.' )
+    } catch ( e ) {
+        console.error(
+            ' Issue opening a window. It did not exist for this app... Check that the correct app version is opening.'
+        );
         throw new Error( e );
     }
-
 } );

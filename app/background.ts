@@ -8,22 +8,18 @@ import {
     PROTOCOLS
 } from '@Constants';
 
-declare let window : Window;
+declare let window: Window;
 
 const PID = process.pid;
 
 logger.info( "Welcome to the BG process it's ID is: ", PID );
 
-
 const initBgProcess = () => {
-
     const store = configureStore( undefined );
-
 
     store.subscribe( () => {
         logger.info( 'chchchchchaaaanges' );
     } );
-
 };
 
 initBgProcess();

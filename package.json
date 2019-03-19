@@ -14,7 +14,7 @@
     "check-types": "tsc",
     "dev": "cross-env START_HOT=1 node -r babel-register-ts ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
     "lint": "cross-env NODE_ENV=development eslint --cache --format=pretty --ext .js,.jsx,.ts,.tsx .",
-    "lint-fix": "yarn --silent run lint --fix; exit 0",
+    "lint-fix": "yarn --silent lint --fix; exit 0",
     "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
     "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
     "package": "yarn build && electron-builder build --publish never",
@@ -23,7 +23,7 @@
     "package-linux": "yarn build && electron-builder build --linux",
     "package-win": "yarn build && electron-builder build --win --x64",
     "postinstall": "electron-builder install-app-deps package.json && yarn build-dll && opencollective-postinstall",
-    "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}'",
+    "prelint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{*{js,ts,tsx,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}'",
     "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
     "precommit": "lint-staged",
     "prestart": "yarn build",
@@ -38,6 +38,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
+      "prettier --ignore-path .eslintignore --arrow-parens always --single-quote --write",
       "cross-env NODE_ENV=development eslint --cache --format=pretty --fix",
       "git add"
     ],
@@ -248,7 +249,7 @@
     "opencollective-postinstall": "^2.0.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "precss": "4.0.0",
-    "prettier": "^1.15.2",
+    "prettier": "1.16.4",
     "react-test-renderer": "^16.6.3",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",

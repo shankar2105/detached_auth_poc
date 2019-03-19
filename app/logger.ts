@@ -80,18 +80,18 @@ if ( log.info && log.verbose && inMainProcess ) {
     //     log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     // } );
 
-    process.on( 'uncaughtException',  ( err: NodeError ) => {
+    process.on( 'uncaughtException', ( err: NodeError ) => {
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
         log.error( 'whoops! there was an uncaught error:' );
         log.error( err, err.line );
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     } );
 
-    process.on( 'unhandledRejection', ( err : NodeError ) => {
+    process.on( 'unhandledRejection', ( err: NodeError ) => {
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
         log.error( 'Unhandled Rejection. Reason:', err.message || err );
-        log.error(  err.line );
-        log.error(  err.file );
+        log.error( err.line );
+        log.error( err.file );
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     } );
 }
