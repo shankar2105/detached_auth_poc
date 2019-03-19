@@ -1,3 +1,5 @@
+const aliases = require("./.aliases")
+
 module.exports = {
     parser: '@typescript-eslint/parser',
     extends: [
@@ -145,5 +147,13 @@ module.exports = {
         'promise',
         'unicorn',
         '@typescript-eslint/tslint'
-    ]
+    ],
+    settings: {
+      "import/resolver": {
+        "babel-module": {
+            root: ['.'],
+            alias: aliases
+        }
+      }
+    }
 };
