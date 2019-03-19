@@ -110,8 +110,7 @@ module.exports = {
                     'no-unnecessary-qualifier': true,
                     'prefer-method-signature': true,
                     'prefer-template': true,
-                    'return-undefined': true,
-                    'space-within-parens': false
+                    'return-undefined': true
                 }
             }
         ],
