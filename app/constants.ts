@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { remote } from 'electron';
+// eslint-disable-next-line
 import pkg from '@Package';
 import getPort from 'get-port';
 
@@ -14,7 +15,7 @@ declare const document : Document;
 
 const allPassedArgs = process.argv;
 
-let shouldRunMockNetwork = fs.existsSync(
+let shouldRunMockNetwork : boolean = fs.existsSync(
     path.resolve( __dirname, '../..', 'startAsMock' )
 );
 
@@ -49,14 +50,14 @@ if ( allPassedArgs.includes( '--debug' ) ) {
     hasDebugFlag = true;
 }
 
-let forcedPort;
+let forcedPort : number;
 if ( allPassedArgs.includes( '--port' ) ) {
     const index = allPassedArgs.indexOf( '--port' );
 
-    forcedPort = allPassedArgs[index + 1];
+    forcedPort = Number( allPassedArgs[index + 1] );
 }
 
-export const shouldStartAsMockFromFlagsOrPackage = shouldRunMockNetwork;
+export const shouldStartAsMockFromFlagsOrPackage : boolean = shouldRunMockNetwork;
 
 export const env = shouldStartAsMockFromFlagsOrPackage
     ? 'development'
@@ -64,7 +65,7 @@ export const env = shouldStartAsMockFromFlagsOrPackage
 
 export const isRunningDevelopment = env.startsWith( 'dev' );
 
-export const isCI =
+export const isCI : boolean =
     remote && remote.getGlobal ? remote.getGlobal( 'isCI' ) : process.env.CI;
 export const travisOS = process.env.TRAVIS_OS_NAME || '';
 // other considerations?
@@ -73,7 +74,7 @@ export const isHot = process.env.HOT || 0;
 const startAsMockNetwork = shouldStartAsMockFromFlagsOrPackage;
 
 // only to be used for inital store setting in main process. Not guaranteed correct for renderers.
-export const startedRunningMock =
+export const startedRunningMock : boolean =
     remote && remote.getGlobal
         ? remote.getGlobal( 'startedRunningMock' )
         : startAsMockNetwork || isRunningDevelopment;
@@ -122,12 +123,14 @@ const safeNodeAppPath = () => {
         return '';
     }
 
-    return isRunningUnpacked
+    const nodeAppPath : string[] = isRunningUnpacked
         ? [
             remote.process.execPath,
             `${remote.getGlobal( 'appDir' )}/main.prod.js`
         ]
         : [remote.app.getPath( 'exe' )];
+
+    return nodeAppPath;
 };
 
 export const I18N_CONFIG = {
@@ -193,7 +196,25 @@ if ( inMainProcess ) {
 //     CONFIG.CONFIG_PATH = path.resolve( __dirname, '../resources' );
 // }
 
-const appInfo = {
+interface AppInfo {
+    info: {
+        id: string;
+        scope: null | string;
+        name: string;
+        vendor: string;
+        customExecPath: string | string[];
+        bundle? : string;
+    };
+
+    opts: {
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
+        own_container: boolean;
+    };
+    permissions: {
+        _public: string[]
+    };
+}
+const appInfo : AppInfo = {
     info: {
         id: pkg.identifier,
         scope: null,
@@ -202,6 +223,7 @@ const appInfo = {
         customExecPath: safeNodeAppPath()
     },
     opts: {
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         own_container: true
     },
     permissions: {

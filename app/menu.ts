@@ -1,14 +1,20 @@
 
 import { app, Menu, shell, BrowserWindow } from 'electron';
 
-export class MenuBuilder {
-    mainWindow : BrowserWindow;
+interface PeruseBrowserWindow extends BrowserWindow {
+    openDevTools : Function;
+    toggleDevTools : Function;
+    inspectElement : Function,
 
-    private constructor( mainWindow : BrowserWindow ) {
+}
+export class MenuBuilder {
+    private mainWindow : PeruseBrowserWindow;
+
+    public constructor( mainWindow : PeruseBrowserWindow ) {
         this.mainWindow = mainWindow;
     }
 
-    private buildMenu() {
+    public buildMenu() {
         if (
             process.env.NODE_ENV === 'development' ||
             process.env.DEBUG_PROD === 'true'
@@ -39,7 +45,7 @@ export class MenuBuilder {
                         this.mainWindow.inspectElement( x, y );
                     }
                 }
-            ] ).popup( this.mainWindow );
+            ] ).popup( { window: this.mainWindow } );
         } );
     }
 

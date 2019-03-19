@@ -23,9 +23,9 @@ import { setupBackground } from './setupBackground';
 
 app.setPath( 'userData', path.resolve( app.getPath( 'temp' ) , 'sauther' ) )
 
-/* eslint import/no-default-export : off */
+/* eslint-disable-next-line import/no-default-export */
 export default class AppUpdater {
-    constructor() {
+    public constructor() {
         log.transports.file.level = 'info';
         autoUpdater.logger = log;
         autoUpdater.checkForUpdatesAndNotify();

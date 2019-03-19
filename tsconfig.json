@@ -23,5 +23,11 @@
             "@Package": ["package.json"]
         }
     },
-    "exclude": ["app/*.prod.js", "app/dist", "node_modules"]
+    "exclude": [
+        "babel.config.js",
+        "postcss.config.js",
+        "app/*.prod.js",
+        "app/dist",
+        "node_modules/*"
+    ]
 }

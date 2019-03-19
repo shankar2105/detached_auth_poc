@@ -1,4 +1,4 @@
-const aliases = require("./.aliases")
+const { aliases } = require("./.aliases")
 
 module.exports = {
     parser: '@typescript-eslint/parser',

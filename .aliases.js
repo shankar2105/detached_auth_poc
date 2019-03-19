@@ -1,4 +1,4 @@
-module.exports = {
+export const aliases = {
     test: './test',
     '@Actions': './app/actions',
     '@Store': './app/store',
