@@ -1,4 +1,11 @@
-import { createStore, applyMiddleware, compose, Store, Reducer } from 'redux';
+import {
+    createStore,
+    applyMiddleware,
+    compose,
+    Store,
+    Reducer,
+    StoreEnhancer
+} from 'redux';
 import { createHashHistory, History } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
@@ -34,12 +41,12 @@ declare namespace window {
     function __REDUX_DEVTOOLS_EXTENSION_COMPOSE__( actionCreators: {} );
 }
 
-const configureStore = (
+export const configureStore = (
     initialState : {} = initialStateFromMain
 ) => {
     // Redux Configuration
     const middleware : any[] = [];
-    const enhancers : any[] = [];
+    const enhancers : StoreEnhancer[] = [];
 
     // Router Middleware
     if ( ourHistory ) {
@@ -105,4 +112,4 @@ const configureStore = (
     return store;
 };
 
-export default { configureStore, history };
+export const history = ourHistory ;

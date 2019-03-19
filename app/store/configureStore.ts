@@ -1,7 +1,7 @@
 
-import configureStoreDev from './configureStore.dev';
+import {configureStore as configureStoreDev } from './configureStore.dev';
 // import configureStoreProd from './configureStore.prod';
-
+export { history } from './configureStore.dev';
 const selectedConfigureStore =
 // In case a different set up is needed for prod:
 // process.env.NODE_ENV === 'production'
@@ -9,6 +9,4 @@ const selectedConfigureStore =
         // :
         configureStoreDev;
 
-export const { configureStore } = selectedConfigureStore;
-
-export const { history } = selectedConfigureStore;
+export const configureStore = selectedConfigureStore;

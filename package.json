@@ -2,6 +2,7 @@
   "name": "electron-react-boilerplate",
   "productName": "ElectronReact",
   "version": "0.17.1",
+  "identifier" : "boilerplateExamples",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-bg\" \"yarn build-renderer\"",
@@ -211,7 +212,6 @@
     "babel-plugin-module-resolver": "3.1.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.20",
     "babel-register-ts": "7.0.0",
-    "chalk": "^2.4.1",
     "circular-dependency-plugin": "5.0.2",
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
@@ -277,6 +277,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
     "antd": "3.11.2",
+    "chalk": "^2.4.1",
     "connected-react-router": "^5.0.1",
     "devtron": "^1.4.0",
     "electron": "4.1.0",

@@ -58,7 +58,6 @@ if ( log.info && log.verbose && inMainProcess ) {
     log.verbose( 'Running with derived constants:' );
     log.verbose( '' );
     log.verbose( 'isCI?', isCI );
-    log.verbose( 'TESTENV?', TESTENV );
     log.verbose( 'isRunningDebug?', isRunningDebug );
     log.verbose( 'isRunningUnpacked?', isRunningUnpacked );
     log.verbose( 'isRunningPackaged?', isRunningPackaged );
