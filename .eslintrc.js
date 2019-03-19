@@ -48,6 +48,7 @@ module.exports = {
         'no-shadow': 'error',
         'react/prefer-stateless-function': 'error',
         '@typescript-eslint/interface-name-prefix': 'off',
+        '@typescript-eslint/array-type': ['error', 'generic'],
         '@typescript-eslint/tslint/config': [
             'error',
             {

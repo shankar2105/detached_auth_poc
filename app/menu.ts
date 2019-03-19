@@ -1,15 +1,14 @@
-
 import { app, Menu, shell, BrowserWindow } from 'electron';
-import { Application } from './application.d'
+import { Application } from './application.d';
 
 export class MenuBuilder {
-    private mainWindow : Application.Window;
+    private mainWindow: Application.Window;
 
-    public constructor( mainWindow : Application.Window ) {
+    public constructor(mainWindow: Application.Window) {
         this.mainWindow = mainWindow;
     }
 
-    public buildMenu() {
+    public buildMenu(): Menu {
         if (
             process.env.NODE_ENV === 'development' ||
             process.env.DEBUG_PROD === 'true'
@@ -17,34 +16,37 @@ export class MenuBuilder {
             this.setupDevelopmentEnvironment();
         }
 
-        const template =
-            process.platform === 'darwin'
-                ? this.buildDarwinTemplate()
-                : this.buildDefaultTemplate();
+        let template: Array<{}>;
 
-        const menu = Menu.buildFromTemplate( template );
-        Menu.setApplicationMenu( menu );
+        if (process.platform === 'darwin') {
+            template = this.buildDarwinTemplate();
+        } else {
+            template = this.buildDefaultTemplate();
+        }
+
+        const menu = Menu.buildFromTemplate(template);
+        Menu.setApplicationMenu(menu);
 
         return menu;
     }
 
-    private setupDevelopmentEnvironment() {
+    private setupDevelopmentEnvironment(): void {
         this.mainWindow.openDevTools();
-        this.mainWindow.webContents.on( 'context-menu', ( e, props ) => {
+        this.mainWindow.webContents.on('context-menu', (e, props) => {
             const { x, y } = props;
 
-            Menu.buildFromTemplate( [
+            Menu.buildFromTemplate([
                 {
                     label: 'Inspect element',
                     click: () => {
-                        this.mainWindow.inspectElement( x, y );
+                        this.mainWindow.inspectElement(x, y);
                     }
                 }
-            ] ).popup( { window: this.mainWindow } );
-        } );
+            ]).popup({ window: this.mainWindow });
+        });
     }
 
-    private buildDarwinTemplate() {
+    private buildDarwinTemplate(): Array<{}> {
         const subMenuAbout = {
             label: 'Electron',
             submenu: [
@@ -165,7 +167,7 @@ export class MenuBuilder {
                 {
                     label: 'Learn More',
                     click() {
-                        shell.openExternal( 'http://electron.atom.io' );
+                        shell.openExternal('http://electron.atom.io');
                     }
                 },
                 {
@@ -209,7 +211,7 @@ export class MenuBuilder {
         ];
     }
 
-    private buildDefaultTemplate() {
+    private buildDefaultTemplate(): Array<{}> {
         const templateDefault = [
             {
                 label: '&File',
@@ -232,41 +234,41 @@ export class MenuBuilder {
                 submenu:
                     process.env.NODE_ENV === 'development'
                         ? [
-                            {
-                                label: '&Reload',
-                                accelerator: 'Ctrl+R',
-                                click: () => {
-                                    this.mainWindow.webContents.reload();
-                                }
-                            },
-                            {
-                                label: 'Toggle &Full Screen',
-                                accelerator: 'F11',
-                                click: () => {
-                                    this.mainWindow.setFullScreen(
-                                        !this.mainWindow.isFullScreen()
-                                    );
-                                }
-                            },
-                            {
-                                label: 'Toggle &Developer Tools',
-                                accelerator: 'Alt+Ctrl+I',
-                                click: () => {
-                                    this.mainWindow.toggleDevTools();
-                                }
-                            }
-                        ]
+                              {
+                                  label: '&Reload',
+                                  accelerator: 'Ctrl+R',
+                                  click: () => {
+                                      this.mainWindow.webContents.reload();
+                                  }
+                              },
+                              {
+                                  label: 'Toggle &Full Screen',
+                                  accelerator: 'F11',
+                                  click: () => {
+                                      this.mainWindow.setFullScreen(
+                                          !this.mainWindow.isFullScreen()
+                                      );
+                                  }
+                              },
+                              {
+                                  label: 'Toggle &Developer Tools',
+                                  accelerator: 'Alt+Ctrl+I',
+                                  click: () => {
+                                      this.mainWindow.toggleDevTools();
+                                  }
+                              }
+                          ]
                         : [
-                            {
-                                label: 'Toggle &Full Screen',
-                                accelerator: 'F11',
-                                click: () => {
-                                    this.mainWindow.setFullScreen(
-                                        !this.mainWindow.isFullScreen()
-                                    );
-                                }
-                            }
-                        ]
+                              {
+                                  label: 'Toggle &Full Screen',
+                                  accelerator: 'F11',
+                                  click: () => {
+                                      this.mainWindow.setFullScreen(
+                                          !this.mainWindow.isFullScreen()
+                                      );
+                                  }
+                              }
+                          ]
             },
             {
                 label: 'Help',
@@ -274,7 +276,7 @@ export class MenuBuilder {
                     {
                         label: 'Learn More',
                         click() {
-                            shell.openExternal( 'http://electron.atom.io' );
+                            shell.openExternal('http://electron.atom.io');
                         }
                     },
                     {
