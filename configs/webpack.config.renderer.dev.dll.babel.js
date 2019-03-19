@@ -11,12 +11,12 @@ import baseConfig from './webpack.config.base';
 import { dependencies } from '../package.json';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
-CheckNodeEnv('development');
+CheckNodeEnv( 'development' );
 
-const dist = path.join(__dirname, '..', 'dll');
+const dist = path.join( __dirname, '..', 'dll' );
 
-export default merge.smart(baseConfig, {
-    context: path.join(__dirname, '..'),
+export default merge.smart( baseConfig, {
+    context: path.join( __dirname, '..' ),
 
     devtool: 'eval',
 
@@ -29,10 +29,10 @@ export default merge.smart(baseConfig, {
     /**
      * Use `module` from `webpack.config.renderer.dev.js`
      */
-    module: require('./webpack.config.renderer.dev.babel').module,
+    module: require( './webpack.config.renderer.dev.babel' ).module,
 
     entry: {
-        renderer: Object.keys(dependencies || {})
+        renderer: Object.keys( dependencies || {} )
     },
 
     output: {
@@ -43,10 +43,10 @@ export default merge.smart(baseConfig, {
     },
 
     plugins: [
-        new webpack.DllPlugin({
-            path: path.join(dist, '[name].json'),
+        new webpack.DllPlugin( {
+            path: path.join( dist, '[name].json' ),
             name: '[name]'
-        }),
+        } ),
 
         /**
          * Create global constants which can be configured at compile time.
@@ -57,18 +57,18 @@ export default merge.smart(baseConfig, {
          * NODE_ENV should be production so that modules do not perform certain
          * development checks
          */
-        new webpack.EnvironmentPlugin({
+        new webpack.EnvironmentPlugin( {
             NODE_ENV: 'development'
-        }),
+        } ),
 
-        new webpack.LoaderOptionsPlugin({
+        new webpack.LoaderOptionsPlugin( {
             debug: true,
             options: {
-                context: path.join(__dirname, '..', 'app'),
+                context: path.join( __dirname, '..', 'app' ),
                 output: {
-                    path: path.join(__dirname, '..', 'dll')
+                    path: path.join( __dirname, '..', 'dll' )
                 }
             }
-        })
+        } )
     ]
-});
+} );
