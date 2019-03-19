@@ -68,7 +68,7 @@ module.exports = {
                     'no-duplicate-variable': true,
                     'no-empty': true,
                     'no-floating-promises': true,
-                    'no-implicit-dependencies': [true, 'dev'],
+                    'no-implicit-dependencies': [true, 'dev', Object.keys(aliases)],
                     'no-invalid-template-strings': true,
                     'no-invalid-this': true,
                     'no-return-await': true,

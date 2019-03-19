@@ -15,7 +15,7 @@ import {
     isRunningSpectronTestProcess
 } from '@Constants';
 
-import addMiddlewares from '@Store/addMiddlewares';
+import { addMiddlewares } from '@Store/addMiddlewares';
 
 import {
     getInitialStateRenderer,
@@ -35,8 +35,6 @@ if ( inRendererProcess ) {
 
 const rootReducer : Reducer = createRootReducer( ourHistory );
 
-// declare var window : Window;
-
 declare namespace window {
     function __REDUX_DEVTOOLS_EXTENSION_COMPOSE__( actionCreators: {} );
 }
@@ -45,8 +43,8 @@ export const configureStore = (
     initialState : {} = initialStateFromMain
 ) => {
     // Redux Configuration
-    const middleware : any[] = [];
-    const enhancers : StoreEnhancer[] = [];
+    const middleware : Array<any> = [];
+    const enhancers : Array<StoreEnhancer> = [];
 
     // Router Middleware
     if ( ourHistory ) {
@@ -90,7 +88,7 @@ export const configureStore = (
 
     // Apply Middleware & Compose Enhancers
     enhancers.push( applyMiddleware( ...middleware ) );
-    const enhancer : {} = composeEnhancers( ...enhancers );
+    const enhancer : StoreEnhancer = composeEnhancers( ...enhancers );
 
     // Create Store
     const store : Store = createStore( rootReducer, initialState, enhancer );
