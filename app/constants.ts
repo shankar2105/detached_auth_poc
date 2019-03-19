@@ -277,7 +277,7 @@ const getDomClasses = () => {
     const domClasses = {};
 
     Object.keys( CLASSES ).forEach(
-        theClass => ( domClasses[theClass] = `.${CLASSES[theClass]}` )
+        ( theClass ) => ( domClasses[theClass] = `.${CLASSES[theClass]}` )
     );
 
     return domClasses;
