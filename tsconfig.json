@@ -7,7 +7,6 @@
         "noEmit": true,
         "jsx": "react",
         "resolveJsonModule": true,
-        "isolatedModules": true,
         "esModuleInterop": true,
         "paths": {
             "*": ["app/definitions"],
@@ -23,11 +22,5 @@
             "@Package": ["package.json"]
         }
     },
-    "exclude": [
-        "babel.config.js",
-        "postcss.config.js",
-        "app/*.prod.js",
-        "app/dist",
-        "node_modules/*"
-    ]
+    "exclude": ["*.config*?js", "app/*.prod.js", "app/dist", "node_modules/*"]
 }

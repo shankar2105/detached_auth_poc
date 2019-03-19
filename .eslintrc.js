@@ -1,4 +1,4 @@
-const { aliases } = require("./.aliases")
+const aliases = require('./.aliases.config');
 
 module.exports = {
     parser: '@typescript-eslint/parser',
@@ -117,9 +117,9 @@ module.exports = {
         {
             files: ['*config*.js'],
             rules: {
-                'no-console' : 'off',
-                'import/no-extraneous-dependencies' : 'off',
-                'import/no-default-export' : 'off',
+                'no-console': 'off',
+                'import/no-extraneous-dependencies': 'off',
+                'import/no-default-export': 'off',
                 '@typescript-eslint/tslint/config': 'off',
                 '@typescript-eslint/no-var-requires': 'off'
             }
@@ -134,7 +134,7 @@ module.exports = {
         {
             files: ['*.tsx'],
             rules: {
-                 "react/prop-types": "off",
+                'react/prop-types': 'off',
                 'member-access': 'off',
                 '@typescript-eslint/explicit-function-return-type': 'off',
                 '@typescript-eslint/explicit-member-accessibility': 'off'
@@ -149,11 +149,11 @@ module.exports = {
         '@typescript-eslint/tslint'
     ],
     settings: {
-      "import/resolver": {
-        "babel-module": {
-            root: ['.'],
-            alias: aliases
+        'import/resolver': {
+            'babel-module': {
+                root: ['.'],
+                alias: aliases
+            }
         }
-      }
     }
 };
