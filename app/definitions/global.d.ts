@@ -16,3 +16,10 @@ declare interface NodeError extends Error {
     line: string,
     file: string
 }
+
+// Enable import of css in typescript
+declare module '*.css' {
+    const content: any;
+    /* eslint import/no-default-export: off */
+    export default content;
+}

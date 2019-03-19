@@ -2,13 +2,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Input, Row, Col, Button } from "antd";
-import routes from "../constants/routes";
+import routes from "../constants/routes.json";
 import styles from "./Home.css";
 
 interface Props {}
 export class Home extends Component<{}, {}> {
     props: Props;
-
 
 
     render() {

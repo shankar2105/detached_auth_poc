@@ -16,7 +16,7 @@
             "@Store/*": ["app/store/*"],
             "@Extensions/*": ["app/extensions/*"],
             "@Reducers/*": ["app/reducers/*"],
-            "logger": ["app/logger"],
+            "@Logger": ["app/logger.ts"],
             "@Components/*": ["app/components/*"],
             "@Constants": ["app/constants"],
             "@Utils/*": ["app/utils/*"],
