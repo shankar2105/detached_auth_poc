@@ -9,6 +9,8 @@ function mapStateToProps( state ) {
 }
 function mapDispatchToProps( dispatch ) {
     // return bindActionCreators( AuthenticatorActions, dispatch );
+    // until we have a reducer to add here.
+    return {};
 }
 
 export const HomePage : React.ComponentClass  = connect(

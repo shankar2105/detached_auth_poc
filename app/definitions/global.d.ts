@@ -11,3 +11,8 @@ declare namespace NodeJS  {
         SPECTRON_TEST : boolean
     }
 }
+
+declare interface NodeError extends Error {
+    line: string,
+    file: string
+}

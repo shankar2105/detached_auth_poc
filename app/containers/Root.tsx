@@ -1,18 +1,20 @@
 
 import React, { Component } from "react";
-import { Provider } from "react-redux";
+import { Provider, Store } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
-import Routes from "../Routes";
+import { Routes } from "../Routes";
 
-export class Root extends Component<{ store: any, history: any }, {}> {
-    render() {
-        const { store, history } = this.props;
-        return (
-            <Provider store={store}>
-                <ConnectedRouter history={history}>
-                    <Routes />
-                </ConnectedRouter>
-            </Provider>
-        );
-    }
+interface RootProps {
+    store: Store,
+    history : any
+}
+export const Root : React.FunctionComponent<RootProps> = ( props ) => {
+    const { store, history } = props;
+    return (
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                <Routes />
+            </ConnectedRouter>
+        </Provider>
+    );
 }

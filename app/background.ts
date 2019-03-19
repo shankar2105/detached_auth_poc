@@ -1,5 +1,5 @@
 /* eslint global-require: 1 */
-import logger from 'logger';
+import { logger } from '@Logger';
 import { configureStore } from '@Store/configureStore';
 import {
     isRunningDevelopment,

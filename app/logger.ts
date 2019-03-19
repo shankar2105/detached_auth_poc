@@ -73,21 +73,21 @@ if ( log.info && log.verbose && inMainProcess ) {
     log.verbose( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     log.verbose( '' );
 
-    process.on( 'uncaughtTypeError', ( err : Error ) => {
-        log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
-        log.error( 'whoops! there was an uncaught type error:' );
-        log.error( err, err.line );
-        log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
-    } );
+    // process.on( 'uncaughtTypeError', ( err : Error ) => {
+    //     log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
+    //     log.error( 'whoops! there was an uncaught type error:' );
+    //     log.error( err, err.line );
+    //     log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
+    // } );
 
-    process.on( 'uncaughtException', err => {
+    process.on( 'uncaughtException',  ( err: NodeError ) => {
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
         log.error( 'whoops! there was an uncaught error:' );
         log.error( err, err.line );
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
     } );
 
-    process.on( 'unhandledRejection', ( err : Error ) => {
+    process.on( 'unhandledRejection', ( err : NodeError ) => {
         log.error( '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' );
         log.error( 'Unhandled Rejection. Reason:', err.message || err );
         log.error(  err.line );
@@ -96,5 +96,4 @@ if ( log.info && log.verbose && inMainProcess ) {
     } );
 }
 
-/* eslint-ignore import/no-default-export */
-export default log;
+export const logger = log;

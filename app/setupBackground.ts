@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron';
-import logger from 'logger';
+import { logger } from '@Logger';
 // import path from 'path';
 import {
     isRunningUnpacked,
