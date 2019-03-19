@@ -1,5 +1,5 @@
 module.exports = {
-    test: './test',
+    '@Test': './test',
     '@Actions': './app/actions',
     '@Store': './app/store',
     '@Logger': './app/logger.ts',
