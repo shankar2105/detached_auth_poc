@@ -10,7 +10,7 @@
         "esModuleInterop": true,
         "paths": {
             "*": ["app/definitions"],
-            "@Test/*": ["test/*"],
+            "@Tests/*": ["__test__/*"],
             "@Actions/*": ["app/actions/*"],
             "@Store/*": ["app/store/*"],
             "@Extensions/*": ["app/extensions/*"],
