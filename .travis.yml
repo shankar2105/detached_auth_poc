@@ -29,10 +29,13 @@ matrix:
     - os: windows
       language: node_js
       node_js:
-        - node
+        - 8
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+        - NODE_ENV=dev
+        - YARN_GPG=no # otherwise this starts gpg-agent that never exits
+
 
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
@@ -48,6 +51,11 @@ cache:
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX="g++-8"; fi
+  - yarn config delete proxy
+  - yarn --version
+  - npm --version
+  - npm config rm proxy
+  - npm config rm https-proxy
 
 install:
   - yarn --ignore-engines
@@ -73,7 +81,8 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sleep 3; fi
 
 script:
-  - yarn package-ci
+  - yarn package
+  # - yarn package-ci
   # - yarn lint
   - yarn check-types
   - yarn test;
