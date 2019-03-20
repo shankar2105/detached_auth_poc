@@ -29,7 +29,7 @@ matrix:
     - os: windows
       language: node_js
       node_js:
-        - 8
+        - node
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
@@ -58,7 +58,7 @@ before_install:
   - npm config rm https-proxy
 
 install:
-  - travis_wait 30 yarn --ignore-engines --network-timeout 400000
+  - travis_wait 20 yarn --ignore-engines --network-timeout 400000
   # On Linux, initialize "virtual display". See before_script
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
